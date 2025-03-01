@@ -1,0 +1,216 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* Beige */
+    color: #333;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center;
+    padding: 20px 40px; /* Más grande */
+    background-color: #d8e2dc; /* Verde pastel */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.logo img {
+    height: 60px; /* Más grande */
+}
+
+.cart-button {
+    position: absolute;
+    left: 40px; /* Más cerca del centro */
+    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-button:hover {
+    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+}
+
+/* Barra de búsqueda */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-button {
+    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.search-button:hover {
+    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+}
+
+/* Navegación */
+.navbar {
+    background-color: #d8e2dc; /* Verde pastel */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navbar ul li a:hover {
+    color: #a8d5ba; /* Verde pastel más oscuro */
+}
+
+/* Títulos */
+.featured-title, .seasonal-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Carrusel */
+.carousel {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 20%; /* Muestra 5 imágenes a la vez (100% / 5) */
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 10px; /* Espacio entre imágenes */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.add-button {
+    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.add-button:hover {
+    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+}
+
+/* Controles del carrusel */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(216, 226, 220, 0.8); /* Verde pastel con transparencia */
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+.carousel-control:hover {
+    background-color: rgba(168, 213, 186, 0.8); /* Verde pastel más oscuro con transparencia */
+}
+
+/* Cuadrícula de Productos de Temporada */
+.seasonal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 20px; /* Espacio entre imágenes */
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.seasonal-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.seasonal-item img:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Aviso de Cookies */
+.cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.cookie-button {
+    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cookie-button:hover {
+    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+}
