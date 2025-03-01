@@ -214,3 +214,34 @@ body {
 .cookie-button:hover {
     background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
 }
+
+/* Estilos para la sección de productos */
+.productos-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.productos-section h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 20px; /* Espacio entre imágenes */
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.producto img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.producto img:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
