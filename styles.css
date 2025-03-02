@@ -378,3 +378,104 @@ footer {
     color: #333;
     margin-top: 40px;
 }
+
+
+
+/* Estilos para la ventana modal */
+.modal {
+    display: none; /* Oculta la ventana modal inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.cerrar-modal:hover {
+    color: #000;
+}
+
+.modal-imagen {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.cantidad-agregar {
+    margin: 15px 0;
+}
+
+.cantidad-agregar label {
+    margin-right: 10px;
+}
+
+.cantidad-agregar input {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.cantidad-agregar button {
+    padding: 10px 15px;
+    background-color: #a8d5ba; /* Verde pastel */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cantidad-agregar button:hover {
+    background-color: #8cbaa3; /* Verde pastel más oscuro */
+}
+
+.mensaje textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.accesorios select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+
+
+/* Animación al pasar el cursor sobre las flores */
+.flor-clickeable img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flor-clickeable img:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}

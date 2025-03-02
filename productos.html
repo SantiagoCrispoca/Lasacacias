@@ -29,42 +29,42 @@
         </ul>
     </nav>
 
-    <!-- Sección de Manojos -->
+        <!-- Sección de Manojos -->
     <section class="productos-section">
         <h2>Manojos</h2>
         <div class="productos-grid">
             <!-- Flor 1 -->
-            <a href="descripcion_manojo1.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo1.jpg" alt="Manojo 1">
-            </a>
+            </div>
             <!-- Flor 2 -->
-            <a href="descripcion_manojo2.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo2.jpg" alt="Manojo 2">
-            </a>
+            </div>
             <!-- Flor 3 -->
-            <a href="descripcion_manojo3.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo3.jpg" alt="Manojo 3">
-            </a>
+            </div>
             <!-- Flor 4 -->
-            <a href="descripcion_manojo4.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo4.jpg" alt="Manojo 4">
-            </a>
+            </div>
             <!-- Flor 5 -->
-            <a href="descripcion_manojo5.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo5.jpg" alt="Manojo 5">
-            </a>
+            </div>
             <!-- Flor 6 -->
-            <a href="descripcion_manojo6.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo6.jpg" alt="Manojo 6">
-            </a>
+            </div>
             <!-- Flor 7 -->
-            <a href="descripcion_manojo7.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo7.jpg" alt="Manojo 7">
-            </a>
+            </div>
             <!-- Flor 8 -->
-            <a href="descripcion_manojo8.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="manojo8.jpg" alt="Manojo 8">
-            </a>
+            </div>
         </div>
     </section>
 
@@ -73,43 +73,221 @@
         <h2>Ramos</h2>
         <div class="productos-grid">
             <!-- Flor 1 -->
-            <a href="descripcion_ramo1.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo1.jpg" alt="Ramo 1">
-            </a>
+            </div>
             <!-- Flor 2 -->
-            <a href="descripcion_ramo2.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo2.jpg" alt="Ramo 2">
-            </a>
+            </div>
             <!-- Flor 3 -->
-            <a href="descripcion_ramo3.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo3.jpg" alt="Ramo 3">
-            </a>
+            </div>
             <!-- Flor 4 -->
-            <a href="descripcion_ramo4.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo4.jpg" alt="Ramo 4">
-            </a>
+            </div>
             <!-- Flor 5 -->
-            <a href="descripcion_ramo5.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo5.jpg" alt="Ramo 5">
-            </a>
+            </div>
             <!-- Flor 6 -->
-            <a href="descripcion_ramo6.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo6.jpg" alt="Ramo 6">
-            </a>
+            </div>
             <!-- Flor 7 -->
-            <a href="descripcion_ramo7.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo7.jpg" alt="Ramo 7">
-            </a>
+            </div>
             <!-- Flor 8 -->
-            <a href="descripcion_ramo8.html" class="producto">
+            <div class="flor-clickeable">
                 <img src="ramo8.jpg" alt="Ramo 8">
-            </a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer (opcional) -->
+    <!-- Ventana modal -->
+    <div id="modal" class="modal">
+        <div class="modal-contenido">
+            <!-- Botón para cerrar la ventana modal -->
+            <span class="cerrar-modal">&times;</span>
+
+            <!-- Contenido de la ventana modal -->
+            <h2 id="modal-titulo">Nombre de la Flor</h2>
+            <img id="modal-imagen" src="" alt="Flor" class="modal-imagen">
+            <p id="modal-descripcion">Descripción de la flor.</p>
+            <p id="modal-precio">Precio: $XX.XXX</p>
+
+            <!-- Cantidad y botón para agregar al carrito -->
+            <div class="cantidad-agregar">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" min="1" value="1">
+                <button id="agregar-carrito">Agregar al carrito</button>
+            </div>
+
+            <!-- Mensaje personalizado -->
+            <div class="mensaje">
+                <label for="mensaje-flor">Mensaje para la flor:</label>
+                <textarea id="mensaje-flor" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+
+            <!-- Accesorios -->
+            <div class="accesorios">
+                <label>Accesorios:</label>
+                <select id="accesorios">
+                    <option value="ninguno">Ninguno</option>
+                    <option value="oso">Oso de peluche (+$10.000)</option>
+                    <option value="globo">Globo temático (+$5.000)</option>
+                    <option value="chocolate">Chocolate (+$7.000)</option>
+                    <option value="corona">Corona (+$8.000)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2023 Floristería Las Acacias</p>
     </footer>
+
+    <!-- Script para la ventana modal -->
+    <script>
+        // Seleccionar todas las flores clickeables
+        const flores = document.querySelectorAll('.flor-clickeable');
+
+        // Seleccionar elementos de la ventana modal
+        const modal = document.getElementById('modal');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const modalImagen = document.getElementById('modal-imagen');
+        const modalDescripcion = document.getElementById('modal-descripcion');
+        const modalPrecio = document.getElementById('modal-precio');
+        const cerrarModal = document.querySelector('.cerrar-modal');
+
+        // Datos de las flores (puedes cambiarlos más tarde)
+        const datosFlores = [
+        // Manojos
+        {
+            nombre: "Manojo 1",
+            imagen: "manojo1.jpg",
+            descripcion: "Un hermoso manojo de flores variadas, perfecto para cualquier ocasión.",
+            precio: "$20.000"
+        },
+        {
+            nombre: "Manojo 2",
+            imagen: "manojo2.jpg",
+            descripcion: "Manojo de rosas blancas y rojas, ideal para expresar amor y pureza.",
+            precio: "$18.000"
+        },
+        {
+            nombre: "Manojo 3",
+            imagen: "manojo3.jpg",
+            descripcion: "Manojo de girasoles, lleno de energía y alegría.",
+            precio: "$22.000"
+        },
+        {
+            nombre: "Manojo 4",
+            imagen: "manojo4.jpg",
+            descripcion: "Manojo de liliums, elegante y sofisticado.",
+            precio: "$19.000"
+        },
+        {
+            nombre: "Manojo 5",
+            imagen: "manojo5.jpg",
+            descripcion: "Manojo de margaritas, fresco y juvenil.",
+            precio: "$21.000"
+        },
+        {
+            nombre: "Manojo 6",
+            imagen: "manojo6.jpg",
+            descripcion: "Manojo de claveles, clásico y duradero.",
+            precio: "$17.000"
+        },
+        {
+            nombre: "Manojo 7",
+            imagen: "manojo7.jpg",
+            descripcion: "Manojo de orquídeas, exótico y llamativo.",
+            precio: "$23.000"
+        },
+        {
+            nombre: "Manojo 8",
+            imagen: "manojo8.jpg",
+            descripcion: "Manojo de flores silvestres, natural y encantador.",
+            precio: "$20.000"
+        },
+        // Ramos
+        {
+            nombre: "Ramo 1",
+            imagen: "ramo1.jpg",
+            descripcion: "Ramo de rosas rojas, el clásico símbolo del amor.",
+            precio: "$25.000"
+        },
+        {
+            nombre: "Ramo 2",
+            imagen: "ramo2.jpg",
+            descripcion: "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
+            precio: "$24.000"
+        },
+        {
+            nombre: "Ramo 3",
+            imagen: "ramo3.jpg",
+            descripcion: "Ramo de liliums y rosas, elegante y sofisticado.",
+            precio: "$26.000"
+        },
+        {
+            nombre: "Ramo 4",
+            imagen: "ramo4.jpg",
+            descripcion: "Ramo de girasoles y margaritas, lleno de energía y frescura.",
+            precio: "$22.000"
+        },
+        {
+            nombre: "Ramo 5",
+            imagen: "ramo5.jpg",
+            descripcion: "Ramo de orquídeas y claveles, exótico y llamativo.",
+            precio: "$27.000"
+        },
+        {
+            nombre: "Ramo 6",
+            imagen: "ramo6.jpg",
+            descripcion: "Ramo de flores silvestres, natural y encantador.",
+            precio: "$23.000"
+        },
+        {
+            nombre: "Ramo 7",
+            imagen: "ramo7.jpg",
+            descripcion: "Ramo de rosas blancas, ideal para bodas y eventos especiales.",
+            precio: "$28.000"
+        },
+        {
+            nombre: "Ramo 8",
+            imagen: "ramo8.jpg",
+            descripcion: "Ramo de flores variadas, perfecto para cualquier ocasión.",
+            precio: "$24.000"
+        }
+    ];
+        // Abrir la ventana modal con los datos de la flor
+        flores.forEach((flor, index) => {
+            flor.addEventListener('click', () => {
+                const florData = datosFlores[index];
+                modalTitulo.textContent = florData.nombre;
+                modalImagen.src = florData.imagen;
+                modalDescripcion.textContent = florData.descripcion;
+                modalPrecio.textContent = `Precio: ${florData.precio}`;
+                modal.style.display = 'flex'; // Mostrar la ventana modal
+            });
+        });
+
+        // Cerrar la ventana modal
+        cerrarModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Cerrar la ventana modal si se hace clic fuera de ella
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
