@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Floristería Las Acacias</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="cart-button">🛒</button>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de Floristería Las Acacias">
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Buscar">
+            <button class="search-button">&#128269;</button>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="quienes-somos.html">Quienes Somos</a></li>
+            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Preguntas Frecuentes -->
+    <section class="preguntas-frecuentes">
+        <h1>Preguntas Frecuentes</h1>
+
+        <!-- Pregunta 1 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Cómo puedo hacer un pedido de flores?
+                <span class="icono">▼</span> <!-- Icono de flecha -->
+            </button>
+            <div class="respuesta">
+                <p>
+                    Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y completando la información de entrega. También puedes llamarnos directamente para realizar tu pedido.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Cuánto tiempo antes debo hacer mi pedido?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar la disponibilidad y frescura de las flores.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Cómo debo cuidar mis flores?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua. Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del sol.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Qué hago si mis flores se marchitan rápidamente?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el crecimiento de bacterias.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Floristería Las Acacias</p>
+    </footer>
+
+    <!-- Script para el acordeón -->
+    <script>
+        // Funcionalidad del acordeón
+        const preguntas = document.querySelectorAll('.pregunta-titulo');
+        preguntas.forEach(pregunta => {
+            pregunta.addEventListener('click', () => {
+                const respuesta = pregunta.nextElementSibling;
+                respuesta.classList.toggle('activa');
+                const icono = pregunta.querySelector('.icono');
+                icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼'; // Usamos Unicode directamente
+            });
+        });
+    </script>
+</body>
+</html>
