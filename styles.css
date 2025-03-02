@@ -215,6 +215,9 @@ body {
     background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
 }
 
+
+
+
 /* Estilos para la sección de productos */
 .productos-section {
     padding: 20px;
@@ -244,4 +247,134 @@ body {
 
 .producto img:hover {
     transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+
+
+
+/* Estilos para la sección Quiénes Somos */
+.quienes-somos {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.quienes-somos h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.info-block {
+    margin: 40px 0;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.info-block p {
+    font-size: 18px;
+    color: #555;
+}
+
+.collage {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 10px; /* Espacio entre imágenes */
+    margin: 40px 0;
+}
+
+.collage img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.collage img:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #d8e2dc; /* Verde pastel */
+    color: #333;
+    margin-top: 40px;
+}
+
+
+
+/* Estilos para la sección Preguntas Frecuentes */
+.preguntas-frecuentes {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.preguntas-frecuentes h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pregunta {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pregunta-titulo {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f9f9f9;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.pregunta-titulo:hover {
+    background-color: #f1f1f1;
+}
+
+.pregunta-titulo .icono {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.respuesta {
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.respuesta p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.respuesta.activa {
+    max-height: 500px; /* Ajusta según el contenido */
+    padding: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #d8e2dc; /* Verde pastel */
+    color: #333;
+    margin-top: 40px;
 }
