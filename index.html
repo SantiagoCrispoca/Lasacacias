@@ -15,7 +15,7 @@
         </div>
         <div class="search-box">
             <input type="text" placeholder="Buscar">
-            <button class="search-button">&#128269;</button> <!-- Símbolo de lupa -->
+            <button class="search-button">&#128269;</button>
         </div>
     </header>
 
@@ -35,33 +35,26 @@
     <!-- Carrusel de Imágenes -->
     <section id="inicio" class="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item">
-                <img src="imagen1.jpg" alt="Flor 1">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/ramo-1.jpeg" alt="Flor 1">
             </div>
-            <div class="carousel-item">
-                <img src="imagen2.jpg" alt="Flor 2">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/manojo-2.jpeg"Flor 2">
             </div>
-            <div class="carousel-item">
-                <img src="imagen3.jpg" alt="Flor 3">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/ramo-4.jpg" alt="Flor 3">
             </div>
-            <div class="carousel-item">
-                <img src="imagen4.jpg" alt="Flor 4">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/manojo-5.jpeg" alt="Flor 4">
             </div>
-            <div class="carousel-item">
-                <img src="imagen5.jpg" alt="Flor 5">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/ramo-6.jpg" alt="Flor 5">
             </div>
-            <div class="carousel-item">
-                <img src="imagen6.jpg" alt="Flor 6">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/manojo-3.jpeg" alt="Flor 6">
             </div>
-            <div class="carousel-item">
-                <img src="imagen7.jpg" alt="Flor 7">
-                <button class="add-button">Añadir</button>
+            <div class="carousel-item flor-clickeable">
+                <img src="imagenes/ramo-6.jpg" alt="Flor 7">
             </div>
         </div>
         <button class="carousel-control prev">&#10094;</button>
@@ -73,27 +66,123 @@
 
     <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
-        <a href="descripcion1.html" class="seasonal-item">
-            <img src="flor_temporada1.jpg" alt="Flor de temporada 1">
-        </a>
-        <a href="descripcion2.html" class="seasonal-item">
-            <img src="flor_temporada2.jpg" alt="Flor de temporada 2">
-        </a>
-        <a href="descripcion3.html" class="seasonal-item">
-            <img src="flor_temporada3.jpg" alt="Flor de temporada 3">
-        </a>
-        <a href="descripcion4.html" class="seasonal-item">
-            <img src="flor_temporada4.jpg" alt="Flor de temporada 4">
-        </a>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-2.png" alt="Flor de temporada 2">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-3.jpg" alt="Flor de temporada 3">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-4.jpg" alt="Flor de temporada 4">
+        </div>
     </section>
+
+    <!-- Ventana modal -->
+    <div id="modal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal">&times;</span>
+            <h2 id="modal-titulo">Nombre de la Flor</h2>
+            <img id="modal-imagen" src="" alt="Flor" class="modal-imagen">
+            <p id="modal-descripcion">Descripción de la flor.</p>
+            <p id="modal-precio">Precio: $XX.XXX</p>
+            <div class="cantidad-agregar">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" min="1" value="1">
+                <button id="agregar-carrito">Agregar al carrito</button>
+            </div>
+            <div class="mensaje">
+                <label for="mensaje-flor">Mensaje para la flor:</label>
+                <textarea id="mensaje-flor" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+            <div class="accesorios">
+                <label>Accesorios:</label>
+                <select id="accesorios">
+                    <option value="ninguno">Ninguno</option>
+                    <option value="oso">Oso de peluche (+$10.000)</option>
+                    <option value="globo">Globo temático (+$5.000)</option>
+                    <option value="chocolate">Chocolate (+$7.000)</option>
+                    <option value="corona">Corona (+$8.000)</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
     <!-- Aviso de Cookies -->
     <div id="cookie-notice" class="cookie-notice">
-        <p>Este sitio web utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestro uso de cookies.</p>
+        <p>Este sitio web utiliza cookies para mejorar tu experiencia.</p>
         <button id="accept-cookies" class="cookie-button">Aceptar</button>
     </div>
 
-    <!-- Script para el carrusel y el aviso de cookies -->
-    <script src="script.js"></script>
+
+
+    
+    <!-- Script Interno -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carrusel
+            const carouselInner = document.querySelector('.carousel-inner');
+            const prevButton = document.querySelector('.carousel-control.prev');
+            const nextButton = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+
+            function moveCarousel(direction) {
+                const items = document.querySelectorAll('.carousel-item');
+                if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % items.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                }
+                const offset = -currentIndex * 100;
+                carouselInner.style.transform = `translateX(${offset}%)`;
+            }
+            prevButton.addEventListener('click', () => moveCarousel('prev'));
+            nextButton.addEventListener('click', () => moveCarousel('next'));
+
+            // Aviso de Cookies
+            const cookieNotice = document.getElementById('cookie-notice');
+            const acceptCookiesButton = document.getElementById('accept-cookies');
+            acceptCookiesButton.addEventListener('click', () => {
+                cookieNotice.style.display = 'none';
+                localStorage.setItem('cookiesAccepted', 'true');
+            });
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                cookieNotice.style.display = 'none';
+            }
+
+            // Modal de Flores
+            const flores = document.querySelectorAll('.flor-clickeable');
+            const modal = document.getElementById('modal');
+            const modalTitulo = document.getElementById('modal-titulo');
+            const modalImagen = document.getElementById('modal-imagen');
+            const modalDescripcion = document.getElementById('modal-descripcion');
+            const modalPrecio = document.getElementById('modal-precio');
+            const cerrarModal = document.querySelector('.cerrar-modal');
+
+            flores.forEach(flor => {
+                flor.addEventListener('click', () => {
+                    const imagenSrc = flor.querySelector('img').src;
+                    const nombre = flor.querySelector('img').alt;
+                    modalTitulo.textContent = nombre;
+                    modalImagen.src = imagenSrc;
+                    modalDescripcion.textContent = "Descripción de la flor.";
+                    modalPrecio.textContent = "Precio no disponible.";
+                    modal.style.display = 'flex';
+                });
+            });
+
+            cerrarModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
