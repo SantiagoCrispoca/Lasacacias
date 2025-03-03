@@ -7,41 +7,49 @@ body {
     color: #333;
 }
 
-/* Header */
+/* Estilos para el header */
 .header {
     display: flex;
-    justify-content: space-between; /* Espacio entre elementos */
-    align-items: center;
-    padding: 20px 40px; /* Más grande */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px 20px;
     background-color: #d8e2dc; /* Verde pastel */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: relative; /* Para posicionar el botón del carrito */
+}
+
+/* Estilos para el logo */
+.logo {
+    position: absolute; /* Posiciona el logo de manera absoluta */
+    left: 50%; /* Lo coloca en el centro horizontal */
+    transform: translateX(-50%); /* Ajusta el centrado */
 }
 
 .logo img {
-    height: 60px; /* Más grande */
+    height: 50px; /* Altura del logo */
 }
 
+/* Estilos para el botón del carrito */
 .cart-button {
-    position: absolute;
-    left: 40px; /* Más cerca del centro */
     background-color: #a8d5ba; /* Verde pastel más oscuro */
     border: none;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    margin-right: auto; /* Empuja el botón a la izquierda */
 }
 
 .cart-button:hover {
     background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
 }
 
-/* Barra de búsqueda */
+/* Estilos para la barra de búsqueda */
 .search-box {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: auto; /* Empuja la barra de búsqueda a la derecha */
 }
 
 .search-box input {
