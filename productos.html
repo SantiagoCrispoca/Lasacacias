@@ -146,6 +146,23 @@
         </div>
     </div>
 
+        <!-- Carrito de compras -->
+    <div id="carrito-modal" class="carrito-modal">
+            <div class="carrito-header">
+                <h2>Tu Carrito</h2>
+                <span class="cerrar-carrito">&times;</span>
+            </div>
+            <div id="carrito-items"></div>
+            <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
+            <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+    </div>
+
+    <div class="confirmacion-agregado" id="confirmacion-agregado">
+        Producto añadido al carrito!
+    </div>
+
+    
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2023 Floristería Las Acacias</p>
@@ -269,6 +286,7 @@
         // Abrir la ventana modal con los datos de la flor
         flores.forEach((flor, index) => {
             flor.addEventListener('click', () => {
+                currentFlowerIndex = index;
                 const florData = datosFlores[index];
                 modalTitulo.textContent = florData.nombre;
                 modalImagen.src = florData.imagen;
@@ -289,6 +307,104 @@
                 modal.style.display = 'none';
             }
         });
+
+        // Al inicio del script, después de definir los elementos del DOM
+        let currentFlowerIndex = 0; // 🔑 Variable clave que faltaba
+        const agregarCarritoBtn = document.getElementById('agregar-carrito'); // 🛒 Botón de agregar
+        const cartButton = document.querySelector('.cart-button');
+        const carritoModal = document.getElementById('carrito-modal');
+        const cerrarCarrito = document.querySelector('.cerrar-carrito');
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        cartButton.addEventListener('click', () => {
+    carritoModal.style.display = 'block';
+    actualizarCarrito();
+    });
+
+        // Función para actualizar el carrito
+        function actualizarCarrito() {
+        const carritoItems = document.getElementById('carrito-items');
+        const carritoTotal = document.getElementById('carrito-total');
+        let total = 0;
+
+        carritoItems.innerHTML = '';
+
+        carrito.forEach((item, index) => {
+            const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+            const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
+                item.accesorio === 'oso' ? 10000 :
+                item.accesorio === 'globo' ? 5000 :
+                item.accesorio === 'chocolate' ? 7000 : 8000;
+
+            const subtotal = (precio + accesorioPrecio) * item.cantidad;
+            total += subtotal;
+
+            carritoItems.innerHTML += `
+                <div class="carrito-item">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div>
+                        <h3>${item.nombre}</h3>
+                        <p>Cantidad: ${item.cantidad}</p>
+                        ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
+                        ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
+                        <p>Subtotal: $${subtotal.toLocaleString()}</p>
+                        <button class="eliminar-item" data-index="${index}">Eliminar</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        carritoTotal.textContent = total.toLocaleString();
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        cartButton.setAttribute('data-count', carrito.length);
+        cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
+    }
+
+    function agregarAlCarrito() {
+    const cantidad = parseInt(document.getElementById('cantidad').value);
+    const mensaje = document.getElementById('mensaje-flor').value;
+    const accesorio = document.getElementById('accesorios').value;
+
+    const nuevoItem = {
+        ...datosFlores[currentFlowerIndex],
+        cantidad: cantidad,
+        mensaje: mensaje,
+        accesorio: accesorio
+    };
+
+    carrito.push(nuevoItem);
+    
+    // Mostrar confirmación
+    const confirmacion = document.getElementById('confirmacion-agregado');
+    confirmacion.style.display = 'block';
+    setTimeout(() => confirmacion.style.display = 'none', 2000);
+    
+    actualizarCarrito();
+    modal.style.display = 'none';
+    }   
+
+    cartButton.addEventListener('click', () => {
+    carritoModal.style.display = 'block';
+    actualizarCarrito(); // Para refrescar los items
+    });
+
+    agregarCarritoBtn.addEventListener('click', agregarAlCarrito);
+
+    // Eliminar item individual
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('eliminar-item')) {
+            const index = e.target.dataset.index;
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+    });
+
+    // Vaciar carrito
+    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+    vaciarCarritoBtn.addEventListener('click', () => {
+        carrito = [];
+        actualizarCarrito();
+    });
     </script>
 </body>
 </html>
