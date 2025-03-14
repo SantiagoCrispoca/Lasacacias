@@ -181,6 +181,9 @@ body {
     width: 80%;
     margin: 0 auto;
     padding: 20px 0;
+
+    justify-content: center; 
+    align-items: center; 
 }
 
 .seasonal-item img {
@@ -491,4 +494,194 @@ footer {
 .flor-clickeable img:hover {
     transform: scale(1.05); /* Aumenta ligeramente el tamaño */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+
+/* Estilos para el carrito */
+.carrito-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1001;
+    flex-direction: column; /* Asegura que los elementos se apilen correctamente */
+    transition: transform 0.3s ease-in-out;
+}
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #d8e2dc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#carrito-items {
+    flex-grow: 1; /* Permite que la lista de productos ocupe el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento solo aquí */
+    max-height: 60vh; /* Limita la altura para evitar que el botón desaparezca */
+}
+
+.carrito-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.carrito-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.carrito-total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #d8e2dc;
+}
+
+.cerrar-carrito {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.confirmacion-agregado {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #a8d5ba;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+}
+
+.cart-button::after {
+    content: attr(data-count);
+    background: #e74c3c;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+    display: none;
+}
+
+.cart-button[data-count]:not([data-count="0"])::after {
+    display: inline-block;
+}
+
+.eliminar-item {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.vaciar-carrito {
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+}
+/* Estilos para pantallas medianas (tablets) */
+@media (max-width: 1024px) {
+    .carousel-item {
+        flex: 0 0 33.33%; /* Mostrar 3 imágenes a la vez */
+    }
+
+    .seasonal-grid, .productos-grid, .collage {
+        grid-template-columns: repeat(4, 1fr); /* 2 columnas en lugar de 4 */
+        justify-items: center;
+    }
+    .carrito-modal {
+        width: 50%; /* Ocupa la mitad de la pantalla */
+    }
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Organiza los elementos en columna */
+        align-items: center;
+    }
+
+    .logo {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    .cart-button, .search-box {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .navbar ul li {
+        display: block; /* Muestra los elementos en columna */
+        margin: 10px 0;
+    }
+
+    .carousel-item {
+        flex: 0 0 50%; /* Solo 2 imagenes visibles */
+    }
+
+    .seasonal-grid, .productos-grid, .collage {
+        grid-template-columns: repeat(2, 1fr); /* Solo 1 columna */
+    }
+
+    .carrito-modal {
+        width: 70%;  /* Ocupa el 70% del ancho de la pantalla */
+        height: 70vh; /* Ocupa el 70% del alto de la pantalla */
+        left: 50%;    /* Lo posicionamos en el centro */
+        top: 50%;
+        transform: translate(-50%, -50%); /* Centramos el carrito */
+        border-radius: 10px; /* Bordes redondeados para mejor diseño */
+    }
+
+    .modal-contenido {
+        width: 95%;
+    }
+}
+/* Estilos para teléfonos pequeños */
+@media (max-width: 425px) {
+    .modal-contenido {
+        width: 90%; /* Un poco más reducido para pantallas pequeñas */
+    }
+
+    .cart-button, .search-box {
+        font-size: 14px; /* Ajustar el tamaño del texto */
+    }
+
+    .navbar ul {
+        padding: 0;
+    }
+
+    .navbar ul li {
+        font-size: 16px; /* Tamaño adecuado para lectura */
+    }
+    .carousel-item {
+        flex: 0 0 100%; /* Solo 1 imagen visible */
+    }
 }
