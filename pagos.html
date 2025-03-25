@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos - Floristería Las Acacias</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="cart-button">🛒</button>
+        <div class="logo">
+            <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias">
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Buscar">
+            <button class="search-button">&#128269;</button>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="quienes-somos.html">Quienes Somos</a></li>
+            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="contenedor-pagos">
+        <!-- Recordatorio -->
+        <div class="recordatorio">
+            <h2>Recuerda:</h2>
+            <p>Si tu pedido es para el dia de hoy tienes plazo para pedirlo hasta las 12:00pm para que te llegue el mismo dia.</p>
+            <p>De lo contrario queda agendado para mañana y las entregas seran en el transcurso del dia.</p>
+        </div>
+
+        <!-- Resumen del carrito -->
+        <div class="resumen-carrito">
+            <h2>Resumen de tu compra</h2>
+            <div id="resumen-items"></div>
+            <div class="resumen-total">Total: $<span id="resumen-total">0</span></div>
+        </div>
+
+        <!-- Botón de Pago con Nequi -->
+        <div class="botones-pago">
+            <button id="pago-nequi" class="pago-nequi">Pago con Nequi</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Floristería Las Acacias</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const resumenItems = document.getElementById('resumen-items');
+            const resumenTotal = document.getElementById('resumen-total');
+            
+            if(carrito.length === 0) {
+                resumenItems.innerHTML = "<p>No hay productos en el carrito</p>";
+                return;
+            }
+
+            let total = 0;
+            resumenItems.innerHTML = carrito.map((item, index) => {
+                const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+                const accesorioPrecio = item.accesorio === 'ninguno' ? 0 : 
+                    item.accesorio === 'oso' ? 10000 :
+                    item.accesorio === 'globo' ? 5000 :
+                    item.accesorio === 'chocolate' ? 7000 : 8000;
+                
+                const subtotal = (precio + accesorioPrecio) * item.cantidad;
+                total += subtotal;
+
+                return `
+                <div class="item-resumen">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <h3>${item.nombre}</h3>
+                    <p>Cantidad: ${item.cantidad}</p>
+                    ${ item.mensaje ? `<p>Comentario: ${item.mensaje}</p>` : '' }
+                    ${ item.accesorio && item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : '' }
+                    <p>Subtotal: $${subtotal.toLocaleString()}</p>
+                </div>
+                `;
+            }).join('');
+
+            resumenTotal.textContent = total.toLocaleString();
+        });
+    </script>
+</body>
+</html>
