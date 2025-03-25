@@ -314,6 +314,11 @@
         const cartButton = document.querySelector('.cart-button');
         const carritoModal = document.getElementById('carrito-modal');
         const cerrarCarrito = document.querySelector('.cerrar-carrito');
+
+        cerrarCarrito.addEventListener('click', () => {
+            carritoModal.style.display = 'none'; 
+        });
+
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
         cartButton.addEventListener('click', () => {
