@@ -316,7 +316,7 @@
         const cerrarCarrito = document.querySelector('.cerrar-carrito');
 
         cerrarCarrito.addEventListener('click', () => {
-            carritoModal.style.display = 'none'; // ✅ Ahora cierra el modal correcto
+            carritoModal.style.display = 'none'; 
         });
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
