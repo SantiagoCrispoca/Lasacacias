@@ -173,6 +173,11 @@ body {
     background-color: rgba(168, 213, 186, 0.8); /* Verde pastel más oscuro con transparencia */
 }
 
+.carousel-control:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 /* Cuadrícula de Productos de Temporada */
 .seasonal-grid {
     display: grid;

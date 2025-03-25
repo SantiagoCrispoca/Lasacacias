@@ -151,16 +151,21 @@
             const prevButton = document.querySelector('.carousel-control.prev');
             const nextButton = document.querySelector('.carousel-control.next');
             let currentIndex = 0;
+            prevButton.disabled = true; // Deshabilitar botón prev al cargar
 
             function moveCarousel(direction) {
                 const items = document.querySelectorAll('.carousel-item');
                 if (direction === 'next') {
-                    currentIndex = (currentIndex + 1) % items.length;
+                    currentIndex = Math.min(currentIndex + 1, items.length - 1);
                 } else {
-                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    currentIndex = Math.max(currentIndex - 1, 0);
                 }
                 const offset = -currentIndex * 100;
                 carouselInner.style.transform = `translateX(${offset}%)`;
+                
+                // Actualizar estado de los botones
+                prevButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex === items.length - 1;
             }
             prevButton.addEventListener('click', () => moveCarousel('prev'));
             nextButton.addEventListener('click', () => moveCarousel('next'));
