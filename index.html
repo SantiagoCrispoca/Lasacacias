@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floristería Las Acacias</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <!-- Header -->
     <header class="header">
       <button class="cart-button">🛒</button>
       <div class="logo">
+        <a href="index.html">
         <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias" />
       </div>
       <div class="search-box">
@@ -18,6 +19,7 @@
         <div id="search-results" class="search-results"></div> <!-- Contenedor de sugerencias -->
       </div>    
     </header>
+
 
     <!-- Navegación -->
     <nav class="navbar">
@@ -69,7 +71,26 @@
     </section>
 
     <!-- Título "Productos de temporada" -->
-    <h1 class="seasonal-title">Productos de temporada</h1>
+    <h1 class="seasonal-title">Productos Destacados</h1>
+
+    <!-- Cuadrícula de Productos de Temporada -->
+    <section class="seasonal-grid">
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-2.png" alt="Flor de temporada 2">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-3.jpg" alt="Flor de temporada 3">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-4.jpg" alt="Flor de temporada 4">
+        </div>
+    </section>
+
+    <!-- Título "Productos de temporada" -->
+    <h1 class="seasonal-title">Reciente</h1>
 
     <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
@@ -135,7 +156,10 @@
       </div>
       <div id="carrito-items"></div>
       <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
-      <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+      <div class="carrito-botones">
+        <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+        <a href="pagos.html" class="pagar-carrito">Ir a pagar</a>
+    </div>
     </div>
 
     <div class="confirmacion-agregado" id="confirmacion-agregado">
@@ -144,200 +168,218 @@
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2023 Floristería Las Acacias</p>
+
+        <div class="footer-container">
+            <!-- Sección izquierda (Contáctanos) -->
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <p>
+                    <i class="fab fa-whatsapp"></i> +57 321 9694834
+                </p>
+                <p>
+                    <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+                </p>
+            </div>
+
+            <!-- Sección central (Formas de pago) -->
+            <div class="footer-section">
+                <h3>Formas de pago</h3>
+                <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
+            </div>
+
+            <!-- Sección derecha (Redes) -->
+            <div class="footer-section">
+                <h3>Redes</h3>
+                <p>
+                    <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+                        <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+                    </a>
+                    <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+                        <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+                    </a>
+                </p>
+            </div>
+        </div> <!-- Cierra el contenedor principal -->
+            
+        <!-- Sección de copyright -->
+        <div class="footer-copy">
+            <p>© 2023 Floristería Las Acacias</p>
+        </div>
     </footer>
 
     <!-- Script Interno -->
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Carrusel
-        const carouselInner = document.querySelector(".carousel-inner");
-        const items = document.querySelectorAll(".carousel-item"); // Se define items
-        const visibleItems = 5; // Se define cuántos elementos se muestran a la vez
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carrusel
+            const carouselInner = document.querySelector('.carousel-inner');
+            const prevButton = document.querySelector('.carousel-control.prev');
+            const nextButton = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
 
-        const prevButton = document.querySelector(".carousel-control.prev");
-        const nextButton = document.querySelector(".carousel-control.next");
-        let currentIndex = 0;
+            function moveCarousel(direction) {
+                const items = document.querySelectorAll('.carousel-item');
+                if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % items.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                }
+                const offset = -currentIndex * 100;
+                carouselInner.style.transform = `translateX(${offset}%)`;
+            }
+            prevButton.addEventListener('click', () => moveCarousel('prev'));
+            nextButton.addEventListener('click', () => moveCarousel('next'));
 
-        // Deshabilitar botón previo al inicio
-        prevButton.disabled = true;
-        nextButton.disabled = items.length <= visibleItems;
+            // Aviso de Cookies
+            const cookieNotice = document.getElementById('cookie-notice');
+            const acceptCookiesButton = document.getElementById('accept-cookies');
+            acceptCookiesButton.addEventListener('click', () => {
+                cookieNotice.style.display = 'none';
+                localStorage.setItem('cookiesAccepted', 'true');
+            });
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                cookieNotice.style.display = 'none';
+            }
 
-        function moveCarousel(direction) {
-          if (direction === "next") {
-            // Limita currentIndex para que nunca sobrepase el último conjunto completo
-            currentIndex = Math.min(
-              currentIndex + 1,
-              items.length - visibleItems
-            );
-          } else {
-            currentIndex = Math.max(currentIndex - 1, 0);
-          }
-          // Calcula el desplazamiento según el número de elementos visibles (cada item ocupa 20% en este caso)
-          const offset = -currentIndex * (100 / visibleItems);
-          carouselInner.style.transform = `translateX(${offset}%)`;
+            // Datos de las flores
+            const datosFlores = [
+                {
+                    nombre: "Productos destacados 1",
+                    imagen: "imagenes/ramo-1.jpeg",
+                    descripcion: "Un hermoso ramo de flores variadas, perfecto para cualquier ocasión.",
+                    precio: "$25.000"
+                },
+                {
+                    nombre: "Productos destacados 2",
+                    imagen: "imagenes/manojo-2.jpeg",
+                    descripcion: "Manojo de rosas blancas y rojas, ideal para expresar amor y pureza.",
+                    precio: "$18.000"
+                },
+                {
+                    nombre: "Productos destacados 3",
+                    imagen: "imagenes/ramo-4.jpg",
+                    descripcion: "Ramo de liliums y rosas, elegante y sofisticado.",
+                    precio: "$26.000"
+                },
+                {
+                    nombre: "Productos destacados 4",
+                    imagen: "imagenes/manojo-5.jpeg",
+                    descripcion: "Manojo de margaritas, fresco y juvenil.",
+                    precio: "$21.000"
+                },
+                {
+                    nombre: "Productos destacados 5",
+                    imagen: "imagenes/ramo-6.jpg",
+                    descripcion: "Ramo de flores silvestres, natural y encantador.",
+                    precio: "$23.000"
+                },
+                {
+                    nombre: "Productos destacados 6",
+                    imagen: "imagenes/manojo-3.jpeg",
+                    descripcion: "Manojo de claveles, clásico y duradero.",
+                    precio: "$17.000"
+                },
+                {
+                    nombre: "Productos destacados 7",
+                    imagen: "imagenes/ramo-6.jpg",
+                    descripcion: "Ramo de flores variadas, perfecto para cualquier ocasión.",
+                    precio: "$24.000"
+                },
+                {
+                    nombre: "Productos destacados 8",
+                    imagen: "imagenes/manojo-5.jpeg",
+                    descripcion: "Manojo de margaritas, fresco y juvenil.",
+                    precio: "$21.000"
+                },
+                {
+                    nombre: "Productos destacados 9",
+                    imagen: "imagenes/manojo-2.jpeg",
+                    descripcion: "Manojo de rosas blancas y rojas, ideal para expresar amor y pureza.",
+                    precio: "$18.000"
+                },
+                // Productos de temporada
+                {
+                    nombre: "Flor de temporada 1",
+                    imagen: "imagenes/ramo-1.jpeg",
+                    descripcion: "Un hermoso ramo de flores de temporada, ideal para ocasiones especiales.",
+                    precio: "$20.000"
+                },
+                {
+                    nombre: "Flor de temporada 2",
+                    imagen: "imagenes/ramo-2.png",
+                    descripcion: "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
+                    precio: "$22.000"
+                },
+                {
+                    nombre: "Flor de temporada 3",
+                    imagen: "imagenes/ramo-3.jpg",
+                    descripcion: "Ramo de liliums, elegante y sofisticado.",
+                    precio: "$24.000"
+                },
+                {
+                    nombre: "Flor de temporada 4",
+                    imagen: "imagenes/ramo-4.jpg",
+                    descripcion: "Ramo de girasoles y margaritas, lleno de energía y frescura.",
+                    precio: "$21.000"
+                }
+            ];
 
-          // Actualiza el estado de los botones
-          prevButton.disabled = currentIndex === 0;
-          nextButton.disabled = currentIndex >= items.length - visibleItems;
-        }
+            // Modal de Flores
+            const flores = document.querySelectorAll('.flor-clickeable');
+            const modal = document.getElementById('modal');
+            const modalTitulo = document.getElementById('modal-titulo');
+            const modalImagen = document.getElementById('modal-imagen');
+            const modalDescripcion = document.getElementById('modal-descripcion');
+            const modalPrecio = document.getElementById('modal-precio');
+            const cerrarModal = document.querySelector('.cerrar-modal');
 
-        prevButton.addEventListener("click", () => moveCarousel("prev"));
-        nextButton.addEventListener("click", () => moveCarousel("next"));
+            flores.forEach((flor, index) => {
+                flor.addEventListener('click', () => {
+                    const florData = datosFlores[index];
+                    modalTitulo.textContent = florData.nombre;
+                    modalImagen.src = florData.imagen;
+                    modalDescripcion.textContent = florData.descripcion;
+                    modalPrecio.textContent = `Precio: ${florData.precio}`;
+                    modal.style.display = 'flex';
+                });
+            });
 
-        // Datos de las flores
-        const datosFlores = [
-          {
-            nombre: "Productos destacados 1",
-            imagen: "imagenes/ramo-1.jpeg",
-            descripcion:
-              "Un hermoso ramo de flores variadas, perfecto para cualquier ocasión.",
-            precio: "$25.000",
-          },
-          {
-            nombre: "Productos destacados 2",
-            imagen: "imagenes/manojo-2.jpeg",
-            descripcion:
-              "Manojo de rosas blancas y rojas, ideal para expresar amor y pureza.",
-            precio: "$18.000",
-          },
-          {
-            nombre: "Productos destacados 3",
-            imagen: "imagenes/ramo-4.jpg",
-            descripcion: "Ramo de liliums y rosas, elegante y sofisticado.",
-            precio: "$26.000",
-          },
-          {
-            nombre: "Productos destacados 4",
-            imagen: "imagenes/manojo-5.jpeg",
-            descripcion: "Manojo de margaritas, fresco y juvenil.",
-            precio: "$21.000",
-          },
-          {
-            nombre: "Productos destacados 5",
-            imagen: "imagenes/ramo-6.jpg",
-            descripcion: "Ramo de flores silvestres, natural y encantador.",
-            precio: "$23.000",
-          },
-          {
-            nombre: "Productos destacados 6",
-            imagen: "imagenes/manojo-3.jpeg",
-            descripcion: "Manojo de claveles, clásico y duradero.",
-            precio: "$17.000",
-          },
-          {
-            nombre: "Productos destacados 7",
-            imagen: "imagenes/ramo-6.jpg",
-            descripcion:
-              "Ramo de flores variadas, perfecto para cualquier ocasión.",
-            precio: "$24.000",
-          },
-          {
-            nombre: "Productos destacados 8",
-            imagen: "imagenes/manojo-5.jpeg",
-            descripcion: "Manojo de margaritas, fresco y juvenil.",
-            precio: "$21.000",
-          },
-          {
-            nombre: "Productos destacados 9",
-            imagen: "imagenes/manojo-2.jpeg",
-            descripcion:
-              "Manojo de rosas blancas y rojas, ideal para expresar amor y pureza.",
-            precio: "$18.000",
-          },
-          // Productos de temporada
-          {
-            nombre: "Flor de temporada 1",
-            imagen: "imagenes/ramo-1.jpeg",
-            descripcion:
-              "Un hermoso ramo de flores de temporada, ideal para ocasiones especiales.",
-            precio: "$20.000",
-          },
-          {
-            nombre: "Flor de temporada 2",
-            imagen: "imagenes/ramo-2.png",
-            descripcion:
-              "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
-            precio: "$22.000",
-          },
-          {
-            nombre: "Flor de temporada 3",
-            imagen: "imagenes/ramo-3.jpg",
-            descripcion: "Ramo de liliums, elegante y sofisticado.",
-            precio: "$24.000",
-          },
-          {
-            nombre: "Flor de temporada 4",
-            imagen: "imagenes/ramo-4.jpg",
-            descripcion:
-              "Ramo de girasoles y margaritas, lleno de energía y frescura.",
-            precio: "$21.000",
-          },
-        ];
+            cerrarModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
 
-        // Modal de Flores
-        const flores = document.querySelectorAll(".flor-clickeable");
-        const modal = document.getElementById("modal");
-        const modalTitulo = document.getElementById("modal-titulo");
-        const modalImagen = document.getElementById("modal-imagen");
-        const modalDescripcion = document.getElementById("modal-descripcion");
-        const modalPrecio = document.getElementById("modal-precio");
-        const cerrarModal = document.querySelector(".cerrar-modal");
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
 
-        flores.forEach((flor, index) => {
-          flor.addEventListener("click", () => {
-            const florData = datosFlores[index];
-            modalTitulo.textContent = florData.nombre;
-            modalImagen.src = florData.imagen;
-            modalDescripcion.textContent = florData.descripcion;
-            modalPrecio.textContent = `Precio: ${florData.precio}`;
-            modal.style.display = "flex";
-          });
-        });
+            // Variables globales
+            let currentFlowerIndex = 0;
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const cartButton = document.querySelector('.cart-button');
+            const carritoModal = document.getElementById('carrito-modal');
+            const cerrarCarrito = document.querySelector('.cerrar-carrito');
+            const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
 
-        cerrarModal.addEventListener("click", () => {
-          modal.style.display = "none";
-        });
+            // Función para actualizar el carrito
+            function actualizarCarrito() {
+                const carritoItems = document.getElementById('carrito-items');
+                const carritoTotal = document.getElementById('carrito-total');
+                let total = 0;
 
-        window.addEventListener("click", (event) => {
-          if (event.target === modal) {
-            modal.style.display = "none";
-          }
-        });
+                carritoItems.innerHTML = '';
 
-        // Variables globales
-        let currentFlowerIndex = 0;
-        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-        const cartButton = document.querySelector(".cart-button");
-        const carritoModal = document.getElementById("carrito-modal");
-        const cerrarCarrito = document.querySelector(".cerrar-carrito");
-        const vaciarCarritoBtn = document.getElementById("vaciar-carrito");
+                carrito.forEach((item, index) => {
+                    const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+                    const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
+                        item.accesorio === 'oso' ? 10000 :
+                            item.accesorio === 'globo' ? 5000 :
+                                item.accesorio === 'chocolate' ? 7000 : 8000;
 
-        // Función para actualizar el carrito
-        function actualizarCarrito() {
-          const carritoItems = document.getElementById("carrito-items");
-          const carritoTotal = document.getElementById("carrito-total");
-          let total = 0;
+                    const subtotal = (precio + accesorioPrecio) * item.cantidad;
+                    total += subtotal;
 
-          carritoItems.innerHTML = "";
-
-          carrito.forEach((item, index) => {
-            const precio = parseInt(item.precio.replace(/\D/g, "")) || 0;
-            const accesorioPrecio =
-              item.accesorio === "ninguno"
-                ? 0
-                : item.accesorio === "oso"
-                ? 10000
-                : item.accesorio === "globo"
-                ? 5000
-                : item.accesorio === "chocolate"
-                ? 7000
-                : 8000;
-
-            const subtotal = (precio + accesorioPrecio) * item.cantidad;
-            total += subtotal;
-
-            carritoItems.innerHTML += `
+                    carritoItems.innerHTML += `
                     <div class="carrito-item">
                         <img src="${item.imagen}" alt="${item.nombre}">
                         <div>
@@ -358,69 +400,62 @@
                         </div>
                     </div>
                 `;
-          });
+                });
 
-          carritoTotal.textContent = total.toLocaleString();
-          localStorage.setItem("carrito", JSON.stringify(carrito));
-          cartButton.setAttribute("data-count", carrito.length);
-          cartButton.style.backgroundColor =
-            carrito.length > 0 ? "#8cbaa3" : "#a8d5ba";
-        }
+                carritoTotal.textContent = total.toLocaleString();
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                cartButton.setAttribute('data-count', carrito.length);
+                cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
+            }
 
-        // Event listeners del carrito
-        cartButton.addEventListener("click", () => {
-          carritoModal.style.display = "block";
-          actualizarCarrito();
+            // Event listeners del carrito
+            cartButton.addEventListener('click', () => {
+                carritoModal.style.display = 'block';
+                actualizarCarrito();
+            });
+
+            cerrarCarrito.addEventListener('click', () => {
+                carritoModal.style.display = 'none';
+            });
+
+            // Eliminar item individual
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('eliminar-item')) {
+                    const index = e.target.dataset.index;
+                    carrito.splice(index, 1);
+                    actualizarCarrito();
+                }
+            });
+
+            // Vaciar carrito
+            vaciarCarritoBtn.addEventListener('click', () => {
+                carrito = [];
+                actualizarCarrito();
+            });
+
+            // Agregar al carrito
+            document.getElementById('agregar-carrito').addEventListener('click', () => {
+                const cantidad = parseInt(document.getElementById('cantidad').value);
+                const mensaje = document.getElementById('mensaje-flor').value;
+                const accesorio = document.getElementById('accesorios').value;
+
+                const nuevoItem = {
+                    ...datosFlores[currentFlowerIndex],
+                    cantidad: cantidad,
+                    mensaje: mensaje,
+                    accesorio: accesorio
+                };
+
+                carrito.push(nuevoItem);
+
+                const confirmacion = document.getElementById('confirmacion-agregado');
+                confirmacion.style.display = 'block';
+                setTimeout(() => confirmacion.style.display = 'none', 2000);
+
+                actualizarCarrito();
+                modal.style.display = 'none';
+            });
         });
-
-        cerrarCarrito.addEventListener("click", () => {
-          carritoModal.style.display = "none";
-        });
-
-        // Eliminar item individual
-        document.addEventListener("click", (e) => {
-          if (e.target.classList.contains("eliminar-item")) {
-            const index = e.target.dataset.index;
-            carrito.splice(index, 1);
-            actualizarCarrito();
-          }
-        });
-
-        // Vaciar carrito
-        vaciarCarritoBtn.addEventListener("click", () => {
-          carrito = [];
-          actualizarCarrito();
-        });
-
-        // Agregar al carrito
-        document
-          .getElementById("agregar-carrito")
-          .addEventListener("click", () => {
-            const cantidad = parseInt(
-              document.getElementById("cantidad").value
-            );
-            const mensaje = document.getElementById("mensaje-flor").value;
-            const accesorio = document.getElementById("accesorios").value;
-
-            const nuevoItem = {
-              ...datosFlores[currentFlowerIndex],
-              cantidad: cantidad,
-              mensaje: mensaje,
-              accesorio: accesorio,
-            };
-
-            carrito.push(nuevoItem);
-
-            const confirmacion = document.getElementById(
-              "confirmacion-agregado"
-            );
-            confirmacion.style.display = "block";
-            setTimeout(() => (confirmacion.style.display = "none"), 2000);
-
-            actualizarCarrito();
-            modal.style.display = "none";
-          });
-      });
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
