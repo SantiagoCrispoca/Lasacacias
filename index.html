@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
@@ -32,12 +31,12 @@
 
     <!-- Navegación -->
     <nav class="navbar">
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="quienes-somos.html">Quienes Somos</a></li>
-            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
-        </ul>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+      </ul>
     </nav>
 
     <!-- Título "Productos destacados" -->
@@ -45,38 +44,38 @@
 
     <!-- Carrusel de Imágenes -->
     <section id="inicio" class="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/ramo-1.jpeg" alt="Flor 1">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/manojo-2.jpeg" alt="Flor 2">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/ramo-4.jpg" alt="Flor 3">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/manojo-5.jpeg" alt="Flor 4">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/ramo-6.jpg" alt="Flor 5">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/manojo-3.jpeg" alt="Flor 6">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/ramo-6.jpg" alt="Flor 7">
-            </div>
-            <!-- Nuevas flores -->
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/manojo-5.jpeg" alt="Flor 8">
-            </div>
-            <div class="carousel-item flor-clickeable">
-                <img src="imagenes/manojo-2.jpeg" alt="Flor 9">
-            </div>
+      <div class="carousel-inner">
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/ramo-1.jpeg" alt="Flor 1" />
         </div>
-        <button class="carousel-control prev">&#10094;</button>
-        <button class="carousel-control next">&#10095;</button>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/manojo-2.jpeg" alt="Flor 2" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/ramo-4.jpg" alt="Flor 3" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/manojo-5.jpeg" alt="Flor 4" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/ramo-6.jpg" alt="Flor 5" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/manojo-3.jpeg" alt="Flor 6" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/ramo-6.jpg" alt="Flor 7" />
+        </div>
+        <!-- Nuevas flores -->
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/manojo-5.jpeg" alt="Flor 8" />
+        </div>
+        <div class="carousel-item flor-clickeable">
+          <img src="imagenes/manojo-2.jpeg" alt="Flor 9" />
+        </div>
+      </div>
+      <button class="carousel-control prev">&#10094;</button>
+      <button class="carousel-control next">&#10095;</button>
     </section>
 
     <!-- Título "Productos de temporada" -->
@@ -103,73 +102,81 @@
 
     <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
-        <div class="seasonal-item flor-clickeable">
-            <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1">
-        </div>
-        <div class="seasonal-item flor-clickeable">
-            <img src="imagenes/ramo-2.png" alt="Flor de temporada 2">
-        </div>
-        <div class="seasonal-item flor-clickeable">
-            <img src="imagenes/ramo-3.jpg" alt="Flor de temporada 3">
-        </div>
-        <div class="seasonal-item flor-clickeable">
-            <img src="imagenes/ramo-4.jpg" alt="Flor de temporada 4">
-        </div>
+      <div class="seasonal-item flor-clickeable">
+        <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1" />
+      </div>
+      <div class="seasonal-item flor-clickeable">
+        <img src="imagenes/ramo-2.png" alt="Flor de temporada 2" />
+      </div>
+      <div class="seasonal-item flor-clickeable">
+        <img src="imagenes/ramo-3.jpg" alt="Flor de temporada 3" />
+      </div>
+      <div class="seasonal-item flor-clickeable">
+        <img src="imagenes/ramo-4.jpg" alt="Flor de temporada 4" />
+      </div>
     </section>
 
     <!-- Ventana modal -->
     <div id="modal" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrar-modal">&times;</span>
-            <h2 id="modal-titulo">Nombre de la Flor</h2>
-            <img id="modal-imagen" src="" alt="Flor" class="modal-imagen">
-            <p id="modal-descripcion">Descripción de la flor.</p>
-            <p id="modal-precio">Precio: $XX.XXX</p>
-            <div class="cantidad-agregar">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" id="cantidad" min="1" value="1">
-                <button id="agregar-carrito">Agregar al carrito</button>
-            </div>
-            <div class="mensaje">
-                <label for="mensaje-flor">Mensaje para la flor:</label>
-                <textarea id="mensaje-flor" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
-            </div>
-            <div class="accesorios">
-                <label>Accesorios:</label>
-                <select id="accesorios">
-                    <option value="ninguno">Ninguno</option>
-                    <option value="oso">Oso de peluche (+$10.000)</option>
-                    <option value="globo">Globo temático (+$5.000)</option>
-                    <option value="chocolate">Chocolate (+$7.000)</option>
-                    <option value="corona">Corona (+$8.000)</option>
-                </select>
-            </div>
+      <div class="modal-contenido">
+        <span class="cerrar-modal">&times;</span>
+        <h2 id="modal-titulo">Nombre de la Flor</h2>
+        <img id="modal-imagen" src="" alt="Flor" class="modal-imagen" />
+        <p id="modal-descripcion">Descripción de la flor.</p>
+        <p id="modal-precio">Precio: $XX.XXX</p>
+        <div class="cantidad-agregar">
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" id="cantidad" min="1" value="1" />
+          <button id="agregar-carrito">Agregar al carrito</button>
         </div>
+        <div class="mensaje">
+          <label for="mensaje-flor">Mensaje para la flor:</label>
+          <textarea
+            id="mensaje-flor"
+            rows="4"
+            placeholder="Escribe tu mensaje aquí..."
+          ></textarea>
+        </div>
+        <div class="accesorios">
+          <label>Accesorios:</label>
+          <select id="accesorios">
+            <option value="ninguno">Ninguno</option>
+            <option value="oso">Oso de peluche (+$10.000)</option>
+            <option value="globo">Globo temático (+$5.000)</option>
+            <option value="chocolate">Chocolate (+$7.000)</option>
+            <option value="corona">Corona (+$8.000)</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <!-- Aviso de Cookies -->
     <div id="cookie-notice" class="cookie-notice">
-        <p>Este sitio web utiliza cookies para mejorar tu experiencia.</p>
-        <button id="accept-cookies" class="cookie-button">Aceptar</button>
+      <p>Este sitio web utiliza cookies para mejorar tu experiencia.</p>
+      <button id="accept-cookies" class="cookie-button">Aceptar</button>
     </div>
 
     <!-- Carrito de compras -->
     <div id="carrito-modal" class="carrito-modal">
-        <div class="carrito-header">
-            <h2>Tu Carrito</h2>
-            <span class="cerrar-carrito">&times;</span>
-        </div>
-        <div id="carrito-items"></div>
-        <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
+      <div class="carrito-header">
+        <h2>Tu Carrito</h2>
+        <span class="cerrar-carrito">&times;</span>
+      </div>
+      <div id="carrito-items"></div>
+      <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
+      <div class="carrito-botones">
         <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+        <a href="pagos.html" class="pagar-carrito">Ir a pagar</a>
+    </div>
     </div>
 
     <div class="confirmacion-agregado" id="confirmacion-agregado">
-        Producto añadido al carrito!
+      Producto añadido al carrito!
     </div>
 
     <!-- Footer -->
     <footer>
+
         <div class="footer-container">
             <!-- Sección izquierda (Contáctanos) -->
             <div class="footer-section">
@@ -386,8 +393,16 @@
                         <div>
                             <h3>${item.nombre}</h3>
                             <p>Cantidad: ${item.cantidad}</p>
-                            ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
-                            ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
+                            ${
+                              item.mensaje
+                                ? `<p>Mensaje: ${item.mensaje}</p>`
+                                : ""
+                            }
+                            ${
+                              item.accesorio !== "ninguno"
+                                ? `<p>Accesorio: ${item.accesorio}</p>`
+                                : ""
+                            }
                             <p>Subtotal: $${subtotal.toLocaleString()}</p>
                             <button class="eliminar-item" data-index="${index}">Eliminar</button>
                         </div>
@@ -452,5 +467,5 @@
     </script>
 
 </body>
-
 </html>
+
