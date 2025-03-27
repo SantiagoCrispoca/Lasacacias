@@ -3,45 +3,57 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5dc; /* Beige */
+    background-color: #f5f5dc;
+    /* Beige */
     color: #333;
 }
 
 /* Estilos para el header */
 .header {
     display: flex;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: space-between;
+    /* Distribuye el espacio entre los elementos */
+    align-items: center;
+    /* Centra verticalmente los elementos */
     padding: 10px 20px;
-    background-color: #d8e2dc; /* Verde pastel */
+    background-color: #517b67;
+    /* Verde pastel */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative; /* Para posicionar el botón del carrito */
+    position: relative;
+    /* Para posicionar el botón del carrito */
 }
 
 /* Estilos para el logo */
 .logo {
-    position: absolute; /* Posiciona el logo de manera absoluta */
-    left: 50%; /* Lo coloca en el centro horizontal */
-    transform: translateX(-50%); /* Ajusta el centrado */
+    position: absolute;
+    /* Posiciona el logo de manera absoluta */
+    left: 50%;
+    /* Lo coloca en el centro horizontal */
+    transform: translateX(-50%);
+    /* Ajusta el centrado */
 }
 
 .logo img {
-    height: 50px; /* Altura del logo */
+    height: 50px;
+    /* Altura del logo */
 }
 
 /* Estilos para el botón del carrito */
 .cart-button {
-    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    background-color: #a8d5ba;
+    /* Verde pastel más oscuro */
     border: none;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-right: auto; /* Empuja el botón a la izquierda */
+    margin-right: auto;
+    /* Empuja el botón a la izquierda */
 }
 
 .cart-button:hover {
-    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+    background-color: #8cbaa3;
+    /* Verde pastel más oscuro al pasar el mouse */
 }
 
 /* Estilos para la barra de búsqueda */
@@ -49,7 +61,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: auto; /* Empuja la barra de búsqueda a la derecha */
+    margin-left: auto;
+    /* Empuja la barra de búsqueda a la derecha */
 }
 
 .search-box input {
@@ -60,7 +73,8 @@ body {
 }
 
 .search-button {
-    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    background-color: #a8d5ba;
+    /* Verde pastel más oscuro */
     border: none;
     padding: 8px 12px;
     font-size: 16px;
@@ -69,12 +83,14 @@ body {
 }
 
 .search-button:hover {
-    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+    background-color: #8cbaa3;
+    /* Verde pastel más oscuro al pasar el mouse */
 }
 
 /* Navegación */
 .navbar {
-    background-color: #d8e2dc; /* Verde pastel */
+    background-color: #93e7b6;
+    /* Verde pastel */
     padding: 10px 0;
     text-align: center;
 }
@@ -97,11 +113,13 @@ body {
 }
 
 .navbar ul li a:hover {
-    color: #a8d5ba; /* Verde pastel más oscuro */
+    color: #a8d5ba;
+    /* Verde pastel más oscuro */
 }
 
 /* Títulos */
-.featured-title, .seasonal-title {
+.featured-title,
+.seasonal-title {
     text-align: center;
     font-size: 24px;
     margin: 20px 0;
@@ -122,10 +140,12 @@ body {
 }
 
 .carousel-item {
-    flex: 0 0 20%; /* Muestra 5 imágenes a la vez (100% / 5) */
+    flex: 0 0 20%;
+    /* Muestra 5 imágenes a la vez (100% / 5) */
     box-sizing: border-box;
     text-align: center;
-    padding: 0 10px; /* Espacio entre imágenes */
+    padding: 0 10px;
+    /* Espacio entre imágenes */
 }
 
 .carousel-item img {
@@ -135,7 +155,8 @@ body {
 }
 
 .add-button {
-    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    background-color: #a8d5ba;
+    /* Verde pastel más oscuro */
     border: none;
     padding: 10px 15px;
     font-size: 16px;
@@ -145,7 +166,8 @@ body {
 }
 
 .add-button:hover {
-    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+    background-color: #8cbaa3;
+    /* Verde pastel más oscuro al pasar el mouse */
 }
 
 /* Controles del carrusel */
@@ -153,7 +175,8 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(216, 226, 220, 0.8); /* Verde pastel con transparencia */
+    background-color: rgba(216, 226, 220, 0.8);
+    /* Verde pastel con transparencia */
     border: none;
     padding: 10px;
     font-size: 20px;
@@ -170,7 +193,8 @@ body {
 }
 
 .carousel-control:hover {
-    background-color: rgba(168, 213, 186, 0.8); /* Verde pastel más oscuro con transparencia */
+    background-color: rgba(168, 213, 186, 0.8);
+    /* Verde pastel más oscuro con transparencia */
 }
 
 .carousel-control:disabled {
@@ -181,14 +205,16 @@ body {
 /* Cuadrícula de Productos de Temporada */
 .seasonal-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    gap: 20px; /* Espacio entre imágenes */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columnas */
+    gap: 20px;
+    /* Espacio entre imágenes */
     width: 80%;
     margin: 0 auto;
     padding: 20px 0;
 
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 }
 
 .seasonal-item img {
@@ -199,7 +225,8 @@ body {
 }
 
 .seasonal-item img:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.05);
+    /* Efecto de zoom al pasar el mouse */
 }
 
 /* Aviso de Cookies */
@@ -219,7 +246,8 @@ body {
 }
 
 .cookie-button {
-    background-color: #a8d5ba; /* Verde pastel más oscuro */
+    background-color: #a8d5ba;
+    /* Verde pastel más oscuro */
     border: none;
     padding: 5px 10px;
     font-size: 14px;
@@ -228,7 +256,8 @@ body {
 }
 
 .cookie-button:hover {
-    background-color: #8cbaa3; /* Verde pastel más oscuro al pasar el mouse */
+    background-color: #8cbaa3;
+    /* Verde pastel más oscuro al pasar el mouse */
 }
 
 
@@ -248,8 +277,10 @@ body {
 
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    gap: 20px; /* Espacio entre imágenes */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columnas */
+    gap: 20px;
+    /* Espacio entre imágenes */
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -262,7 +293,8 @@ body {
 }
 
 .producto img:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.05);
+    /* Efecto de zoom al pasar el mouse */
 }
 
 
@@ -295,8 +327,10 @@ body {
 
 .collage {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    gap: 10px; /* Espacio entre imágenes */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columnas */
+    gap: 10px;
+    /* Espacio entre imágenes */
     margin: 40px 0;
 }
 
@@ -308,14 +342,16 @@ body {
 }
 
 .collage img:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.05);
+    /* Efecto de zoom al pasar el mouse */
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #d8e2dc; /* Verde pastel */
+    background-color: #d8e2dc;
+    /* Verde pastel */
     color: #333;
     margin-top: 40px;
 }
@@ -382,7 +418,8 @@ footer {
 }
 
 .respuesta.activa {
-    max-height: 500px; /* Ajusta según el contenido */
+    max-height: 500px;
+    /* Ajusta según el contenido */
     padding: 15px;
 }
 
@@ -390,7 +427,8 @@ footer {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #d8e2dc; /* Verde pastel */
+    background-color: #76aa8c;
+    /* Verde pastel */
     color: #333;
     margin-top: 40px;
 }
@@ -399,13 +437,15 @@ footer {
 
 /* Estilos para la ventana modal */
 .modal {
-    display: none; /* Oculta la ventana modal inicialmente */
+    display: none;
+    /* Oculta la ventana modal inicialmente */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Fondo oscuro semi-transparente */
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -457,7 +497,8 @@ footer {
 
 .cantidad-agregar button {
     padding: 10px 15px;
-    background-color: #a8d5ba; /* Verde pastel */
+    background-color: #a8d5ba;
+    /* Verde pastel */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -465,7 +506,8 @@ footer {
 }
 
 .cantidad-agregar button:hover {
-    background-color: #8cbaa3; /* Verde pastel más oscuro */
+    background-color: #8cbaa3;
+    /* Verde pastel más oscuro */
 }
 
 .mensaje textarea {
@@ -489,16 +531,22 @@ footer {
 /* Animación al pasar el cursor sobre las flores */
 .flor-clickeable img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 50%; /* Hace que la imagen tenga bordes circulares */
-    width: 150px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%;
+    /* Hace que la imagen tenga bordes circulares */
+    width: 150px;
+    /* Ajusta el tamaño según sea necesario */
     height: 150px;
-    object-fit: cover; /* Mantiene el contenido visible sin distorsión */
-    border: 2px solid #ccc; /* Opcional: Agregar un borde alrededor */
+    object-fit: cover;
+    /* Mantiene el contenido visible sin distorsión */
+    border: 2px solid #ccc;
+    /* Opcional: Agregar un borde alrededor */
 }
 
 .flor-clickeable img:hover {
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transform: scale(1.05);
+    /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra suave */
 }
 
 
@@ -511,11 +559,12 @@ footer {
     width: 400px;
     height: 100%;
     background-color: white;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
     overflow-y: auto;
     z-index: 1001;
-    flex-direction: column; /* Asegura que los elementos se apilen correctamente */
+    flex-direction: column;
+    /* Asegura que los elementos se apilen correctamente */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -529,9 +578,12 @@ footer {
 }
 
 #carrito-items {
-    flex-grow: 1; /* Permite que la lista de productos ocupe el espacio disponible */
-    overflow-y: auto; /* Agrega desplazamiento solo aquí */
-    max-height: 60vh; /* Limita la altura para evitar que el botón desaparezca */
+    flex-grow: 1;
+    /* Permite que la lista de productos ocupe el espacio disponible */
+    overflow-y: auto;
+    /* Agrega desplazamiento solo aquí */
+    max-height: 60vh;
+    /* Limita la altura para evitar que el botón desaparezca */
 }
 
 .carrito-item {
@@ -631,74 +683,152 @@ footer {
 .pagar-carrito:hover {
     background: #8cbaa3;
 }
+
 /* Estilos para pantallas medianas (tablets) */
 @media (max-width: 1024px) {
     .carousel-item {
-        flex: 0 0 33.33%; /* Mostrar 3 imágenes a la vez */
+        flex: 0 0 33.33%;
+        /* Mostrar 3 imágenes a la vez */
     }
 
-    .seasonal-grid, .productos-grid, .collage {
-        grid-template-columns: repeat(4, 1fr); /* 2 columnas en lugar de 4 */
+    .seasonal-grid,
+    .productos-grid,
+    .collage {
+        grid-template-columns: repeat(4, 1fr);
+        /* 2 columnas en lugar de 4 */
         justify-items: center;
     }
+
     .carrito-modal {
-        width: 50%; /* Ocupa la mitad de la pantalla */
+        width: 50%;
+        /* Ocupa la mitad de la pantalla */
     }
 }
 
 /* Estilos para pantallas pequeñas (móviles) */
 @media (max-width: 768px) {
+
+    /* El header se organiza en columna para que el logo quede arriba */
     .header {
-        flex-direction: column; /* Organiza los elementos en columna */
+        /* Fila con elementos alineados verticalmente al centro */
+        display: flex;
         align-items: center;
+        justify-content: space-between;
+        /* Carrito a la izq, búsqueda a la der */
+        padding: 10px 20px;
     }
 
+    /* Logo centrado y con un margen inferior para separarlo del resto */
     .logo {
+        margin: 0 auto;
         position: static;
         transform: none;
-        margin-bottom: 10px;
     }
 
-    .cart-button, .search-box {
+    /* Contenedor que agrupa carrito y búsqueda en la misma fila */
+    .cart-search-wrapper {
+        display: flex;
+        /* Fila */
+        align-items: center;
+        /* Centrado vertical */
+        justify-content: space-between;
         width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
+        /* Ocupa todo el ancho disponible */
+        padding: 0 20px;
+        /* Opcional: margen lateral */
+        box-sizing: border-box;
+    }
+
+    /* Ajustes para la barra de búsqueda en la misma fila */
+    .search-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: auto;
+        /* Quita el 100% para que no baje a otra línea */
+        margin-left: 0;
+        /* Anula el margin-left auto que pudieras tener */
+        margin-bottom: 0;
+        /* Quita el margen inferior si lo tuviera */
+        justify-content: flex-end;
+        /* Para que el input y botón queden a la derecha */
+    }
+
+    /* Opcional: si quieres que el input se adapte mejor */
+    .search-box input {
+        width: 100%;
+        max-width: 200px;
+        /* O el ancho que quieras */
+    }
+
+    .cart-button {
+        width: auto;
+        /* Evitar que se estire demasiado */
+        padding: 8px 12px;
+        /* Ajusta el padding */
+        font-size: 14px;
+        /* Ajusta tamaño de letra */
+    }
+
+    /* Ajusta el input y el botón de búsqueda */
+    .search-box input {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+    .search-button {
+        font-size: 14px;
+        padding: 6px 8px;
     }
 
     .navbar ul li {
-        display: block; /* Muestra los elementos en columna */
+        display: block;
+        /* Muestra los elementos en columna */
         margin: 10px 0;
     }
 
     .carousel-item {
-        flex: 0 0 50%; /* Solo 2 imagenes visibles */
+        flex: 0 0 50%;
+        /* Solo 2 imagenes visibles */
     }
 
-    .seasonal-grid, .productos-grid, .collage {
-        grid-template-columns: repeat(2, 1fr); /* Solo 1 columna */
+    .seasonal-grid,
+    .productos-grid,
+    .collage {
+        grid-template-columns: repeat(2, 1fr);
+        /* Solo 1 columna */
     }
 
     .carrito-modal {
-        width: 70%;  /* Ocupa el 70% del ancho de la pantalla */
-        height: 70vh; /* Ocupa el 70% del alto de la pantalla */
-        left: 50%;    /* Lo posicionamos en el centro */
+        width: 70%;
+        /* Ocupa el 70% del ancho de la pantalla */
+        height: 70vh;
+        /* Ocupa el 70% del alto de la pantalla */
+        left: 50%;
+        /* Lo posicionamos en el centro */
         top: 50%;
-        transform: translate(-50%, -50%); /* Centramos el carrito */
-        border-radius: 10px; /* Bordes redondeados para mejor diseño */
+        transform: translate(-50%, -50%);
+        /* Centramos el carrito */
+        border-radius: 10px;
+        /* Bordes redondeados para mejor diseño */
     }
 
     .modal-contenido {
         width: 95%;
     }
 }
+
 /* Estilos para teléfonos pequeños */
 @media (max-width: 425px) {
     .modal-contenido {
-        width: 90%; /* Un poco más reducido para pantallas pequeñas */
+        width: 90%;
+        /* Un poco más reducido para pantallas pequeñas */
     }
 
-    .cart-button, .search-box {
-        font-size: 14px; /* Ajustar el tamaño del texto */
+    .cart-button,
+    .search-box {
+        font-size: 14px;
+        /* Ajustar el tamaño del texto */
     }
 
     .navbar ul {
@@ -706,10 +836,30 @@ footer {
     }
 
     .navbar ul li {
-        font-size: 16px; /* Tamaño adecuado para lectura */
+        font-size: 16px;
+        /* Tamaño adecuado para lectura */
     }
+
     .carousel-item {
-        flex: 0 0 100%; /* Solo 1 imagen visible */
+        flex: 0 0 100%;
+        /* Solo 1 imagen visible */
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .preguntas-frecuentes {
+        flex: 1;
+    }
+    
+    .footer {
+        background-color: #6b8e75; /* Ajusta según tu diseño */
+        padding: 20px;
+        text-align: center;
     }
 }
 

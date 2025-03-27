@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -146,29 +149,61 @@
         </div>
     </div>
 
-        <!-- Carrito de compras -->
+    <!-- Carrito de compras -->
     <div id="carrito-modal" class="carrito-modal">
-            <div class="carrito-header">
-                <h2>Tu Carrito</h2>
-                <span class="cerrar-carrito">&times;</span>
-            </div>
-            <div id="carrito-items"></div>
-            <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
-            <div class="carrito-botones">
-                <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
-                <a href="pagos.html" class="pagar-carrito">Ir a pagar</a>
-            </div>
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <span class="cerrar-carrito">&times;</span>
+        </div>
+        <div id="carrito-items"></div>
+        <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
+        <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+
     </div>
 
     <div class="confirmacion-agregado" id="confirmacion-agregado">
         Producto añadido al carrito!
     </div>
 
-    
-
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Floristería Las Acacias</p>
+        <div class="footer-container">
+            <!-- Sección izquierda (Contáctanos) -->
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <p>
+                    <i class="fab fa-whatsapp"></i> +57 321 9694834
+                </p>
+                <p>
+                    <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+                </p>
+            </div>
+
+            <!-- Sección central (Formas de pago) -->
+            <div class="footer-section">
+                <h3>Formas de pago</h3>
+                <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
+            </div>
+
+            <!-- Sección derecha (Redes) -->
+            <div class="footer-section">
+                <h3>Redes</h3>
+                <p>
+                    <a href="https://www.facebook.com/lasacaciasfloreria1" target="_blank" rel="noopener noreferrer">
+                        <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+                    </a>
+                    <a href="https://www.instagram.com/lasacaciasfloristeria/" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+                    </a>
+                </p>
+            </div>
+        </div> <!-- Cierra el contenedor principal -->
+
+        <!-- Sección de copyright -->
+        <div class="footer-copy">
+            <p>© 2023 Floristería Las Acacias</p>
+        </div>
     </footer>
 
     <!-- Script para la ventana modal -->
@@ -319,35 +354,35 @@
         const cerrarCarrito = document.querySelector('.cerrar-carrito');
 
         cerrarCarrito.addEventListener('click', () => {
-            carritoModal.style.display = 'none'; 
+            carritoModal.style.display = 'none';
         });
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
         cartButton.addEventListener('click', () => {
-    carritoModal.style.display = 'block';
-    actualizarCarrito();
-    });
+            carritoModal.style.display = 'block';
+            actualizarCarrito();
+        });
 
         // Función para actualizar el carrito
         function actualizarCarrito() {
-        const carritoItems = document.getElementById('carrito-items');
-        const carritoTotal = document.getElementById('carrito-total');
-        let total = 0;
+            const carritoItems = document.getElementById('carrito-items');
+            const carritoTotal = document.getElementById('carrito-total');
+            let total = 0;
 
-        carritoItems.innerHTML = '';
+            carritoItems.innerHTML = '';
 
-        carrito.forEach((item, index) => {
-            const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
-            const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
-                item.accesorio === 'oso' ? 10000 :
-                item.accesorio === 'globo' ? 5000 :
-                item.accesorio === 'chocolate' ? 7000 : 8000;
+            carrito.forEach((item, index) => {
+                const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+                const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
+                    item.accesorio === 'oso' ? 10000 :
+                        item.accesorio === 'globo' ? 5000 :
+                            item.accesorio === 'chocolate' ? 7000 : 8000;
 
-            const subtotal = (precio + accesorioPrecio) * item.cantidad;
-            total += subtotal;
+                const subtotal = (precio + accesorioPrecio) * item.cantidad;
+                total += subtotal;
 
-            carritoItems.innerHTML += `
+                carritoItems.innerHTML += `
                 <div class="carrito-item">
                     <img src="${item.imagen}" alt="${item.nombre}">
                     <div>
@@ -360,59 +395,60 @@
                     </div>
                 </div>
             `;
+            });
+
+            carritoTotal.textContent = total.toLocaleString();
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            cartButton.setAttribute('data-count', carrito.length);
+            cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
+        }
+
+        function agregarAlCarrito() {
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+            const mensaje = document.getElementById('mensaje-flor').value;
+            const accesorio = document.getElementById('accesorios').value;
+
+            const nuevoItem = {
+                ...datosFlores[currentFlowerIndex],
+                cantidad: cantidad,
+                mensaje: mensaje,
+                accesorio: accesorio
+            };
+
+            carrito.push(nuevoItem);
+
+            // Mostrar confirmación
+            const confirmacion = document.getElementById('confirmacion-agregado');
+            confirmacion.style.display = 'block';
+            setTimeout(() => confirmacion.style.display = 'none', 2000);
+
+            actualizarCarrito();
+            modal.style.display = 'none';
+        }
+
+        cartButton.addEventListener('click', () => {
+            carritoModal.style.display = 'block';
+            actualizarCarrito(); // Para refrescar los items
         });
 
-        carritoTotal.textContent = total.toLocaleString();
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        cartButton.setAttribute('data-count', carrito.length);
-        cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
-    }
+        agregarCarritoBtn.addEventListener('click', agregarAlCarrito);
 
-    function agregarAlCarrito() {
-    const cantidad = parseInt(document.getElementById('cantidad').value);
-    const mensaje = document.getElementById('mensaje-flor').value;
-    const accesorio = document.getElementById('accesorios').value;
+        // Eliminar item individual
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('eliminar-item')) {
+                const index = e.target.dataset.index;
+                carrito.splice(index, 1);
+                actualizarCarrito();
+            }
+        });
 
-    const nuevoItem = {
-        ...datosFlores[currentFlowerIndex],
-        cantidad: cantidad,
-        mensaje: mensaje,
-        accesorio: accesorio
-    };
-
-    carrito.push(nuevoItem);
-    
-    // Mostrar confirmación
-    const confirmacion = document.getElementById('confirmacion-agregado');
-    confirmacion.style.display = 'block';
-    setTimeout(() => confirmacion.style.display = 'none', 2000);
-    
-    actualizarCarrito();
-    modal.style.display = 'none';
-    }   
-
-    cartButton.addEventListener('click', () => {
-    carritoModal.style.display = 'block';
-    actualizarCarrito(); // Para refrescar los items
-    });
-
-    agregarCarritoBtn.addEventListener('click', agregarAlCarrito);
-
-    // Eliminar item individual
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('eliminar-item')) {
-            const index = e.target.dataset.index;
-            carrito.splice(index, 1);
+        // Vaciar carrito
+        const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+        vaciarCarritoBtn.addEventListener('click', () => {
+            carrito = [];
             actualizarCarrito();
-        }
-    });
-
-    // Vaciar carrito
-    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
-    vaciarCarritoBtn.addEventListener('click', () => {
-        carrito = [];
-        actualizarCarrito();
-    });
+        });
     </script>
 </body>
+
 </html>
