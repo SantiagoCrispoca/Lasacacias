@@ -14,9 +14,9 @@
             <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias">
         </div>
         <div class="search-box">
-            <input type="text" placeholder="Buscar">
-            <button class="search-button">&#128269;</button>
-        </div>
+            <input type="text" id="search-input" placeholder="Buscar productos...">
+            <div id="search-results" class="search-results"></div> <!-- Contenedor de sugerencias -->
+        </div>        
     </header>
 
     <!-- Navegación -->
@@ -81,5 +81,126 @@
     <footer>
         <p>&copy; 2023 Floristería Las Acacias</p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Obtener referencias a los elementos del modal (los mismos que en el primer script)
+            const modal = document.getElementById("modal");
+            const modalTitulo = document.getElementById("modal-titulo");
+            const modalImagen = document.getElementById("modal-imagen");
+            const modalDescripcion = document.getElementById("modal-descripcion");
+            const modalPrecio = document.getElementById("modal-precio");
+            let currentFlowerIndex = 0; // Variable para rastrear el producto seleccionado
+        
+            // 2. Datos de productos para búsqueda (deben coincidir con datosFlores del primer script)
+            const productos = [
+                { id: "ramo-1", nombre: "Ramo de Rosas", imagen: "imagenes/ramo-1.jpeg" },
+                { id: "ramo-2", nombre: "Ramo de Tulipanes", imagen: "imagenes/ramo-2.png" },
+                { id: "ramo-3", nombre: "Ramo de Lirios", imagen: "imagenes/ramo-3.jpg" },
+                { id: "ramo-4", nombre: "Ramo Mixto", imagen: "imagenes/ramo-4.jpg" },
+                { id: "ramo-5", nombre: "Ramo de Margaritas", imagen: "imagenes/ramo-5.jpg" },
+                { id: "ramo-6", nombre: "Ramo de Girasoles", imagen: "imagenes/ramo-6.jpg" },
+                { id: "ramo-7", nombre: "Ramo de Claveles", imagen: "imagenes/ramo-7.jpg" },
+                { id: "ramo-8", nombre: "Ramo de Peonias", imagen: "imagenes/ramo-8.jpg" },
+                { id: "manojo-1", nombre: "Manojo de Lavanda", imagen: "imagenes/manojo-1.jpeg" },
+                { id: "manojo-2", nombre: "Manojo de Romero", imagen: "imagenes/manojo-2.jpeg" },
+                { id: "manojo-3", nombre: "Manojo de Eucalipto", imagen: "imagenes/manojo-3.jpeg" },
+                { id: "manojo-4", nombre: "Manojo de Hierbabuena", imagen: "imagenes/manojo-4.jpeg" },
+                { id: "manojo-5", nombre: "Manojo de Albahaca", imagen: "imagenes/manojo-5.jpeg" },
+                { id: "manojo-6", nombre: "Manojo de Cilantro", imagen: "imagenes/manojo-6.jpeg" },
+                { id: "manojo-7", nombre: "Manojo de Tomillo", imagen: "imagenes/manojo-7.jpg" },
+                { id: "manojo-8", nombre: "Manojo de Menta", imagen: "imagenes/manojo-8.jpg" }
+            ];
+        
+            // 3. Datos completos de flores (deben coincidir exactamente con los del primer script)
+            const datosFlores = [
+                // Productos destacados
+                { nombre: "Productos destacados 1", imagen: "imagenes/ramo-1.jpeg", descripcion: "Un hermoso ramo de flores variadas.", precio: "$25.000" },
+                { nombre: "Productos destacados 2", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
+                { nombre: "Productos destacados 3", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de liliums y rosas.", precio: "$26.000" },
+                { nombre: "Productos destacados 4", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
+                { nombre: "Productos destacados 5", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores silvestres.", precio: "$23.000" },
+                { nombre: "Productos destacados 6", imagen: "imagenes/manojo-3.jpeg", descripcion: "Manojo de claveles.", precio: "$17.000" },
+                { nombre: "Productos destacados 7", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores variadas.", precio: "$24.000" },
+                { nombre: "Productos destacados 8", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
+                { nombre: "Productos destacados 9", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
+                // Productos de temporada
+                { nombre: "Flor de temporada 1", imagen: "imagenes/ramo-1.jpeg", descripcion: "Ramo de flores de temporada.", precio: "$20.000" },
+                { nombre: "Flor de temporada 2", imagen: "imagenes/ramo-2.png", descripcion: "Ramo de tulipanes.", precio: "$22.000" },
+                { nombre: "Flor de temporada 3", imagen: "imagenes/ramo-3.jpg", descripcion: "Ramo de liliums.", precio: "$24.000" },
+                { nombre: "Flor de temporada 4", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de girasoles y margaritas.", precio: "$21.000" }
+            ];
+        
+            // 4. Configuración de la búsqueda
+            const searchInput = document.getElementById("search-input");
+            const searchResults = document.getElementById("search-results");
+        
+            searchInput.addEventListener("input", function () {
+                const query = this.value.trim().toLowerCase();
+                searchResults.innerHTML = "";
+        
+                if (query.length > 0) {
+                    const filtrados = productos.filter(producto =>
+                        producto.nombre.toLowerCase().includes(query) || 
+                        producto.id.toLowerCase().includes(query)
+                    );
+                    mostrarResultados(filtrados);
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+        
+            function mostrarResultados(filtrados) {
+                if (filtrados.length === 0) {
+                    searchResults.style.display = "none";
+                    return;
+                }
+        
+                searchResults.style.display = "block";
+                searchResults.innerHTML = ""; // Limpiar resultados anteriores
+        
+                filtrados.forEach(producto => {
+                    const div = document.createElement("div");
+                    div.className = "resultado-busqueda";
+                    div.innerHTML = `
+                        <img src="${producto.imagen}" alt="${producto.nombre}" width="40">
+                        <span>${producto.nombre}</span>
+                    `;
+                    div.addEventListener("click", () => abrirModalProducto(producto));
+                    searchResults.appendChild(div);
+                });
+            }
+        
+            // 5. Función para abrir el modal
+            function abrirModalProducto(producto) {
+                console.log("Abriendo modal para:", producto);
+                
+                // Buscar el producto en datosFlores por la imagen
+                const productoCompleto = datosFlores.find(item => item.imagen === producto.imagen);
+                
+                if (productoCompleto) {
+                    modalTitulo.textContent = productoCompleto.nombre;
+                    modalImagen.src = productoCompleto.imagen;
+                    modalDescripcion.textContent = productoCompleto.descripcion;
+                    modalPrecio.textContent = `Precio: ${productoCompleto.precio}`;
+                    modal.style.display = "flex";
+                    
+                    // Actualizar el índice para el carrito
+                    currentFlowerIndex = datosFlores.indexOf(productoCompleto);
+                } else {
+                    console.error("Producto no encontrado en datosFlores:", producto);
+                    alert("Producto no disponible temporalmente");
+                }
+                
+                searchResults.style.display = "none";
+            }
+        
+            // 6. Cerrar resultados al hacer clic fuera
+            document.addEventListener("click", function (event) {
+                if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
+        </script>
 </body>
 </html>
