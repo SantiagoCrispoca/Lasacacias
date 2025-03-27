@@ -662,6 +662,28 @@ footer {
     left: 0;
 }
 
+.carrito-botones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagar-carrito {
+    background: #a8d5ba;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.pagar-carrito:hover {
+    background: #8cbaa3;
+}
+
 /* Estilos para pantallas medianas (tablets) */
 @media (max-width: 1024px) {
     .carousel-item {
@@ -839,5 +861,103 @@ footer {
         padding: 20px;
         text-align: center;
     }
-    
 }
+
+
+/* Estilos para pagos.html */
+.contenedor-pagos {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.recordatorio {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #a8d5ba;
+}
+
+.resumen-carrito {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.item-resumen {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.item-resumen img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .contenedor-pagos {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.pago-nequi {
+    background: #6ab04c; /* Un tono de verde */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.pago-nequi:hover {
+    background: #489839;
+}
+
+.modal-contenido-nequi {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.cerrar-modal {
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#nequiPaymentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#nequiPaymentForm input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.success { color: green; }
+.error { color: red; }
+
+.botones-pago {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    width: 100%;
+  }
