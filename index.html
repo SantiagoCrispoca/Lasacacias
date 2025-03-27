@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
         <!-- Botón del carrito a la izquierda -->
         <button class="cart-button">🛒</button>
-          <i class="fa fa-shopping-cart"></i>
         </button>
-      
+
         <!-- Logo en el centro -->
         <div class="logo">
-          <img src="imagenes/logo.jpg" alt="Logo">
+            <img src="imagenes/logo.jpg" alt="Logo">
         </div>
-      
+
         <!-- Barra de búsqueda a la derecha -->
         <div class="search-box">
-          <input type="text" placeholder="Buscar...">
-          <button class="search-button">&#128269;</button>
-            <i class="fa fa-search"></i>
-          </button>
+            <input type="text" placeholder="Buscar...">
+            <button class="search-button">&#128269;</button>
+            </button>
         </div>
-      </header>
-      
+    </header>
+
 
     <!-- Navegación -->
     <nav class="navbar">
@@ -79,7 +80,26 @@
     </section>
 
     <!-- Título "Productos de temporada" -->
-    <h1 class="seasonal-title">Productos de temporada</h1>
+    <h1 class="seasonal-title">Productos Destacados</h1>
+
+    <!-- Cuadrícula de Productos de Temporada -->
+    <section class="seasonal-grid">
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-2.png" alt="Flor de temporada 2">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-3.jpg" alt="Flor de temporada 3">
+        </div>
+        <div class="seasonal-item flor-clickeable">
+            <img src="imagenes/ramo-4.jpg" alt="Flor de temporada 4">
+        </div>
+    </section>
+
+    <!-- Título "Productos de temporada" -->
+    <h1 class="seasonal-title">Reciente</h1>
 
     <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
@@ -133,7 +153,7 @@
         <button id="accept-cookies" class="cookie-button">Aceptar</button>
     </div>
 
-        <!-- Carrito de compras -->
+    <!-- Carrito de compras -->
     <div id="carrito-modal" class="carrito-modal">
         <div class="carrito-header">
             <h2>Tu Carrito</h2>
@@ -148,49 +168,45 @@
         Producto añadido al carrito!
     </div>
 
-        <!-- Footer -->
-        <footer>
-            <footer class="footer">
-                <div class="footer-container">
-                  
-                  <!-- Columna de contacto -->
-                  <div class="footer-column">
-                    <h3>Contáctanos</h3>
-                    <p>
-                      <i class="fa fa-whatsapp"></i> +57 324 9898324
-                    </p>
-                    <p>
-                      <i class="fa fa-envelope"></i> lasacaciasfloristeria@gmail.com
-                    </p>
-                  </div>
-                  
-                  <!-- Columna formas de pago -->
-                  <div class="footer-column">
-                    <h3>Formas de pago</h3>
-                    <!-- Aquí insertas el icono o imagen de Nequi -->
-                    <img src="ruta-del-icono-nequi.png" alt="Nequi" class="payment-icon">
-                  </div>
-                  
-                  <!-- Columna redes sociales -->
-                  <div class="footer-column">
-                    <h3>Redes</h3>
-                    <div class="social-links">
-                      <a href="#" target="_blank">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                      <a href="#" target="_blank">
-                        <i class="fa fa-instagram"></i>
-                      </a>
-                      <a href="#" target="_blank">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </div>
-                  </div>
-                  
-                </div>
-              </footer>
-              <p>&copy; 2023 Floristería Las Acacias</p>
-        </footer>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Sección izquierda (Contáctanos) -->
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <p>
+                    <i class="fab fa-whatsapp"></i> +57 321 9694834
+                </p>
+                <p>
+                    <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+                </p>
+            </div>
+
+            <!-- Sección central (Formas de pago) -->
+            <div class="footer-section">
+                <h3>Formas de pago</h3>
+                <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
+            </div>
+
+            <!-- Sección derecha (Redes) -->
+            <div class="footer-section">
+                <h3>Redes</h3>
+                <p>
+                    <a href="https://www.facebook.com/lasacaciasfloreria1" target="_blank" rel="noopener noreferrer">
+                        <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+                    </a>
+                    <a href="https://www.instagram.com/lasacaciasfloristeria/" target="_blank" rel="noopener noreferrer">
+                        <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+                    </a>
+                </p>
+            </div>
+        </div> <!-- Cierra el contenedor principal -->
+            
+        <!-- Sección de copyright -->
+        <div class="footer-copy">
+            <p>© 2023 Floristería Las Acacias</p>
+        </div>
+    </footer>
 
     <!-- Script Interno -->
     <script>
@@ -338,34 +354,33 @@
                 }
             });
 
-
             // Variables globales
-        let currentFlowerIndex = 0;
-        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        const cartButton = document.querySelector('.cart-button');
-        const carritoModal = document.getElementById('carrito-modal');
-        const cerrarCarrito = document.querySelector('.cerrar-carrito');
-        const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+            let currentFlowerIndex = 0;
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const cartButton = document.querySelector('.cart-button');
+            const carritoModal = document.getElementById('carrito-modal');
+            const cerrarCarrito = document.querySelector('.cerrar-carrito');
+            const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
 
-        // Función para actualizar el carrito
-        function actualizarCarrito() {
-            const carritoItems = document.getElementById('carrito-items');
-            const carritoTotal = document.getElementById('carrito-total');
-            let total = 0;
+            // Función para actualizar el carrito
+            function actualizarCarrito() {
+                const carritoItems = document.getElementById('carrito-items');
+                const carritoTotal = document.getElementById('carrito-total');
+                let total = 0;
 
-            carritoItems.innerHTML = '';
+                carritoItems.innerHTML = '';
 
-            carrito.forEach((item, index) => {
-                const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
-                const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
-                    item.accesorio === 'oso' ? 10000 :
-                    item.accesorio === 'globo' ? 5000 :
-                    item.accesorio === 'chocolate' ? 7000 : 8000;
+                carrito.forEach((item, index) => {
+                    const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+                    const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
+                        item.accesorio === 'oso' ? 10000 :
+                            item.accesorio === 'globo' ? 5000 :
+                                item.accesorio === 'chocolate' ? 7000 : 8000;
 
-                const subtotal = (precio + accesorioPrecio) * item.cantidad;
-                total += subtotal;
+                    const subtotal = (precio + accesorioPrecio) * item.cantidad;
+                    total += subtotal;
 
-                carritoItems.innerHTML += `
+                    carritoItems.innerHTML += `
                     <div class="carrito-item">
                         <img src="${item.imagen}" alt="${item.nombre}">
                         <div>
@@ -378,63 +393,64 @@
                         </div>
                     </div>
                 `;
+                });
+
+                carritoTotal.textContent = total.toLocaleString();
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                cartButton.setAttribute('data-count', carrito.length);
+                cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
+            }
+
+            // Event listeners del carrito
+            cartButton.addEventListener('click', () => {
+                carritoModal.style.display = 'block';
+                actualizarCarrito();
             });
 
-            carritoTotal.textContent = total.toLocaleString();
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            cartButton.setAttribute('data-count', carrito.length);
-            cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
-        }
+            cerrarCarrito.addEventListener('click', () => {
+                carritoModal.style.display = 'none';
+            });
 
-        // Event listeners del carrito
-        cartButton.addEventListener('click', () => {
-            carritoModal.style.display = 'block';
-            actualizarCarrito();
-        });
+            // Eliminar item individual
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('eliminar-item')) {
+                    const index = e.target.dataset.index;
+                    carrito.splice(index, 1);
+                    actualizarCarrito();
+                }
+            });
 
-        cerrarCarrito.addEventListener('click', () => {
-            carritoModal.style.display = 'none';
-        });
-
-        // Eliminar item individual
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('eliminar-item')) {
-                const index = e.target.dataset.index;
-                carrito.splice(index, 1);
+            // Vaciar carrito
+            vaciarCarritoBtn.addEventListener('click', () => {
+                carrito = [];
                 actualizarCarrito();
-            }
-        });
+            });
 
-        // Vaciar carrito
-        vaciarCarritoBtn.addEventListener('click', () => {
-            carrito = [];
-            actualizarCarrito();
-        });
+            // Agregar al carrito
+            document.getElementById('agregar-carrito').addEventListener('click', () => {
+                const cantidad = parseInt(document.getElementById('cantidad').value);
+                const mensaje = document.getElementById('mensaje-flor').value;
+                const accesorio = document.getElementById('accesorios').value;
 
-        // Agregar al carrito
-        document.getElementById('agregar-carrito').addEventListener('click', () => {
-            const cantidad = parseInt(document.getElementById('cantidad').value);
-            const mensaje = document.getElementById('mensaje-flor').value;
-            const accesorio = document.getElementById('accesorios').value;
+                const nuevoItem = {
+                    ...datosFlores[currentFlowerIndex],
+                    cantidad: cantidad,
+                    mensaje: mensaje,
+                    accesorio: accesorio
+                };
 
-            const nuevoItem = {
-                ...datosFlores[currentFlowerIndex],
-                cantidad: cantidad,
-                mensaje: mensaje,
-                accesorio: accesorio
-            };
+                carrito.push(nuevoItem);
 
-            carrito.push(nuevoItem);
+                const confirmacion = document.getElementById('confirmacion-agregado');
+                confirmacion.style.display = 'block';
+                setTimeout(() => confirmacion.style.display = 'none', 2000);
 
-            const confirmacion = document.getElementById('confirmacion-agregado');
-            confirmacion.style.display = 'block';
-            setTimeout(() => confirmacion.style.display = 'none', 2000);
-
-            actualizarCarrito();
-            modal.style.display = 'none';
-        });
+                actualizarCarrito();
+                modal.style.display = 'none';
+            });
         });
     </script>
-    
+
 </body>
+
 </html>
