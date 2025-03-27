@@ -356,6 +356,60 @@ footer {
     margin-top: 40px;
 }
 
+/* Footer - Redes Sociales */
+.footer-section img.social-btn {
+    width: 35px; 
+    height: 35px;
+    margin: 0px;
+    transition: transform 0.3s ease;
+}
+
+.footer-section img.social-btn:hover {
+    transform: scale(1.1);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Distribuye las secciones horizontalmente */
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cada sección del footer */
+.footer-section {
+    flex: 1;
+    padding: 0 15px;
+}
+
+/* Alineación específica para cada columna */
+.footer-section:nth-child(1) { /* Contáctanos */
+    text-align: left;
+}
+
+.footer-section:nth-child(2) { /* Formas de pago */
+    text-align: center;
+}
+
+.footer-section:nth-child(3) { /* Redes */
+    text-align: right;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-section {
+        width: 100%;
+        text-align: center !important;
+        padding: 0;
+    }
+}
+
 
 
 /* Estilos para la sección Preguntas Frecuentes */
@@ -424,6 +478,12 @@ footer {
 }
 
 /* Footer */
+
+a {
+    text-decoration: none; 
+    /* Elimina subrayado en todos los estados del enlace */
+  }
+
 footer {
     text-align: center;
     padding: 20px;
@@ -861,6 +921,7 @@ footer {
         padding: 20px;
         text-align: center;
     }
+
 }
 
 
