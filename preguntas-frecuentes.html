@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -41,7 +44,9 @@
             </button>
             <div class="respuesta">
                 <p>
-                    Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y completando la información de entrega. También puedes llamarnos directamente para realizar tu pedido.
+                    Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y
+                    completando la información de entrega. También puedes llamarnos directamente para realizar tu
+                    pedido.
                 </p>
             </div>
         </div>
@@ -54,7 +59,8 @@
             </button>
             <div class="respuesta">
                 <p>
-                    Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar la disponibilidad y frescura de las flores.
+                    Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar
+                    la disponibilidad y frescura de las flores.
                 </p>
             </div>
         </div>
@@ -67,7 +73,9 @@
             </button>
             <div class="respuesta">
                 <p>
-                    Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua. Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del sol.
+                    Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua.
+                    Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del
+                    sol.
                 </p>
             </div>
         </div>
@@ -80,29 +88,132 @@
             </button>
             <div class="respuesta">
                 <p>
-                    Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el crecimiento de bacterias.
+                    Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados
+                    adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el
+                    crecimiento de bacterias.
                 </p>
             </div>
         </div>
+
+        <!-- Pregunta 5 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Puedo programar un pedido para una fecha específica?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Sí, ofrecemos la posibilidad de programar tu pedido para una fecha específica.
+                    Para coordinarlo, por favor envíanos un correo a lasacaciasfloristeria@gmail.com indicándonos la
+                    fecha en la
+                    que deseas que llegue tu pedido. Nuestro equipo te confirmará los detalles y disponibilidad a la
+                    brevedad
+                </p>
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Puedo agregar un detalle o un mensaje adicional al ramo/manojo?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Sí, al realizar tu pedido puedes agregar un mensaje personalizado sin costo adicional. Además,
+                    tienes la opción de incluir accesorios como osos de peluche, globos temáticos, chocolates o coronas.
+                    Cada accesorio tiene un costo adicional que se muestra junto al producto correspondiente, pero el
+                    mensaje personalizado no genera ningún recargo.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Qué hago si mi pedido llega en mal estado o con errores?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                    Si tu pedido llega en mal estado o con errores, por favor contáctanos enviando un correo a
+                    lasacaciasfloristeria@gmail.com. Es importante que adjuntes evidencias, ya sea en fotos o video,
+                    que muestren el estado del producto para poder ayudarte de manera efectiva.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Pregunta 8 -->
+        <div class="pregunta">
+            <button class="pregunta-titulo">
+                ¿Cuáles son los métodos de pago disponibles?
+                <span class="icono">▼</span>
+            </button>
+            <div class="respuesta">
+                <p>
+                El metodo de pago utilizado es mediante nequi
+                </p>
+            </div>
+        </div>
+
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 Floristería Las Acacias</p>
-    </footer>
-
-    <!-- Script para el acordeón -->
-    <script>
-        // Funcionalidad del acordeón
-        const preguntas = document.querySelectorAll('.pregunta-titulo');
-        preguntas.forEach(pregunta => {
-            pregunta.addEventListener('click', () => {
-                const respuesta = pregunta.nextElementSibling;
-                respuesta.classList.toggle('activa');
-                const icono = pregunta.querySelector('.icono');
-                icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼'; // Usamos Unicode directamente
-            });
-        });
-    </script>
 </body>
+
+<!-- Script para el acordeón -->
+<script>
+    // Funcionalidad del acordeón
+    const preguntas = document.querySelectorAll('.pregunta-titulo');
+    preguntas.forEach(pregunta => {
+        pregunta.addEventListener('click', () => {
+            const respuesta = pregunta.nextElementSibling;
+            respuesta.classList.toggle('activa');
+            const icono = pregunta.querySelector('.icono');
+            icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼'; // Usamos Unicode directamente
+        });
+    });
+</script>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <!-- Sección izquierda (Contáctanos) -->
+        <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <p>
+                <i class="fab fa-whatsapp"></i> +57 321 9694834
+            </p>
+            <p>
+                <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+            </p>
+        </div>
+
+        <!-- Sección central (Formas de pago) -->
+        <div class="footer-section">
+            <h3>Formas de pago</h3>
+            <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
+        </div>
+
+        <!-- Sección derecha (Redes) -->
+        <div class="footer-section">
+            <h3>Redes</h3>
+            <p>
+                <a href="https://www.facebook.com/lasacaciasfloreria1" target="_blank" rel="noopener noreferrer">
+                    <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+                </a>
+                <a href="https://www.instagram.com/lasacaciasfloristeria/" target="_blank" rel="noopener noreferrer">
+                    <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+                </a>
+            </p>
+        </div>
+    </div> <!-- Cierra el contenedor principal -->
+
+    <!-- Sección de copyright -->
+    <div class="footer-copy">
+        <p>© 2023 Floristería Las Acacias</p>
+    </div>
+</footer>
+
+</body>
+
 </html>
