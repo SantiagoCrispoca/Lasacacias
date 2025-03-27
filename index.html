@@ -135,7 +135,10 @@
       </div>
       <div id="carrito-items"></div>
       <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
-      <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+      <div class="carrito-botones">
+        <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+        <a href="pagos.html" class="pagar-carrito">Ir a pagar</a>
+    </div>
     </div>
 
     <div class="confirmacion-agregado" id="confirmacion-agregado">
@@ -154,11 +157,23 @@
         const carouselInner = document.querySelector(".carousel-inner");
         const items = document.querySelectorAll(".carousel-item"); // Se define items
         const visibleItems = 5; // Se define cuántos elementos se muestran a la vez
-
+        const cookieNotice = document.getElementById("cookie-notice");
+        const acceptCookiesBtn = document.getElementById("accept-cookies");
         const prevButton = document.querySelector(".carousel-control.prev");
         const nextButton = document.querySelector(".carousel-control.next");
         let currentIndex = 0;
 
+
+        // Ocultar cookies si ya fueron aceptadas
+        if (localStorage.getItem("cookies-accepted")) {
+            cookieNotice.style.display = "none";
+        }
+
+        // Manejar clic en aceptar
+        acceptCookiesBtn.addEventListener("click", () => {
+            localStorage.setItem("cookies-accepted", "true");
+            cookieNotice.style.display = "none";
+        });
         // Deshabilitar botón previo al inicio
         prevButton.disabled = true;
         nextButton.disabled = items.length <= visibleItems;
