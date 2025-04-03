@@ -60,6 +60,7 @@
   <header class="header">
     <button class="cart-button">🛒</button>
     <div class="logo">
+      <a href="index.html">
       <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias">
     </div>
     <div class="search-box">
@@ -105,7 +106,9 @@
     <div class="modal-contenido-nequi">
       <span class="cerrar-modal">&times;</span>
       <h1>Pago con Nequi</h1>
+      <p style="font-size: 1.2em; margin: 15px 0; font-weight: bold;">Total a pagar: $<span id="total-pagar">0</span></p>
       <img src="imagenes/qr-nequi.jpg" alt="Código QR Nequi" id="qr-nequi">
+
       
       <!-- Botón de verificación -->
       <button id="verificar-pago" class="pago-nequi">
@@ -141,12 +144,12 @@
         <div class="footer-section">
             <h3>Redes</h3>
             <p>
-                <a href="https://www.facebook.com/lasacaciasfloreria1" target="_blank" rel="noopener noreferrer">
-                    <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
-                </a>
-                <a href="https://www.instagram.com/lasacaciasfloristeria/" target="_blank" rel="noopener noreferrer">
-                    <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
-                </a>
+              <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+                <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+            </a>
+            <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+                <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+            </a>
             </p>
         </div>
     </div> <!-- Cierra el contenedor principal -->
@@ -191,6 +194,7 @@
               `;
           }).join('');
           resumenTotal.textContent = total.toLocaleString();
+          document.getElementById("total-pagar").textContent = total.toLocaleString(); // Nueva línea
       }
 
       // Mostrar modal al hacer clic en el botón de pago
@@ -212,7 +216,8 @@
       // Manejar verificación de pago
       document.getElementById("verificar-pago").addEventListener("click", () => {
           document.getElementById("paymentStatus").innerHTML = `
-              <p class="success">✔️ Pago realizado con éxito!</p>
+              <p class="success">✔️ Pago realizado con éxito! Recibirás un correo con detalles de tu pedido.</p>
+              <p class="success">Serás redirigido a la pagina principal...</p>
           `;
           
           // Vaciar carrito y redirigir después de 20 segundos
