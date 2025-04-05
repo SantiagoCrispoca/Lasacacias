@@ -5,22 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiénes Somos - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Ocultar elementos y ajustar header */
+        .cart-button, .search-box {
+            display: none !important;
+        }
+        
+        /* Nuevos estilos para el header */
+        .header {
+            min-height: 40px; /* Altura aumentada */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        
+        .logo img {
+            height: 60px; /* Tamaño aumentado del logo */
+            width: auto;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header modificado -->
     <header class="header">
         <button class="cart-button">🛒</button>
         <div class="logo">
             <a href="index.html">
               <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias" />
             </a>
-          </div>
+        </div>
         <div class="search-box">
             <input type="text" id="search-input" placeholder="Buscar productos...">
-            <div id="search-results" class="search-results"></div> <!-- Contenedor de sugerencias -->
+            <div id="search-results" class="search-results"></div>
         </div>        
     </header>
-
     <!-- Navegación -->
     <nav class="navbar">
         <ul>
@@ -80,9 +99,44 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 Floristería Las Acacias</p>
-    </footer>
+  <footer>
+    <div class="footer-container">
+        <!-- Sección izquierda (Contáctanos) -->
+        <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <p>
+                <i class="fab fa-whatsapp"></i> +57 321 9694834
+            </p>
+            <p>
+                <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+            </p>
+        </div>
+
+        <!-- Sección central (Formas de pago) -->
+        <div class="footer-section">
+            <h3>Formas de pago</h3>
+            <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
+        </div>
+
+        <!-- Sección derecha (Redes) -->
+        <div class="footer-section">
+            <h3>Redes</h3>
+            <p>
+              <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+                <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn">
+            </a>
+            <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+                <img src="imagenes/instagram.png" alt="Instagram" class="social-btn">
+            </a>
+            </p>
+        </div>
+    </div> <!-- Cierra el contenedor principal -->
+        
+    <!-- Sección de copyright -->
+    <div class="footer-copy">
+        <p>© 2023 Floristería Las Acacias</p>
+    </div>
+  </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // 1. Obtener referencias a los elementos del modal (los mismos que en el primer script)

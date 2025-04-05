@@ -19,7 +19,7 @@
     }
     /* Estilos para el modal centrado */
     .modal {
-      display: none; /* Se muestra al activar */
+      display: none; /* Oculto por defecto */
       position: fixed;
       z-index: 9999;
       left: 0;
@@ -27,7 +27,6 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      display: flex;
       align-items: center;
       justify-content: center;
     }
@@ -86,7 +85,7 @@
     <div class="recordatorio">
       <h2>Recuerda:</h2>
       <p>Si tu pedido es para el dia de hoy tienes plazo para pedirlo hasta las 12:00pm para que te llegue el mismo dia.</p>
-      <p>De lo contrario queda agendado para mañana y las entregas seran en el transcurso del dia.</p>
+      <p>De lo contrario queda agendado para mañana y las entregas serán en el transcurso del día.</p>
     </div>
 
     <!-- Resumen del carrito -->
@@ -109,7 +108,6 @@
       <h1>Pago con Nequi</h1>
       <p style="font-size: 1.2em; margin: 15px 0; font-weight: bold;">Total a pagar: $<span id="total-pagar">0</span></p>
       <img src="imagenes/qr-nequi.jpg" alt="Código QR Nequi" id="qr-nequi">
-
       
       <!-- Botón de verificación -->
       <button id="verificar-pago" class="pago-nequi">
@@ -195,7 +193,7 @@
               `;
           }).join('');
           resumenTotal.textContent = total.toLocaleString();
-          document.getElementById("total-pagar").textContent = total.toLocaleString(); // Nueva línea
+          document.getElementById("total-pagar").textContent = total.toLocaleString();
       }
 
       // Mostrar modal al hacer clic en el botón de pago
