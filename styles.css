@@ -241,8 +241,13 @@ body {
 }
 
 .carousel-control:disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: not-allowed;
+    background-color: rgba(216, 226, 220, 0.4);
+}
+
+.carousel-control:disabled:hover {
+    background-color: rgba(216, 226, 220, 0.4);
 }
 
 /* Cuadrícula de Productos de Temporada */
