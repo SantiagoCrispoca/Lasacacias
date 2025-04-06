@@ -172,7 +172,7 @@ body {
 /* Carrusel */
 .carousel {
     position: relative;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -562,6 +562,10 @@ footer {
     max-width: 500px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
+    position: relative;
+    margin: 20px; /* Añade margen para pantallas pequeñas */
+    max-height: 90vh; /* Limita la altura */
+    overflow-y: auto; /* Añade scroll si es necesario */
 }
 
 .cerrar-modal {
@@ -924,8 +928,23 @@ footer {
 /* Estilos para teléfonos pequeños */
 @media (max-width: 425px) {
     .modal-contenido {
-        width: 90%;
+        width: 95%;
+        padding: 15px;
         /* Un poco más reducido para pantallas pequeñas */
+    }
+
+    .cantidad-agregar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cantidad-agregar input {
+        margin-bottom: 10px;
+    }
+
+    .modal-imagen {
+        max-height: 200px;
+        object-fit: contain;
     }
 
     .cart-button,
@@ -968,7 +987,7 @@ footer {
 }
 
 
-/* Estilos para pagos.html */
+/* Estilos responsive para pagos.html */
 .contenedor-pagos {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -1006,6 +1025,23 @@ footer {
     height: 80px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+/* Responsive para pantallas medianas */
+@media (max-width: 900px) {
+    .contenedor-pagos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .item-resumen {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .item-resumen img {
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1065,3 +1101,68 @@ footer {
     margin: 20px auto;
     width: 100%;
   }
+
+  /* Responsive para móviles */
+@media (max-width: 600px) {
+    .contenedor-pagos {
+        padding: 10px;
+    }
+    
+    .recordatorio, 
+    .resumen-carrito {
+        padding: 15px;
+    }
+    
+    .header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .logo {
+        margin: 10px 0;
+        position: static;
+        transform: none;
+    }
+    
+    .search-box {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .navbar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .navbar ul li {
+        margin: 5px 10px;
+    }
+    
+    /* Modal en móviles */
+    .modal-contenido-nequi {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    #qr-nequi {
+        max-width: 250px;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .item-resumen img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .pago-nequi {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    #verificar-pago {
+        width: 100%;
+    }
+}
