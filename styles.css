@@ -638,11 +638,12 @@ footer {
 /* Animación al pasar el cursor sobre las flores */
 .flor-clickeable img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 50%;
+    border-radius: 10%;
     /* Hace que la imagen tenga bordes circulares */
-    width: 150px;
+    width: 100%;
     /* Ajusta el tamaño según sea necesario */
-    height: 150px;
+    height: 100%;
+
     object-fit: cover;
     /* Mantiene el contenido visible sin distorsión */
     border: 2px solid #ccc;
@@ -1024,7 +1025,7 @@ footer {
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 0%;
 }
 
 /* Responsive para pantallas medianas */
