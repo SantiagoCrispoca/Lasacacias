@@ -1114,25 +1114,43 @@ footer {
     }
     
     .header {
+        display: flex;
         flex-direction: column;
-        padding: 10px;
+        align-items: center;
+        padding: 15px 10px;
+        gap: 15px;
     }
-    
+
+    /* Eliminar el wrapper si no es esencial (o dejarlo como contenedor invisible) */
+    .cart-search-wrapper {
+        display: contents; /* Hace que los hijos hereden directamente del header */
+    }
+
+    /* Orden de elementos */
+    .cart-button {
+        order: 1; /* Primero: Carrito */
+        margin-right: 0;
+        align-self: flex-start; /* Opcional: alinea a la izquierda */
+    }
+
     .logo {
-        margin: 10px 0;
+        order: 2; /* Segundo: Logo */
         position: static;
         transform: none;
+        margin: 0;
     }
-    
+
     .search-box {
+        order: 3; /* Tercero: Búsqueda */
         width: 100%;
-        margin: 10px 0;
+        max-width: 300px;
+        margin: 0;
     }
-    
-    .navbar ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+
+    /* Navbar - debajo de todo */
+    .navbar {
+        order: 4;
+        margin-top: 15px;
     }
     
     .navbar ul li {
