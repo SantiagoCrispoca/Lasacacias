@@ -52,22 +52,35 @@
       margin: 20px auto;
       display: block;
     }
+    /* Ocultar elementos y ajustar header */
+    .cart-button, .search-box {
+            display: none !important;
+        }
+        
+        /* Nuevos estilos para el header */
+        .header {
+            min-height: 40px; /* Altura aumentada */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        
+        .logo img {
+            height: 60px; /* Tamaño aumentado del logo */
+            width: auto;
+        }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="header">
-    <button class="cart-button">🛒</button>
     <div class="logo">
-      <a href="index.html">
-        <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias" />
-      </a>
+        <a href="index.html">
+            <img src="imagenes/logo.jpg" alt="Logo de Floristería Las Acacias" />
+        </a>
     </div>
-    <div class="search-box">
-      <input type="text" placeholder="Buscar">
-      <button class="search-button">&#128269;</button>
-    </div>
-  </header>
+</header>
 
   <!-- Navegación -->
   <nav class="navbar">
