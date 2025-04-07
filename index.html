@@ -208,7 +208,7 @@
 
   <!-- Script Interno -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded'), () => {
       const carouselInner = document.querySelector('.carousel-inner');
       let items = document.querySelectorAll('.carousel-item');
       const visibleCount = 5; // Número de imágenes que se muestran en el carrusel normalmente
@@ -242,12 +242,117 @@
       prevButton.addEventListener('click', () => moveCarousel('prev'));
       nextButton.addEventListener('click', () => moveCarousel('next'));
 
-      // Aviso de Cookies
-      const cookieNotice = document.getElementById('cookie-notice');
-      const acceptCookiesButton = document.getElementById('accept-cookies');
-      acceptCookiesButton.addEventListener('click', () => {
-        cookieNotice.style.display = 'none';
-        localStorage.setItem('cookiesAccepted', 'true');
+    // Aviso de Cookies
+    const cookieNotice = document.getElementById('cookie-notice');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    acceptCookiesButton.addEventListener('click', () => {
+      cookieNotice.style.display = 'none';
+      localStorage.setItem('cookiesAccepted', 'true');
+    });
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+      cookieNotice.style.display = 'none';
+    }
+
+    // Datos de las flores
+    const datosFlores = [
+      {
+        nombre: "Ramo Rosas Rojas",
+        imagen: "imagenes/ramo-1.jpeg",
+        descripcion: "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
+        precio: "$80.000"
+      },
+      {
+        nombre: "Majono Variado",
+        imagen: "imagenes/manojo-2.jpeg",
+        descripcion: "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
+        precio: "$30.000"
+      },
+      {
+        nombre: "Ramo Girasoles y Rosas",
+        imagen: "imagenes/ramo-4.jpg",
+        descripcion: "Ramo de girasoles y rosas rojas, lleno de energía y frescura.",
+        precio: "$70.000"
+      },
+      {
+        nombre: "Manojo Variado rosado",
+        imagen: "imagenes/manojo-5.jpeg",
+        descripcion: "Manojo de margaritas, fresco y juvenil.",
+        precio: "$25.000"
+      },
+      {
+        nombre: "Ramo Variado",
+        imagen: "imagenes/ramo-6.jpg",
+        descripcion: "Ramo de girasoles y flores silvestres, natural y encantador.",
+        precio: "$80.000"
+      },
+      {
+        nombre: "Manojo De Girasoles",
+        imagen: "imagenes/manojo-3.jpeg",
+        descripcion: "Manojo de girasoles, lleno de energía y alegría.",
+        precio: "$40.000"
+      },
+      {
+        nombre: "Ramo Variado",
+        imagen: "imagenes/ramo-6.jpg",
+        descripcion: "Ramo de girasoles y flores silvestres, natural y encantador.",
+        precio: "$80.000"
+      },
+      {
+        nombre: "Manojo Variado rosado",
+        imagen: "imagenes/manojo-5.jpeg",
+        descripcion: "Manojo de margaritas, fresco y juvenil.",
+        precio: "$25.000"
+      },
+      {
+        nombre: "Majono Variado",
+        imagen: "imagenes/manojo-2.jpeg",
+        descripcion: "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
+        precio: "$30.000"
+      },
+      // Productos de temporada
+      {
+        nombre: "Ramo Rosas Rojas",
+        imagen: "imagenes/ramo-1.jpeg",
+        descripcion: "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
+        precio: "$80.000"
+      },
+      {
+        nombre: "Flor de temporada 2",
+        imagen: "imagenes/ramo-2.png",
+        descripcion: "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
+        precio: "$22.000"
+      },
+      {
+        nombre: "Flor de temporada 3",
+        imagen: "imagenes/ramo-3.jpg",
+        descripcion: "Ramo de liliums, elegante y sofisticado.",
+        precio: "$24.000"
+      },
+      {
+        nombre: "Flor de temporada 4",
+        imagen: "imagenes/ramo-4.jpg",
+        descripcion: "Ramo de girasoles y margaritas, lleno de energía y frescura.",
+        precio: "$21.000"
+      }
+    ];
+
+    // Modal de Flores
+    const flores = document.querySelectorAll('.flor-clickeable');
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalImagen = document.getElementById('modal-imagen');
+    const modalDescripcion = document.getElementById('modal-descripcion');
+    const modalPrecio = document.getElementById('modal-precio');
+    const cerrarModal = document.querySelector('.cerrar-modal');
+
+    flores.forEach((flor, index) => {
+      flor.addEventListener('click', () => {
+        const florData = datosFlores[index];
+        modalTitulo.textContent = florData.nombre;
+        modalImagen.src = florData.imagen;
+        modalDescripcion.textContent = florData.descripcion;
+        modalPrecio.textContent = `Precio: ${florData.precio}`;
+        modal.style.display = 'flex';
       });
       if (localStorage.getItem('cookiesAccepted') === 'true') {
         cookieNotice.style.display = 'none';
@@ -529,20 +634,20 @@
       // 3. Datos completos de flores (deben coincidir exactamente con los del primer script)
       const datosFlores = [
         // Productos destacados
-        { nombre: "Productos destacados 1", imagen: "imagenes/ramo-1.jpeg", descripcion: "Un hermoso ramo de flores variadas.", precio: "$25.000" },
-        { nombre: "Productos destacados 2", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
-        { nombre: "Productos destacados 3", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de liliums y rosas.", precio: "$26.000" },
-        { nombre: "Productos destacados 4", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
-        { nombre: "Productos destacados 5", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores silvestres.", precio: "$23.000" },
-        { nombre: "Productos destacados 6", imagen: "imagenes/manojo-3.jpeg", descripcion: "Manojo de claveles.", precio: "$17.000" },
-        { nombre: "Productos destacados 7", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores variadas.", precio: "$24.000" },
-        { nombre: "Productos destacados 8", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
-        { nombre: "Productos destacados 9", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
+                { nombre: "Ramo Rosas Rojas", imagen: "imagenes/ramo-1.jpeg", descripcion: "Un hermoso ramo de flores variadas.", precio: "$25.000" },
+                { nombre: "Manojo Variado", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
+                { nombre: "Ramo Girasoles y Rosas", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de liliums y rosas.", precio: "$26.000" },
+                { nombre: "Manojo Variado Rosado", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
+                { nombre: "Ramo variado", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores silvestres.", precio: "$23.000" },
+                { nombre: "Manojo girasoles", imagen: "imagenes/manojo-3.jpeg", descripcion: "Manojo de claveles.", precio: "$17.000" },
+                { nombre: "Ramo Variado", imagen: "imagenes/ramo-6.jpg", descripcion: "Ramo de flores variadas.", precio: "$24.000" },
+                { nombre: "Manojo Variado Rosado", imagen: "imagenes/manojo-5.jpeg", descripcion: "Manojo de margaritas.", precio: "$21.000" },
+                { nombre: "Manojo Variado", imagen: "imagenes/manojo-2.jpeg", descripcion: "Manojo de rosas blancas y rojas.", precio: "$18.000" },
         // Productos de temporada
-        { nombre: "Flor de temporada 1", imagen: "imagenes/ramo-1.jpeg", descripcion: "Ramo de flores de temporada.", precio: "$20.000" },
-        { nombre: "Flor de temporada 2", imagen: "imagenes/ramo-2.png", descripcion: "Ramo de tulipanes.", precio: "$22.000" },
-        { nombre: "Flor de temporada 3", imagen: "imagenes/ramo-3.jpg", descripcion: "Ramo de liliums.", precio: "$24.000" },
-        { nombre: "Flor de temporada 4", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de girasoles y margaritas.", precio: "$21.000" },
+        { nombre: "Ramo Rosas Rojas", imagen: "imagenes/ramo-1.jpeg", descripcion: "Ramo de flores de temporada.", precio: "$20.000" },
+        { nombre: "Ramo Rosas Rojas", imagen: "imagenes/ramo-2.png", descripcion: "Ramo de tulipanes.", precio: "$22.000" },
+        { nombre: "Ramo variado", imagen: "imagenes/ramo-3.jpg", descripcion: "Ramo de liliums.", precio: "$24.000" },
+        { nombre: "Ramo Girasoles y Rosas", imagen: "imagenes/ramo-4.jpg", descripcion: "Ramo de girasoles y margaritas.", precio: "$21.000" },
         { nombre: "Ramo de rosas variadas", imagen: "imagenes/Ramo9.jpeg", descripcion: "Ramo de rosas variadas lleno de energía y frescura", precio: "$70.000" },
         { nombre: "Ramo de girasoles", imagen: "imagenes/Ramo10.jpeg", descripcion: "Ramo de girasoles en base de vidrio perfecto para cualquier ocasión.", precio: "$40.000" },
         { nombre: "Manojo variado", imagen: "imagenes/Manojo10.jpeg", descripcion: "Manojo de flores variadas, freso y juvenil.", precio: "$30.000" },
