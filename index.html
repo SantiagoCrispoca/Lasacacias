@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta.">
+    <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript.">
     <title>Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -23,7 +25,6 @@
           placeholder="Buscar productos..."
         />
         <div id="search-results" class="search-results"></div>
-        <!-- Contenedor de sugerencias -->
       </div>
     </header>
 
@@ -37,7 +38,7 @@
       </ul>
     </nav>
 
-    <!-- Título "Productos destacados" -->
+    <!-- Productos destacados -->
     <h1 class="featured-title">Productos destacados</h1>
 
     <!-- Carrusel de Imágenes -->
@@ -76,10 +77,8 @@
       <button class="carousel-control next">&#10095;</button>
     </section>
 
-    <!-- Título "Productos de temporada" -->
+    <!-- Productos de temporada -->
     <h1 class="seasonal-title">Productos de temporada</h1>
-
-    <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
       <div class="seasonal-item flor-clickeable">
         <img src="imagenes/ramo-1.jpeg" alt="Flor de temporada 1" />
@@ -95,10 +94,8 @@
       </div>
     </section>
 
-    <!-- Título "Productos de temporada" -->
+    <!--Productos de temporada-->
     <h1 class="seasonal-title">Productos Reciente</h1>
-
-    <!-- Cuadrícula de Productos de Temporada -->
     <section class="seasonal-grid">
       <div class="seasonal-item flor-clickeable">
         <img src="imagenes/Ramo9.jpeg" alt="Flor reciente 1" />
@@ -114,7 +111,7 @@
       </div>
     </section>
 
-    <!-- Ventana modal -->
+    <!--Modal de flores-->
     <div id="modal" class="modal">
       <div class="modal-contenido">
         <span class="cerrar-modal">&times;</span>
@@ -177,7 +174,6 @@
     <!-- Footer -->
     <footer>
       <div class="footer-container">
-        <!-- Sección izquierda (Contáctanos) -->
         <div class="footer-section">
           <h3>Contáctanos</h3>
           <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
@@ -186,13 +182,13 @@
           </p>
         </div>
 
-        <!-- Sección central (Formas de pago) -->
+        <!--Formas de pago-->
         <div class="footer-section">
           <h3>Formas de pago</h3>
           <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
         </div>
 
-        <!-- Sección derecha (Redes) -->
+        <!--Redes-->
         <div class="footer-section">
           <h3>Redes</h3>
           <p>
@@ -221,9 +217,6 @@
           </p>
         </div>
       </div>
-      <!-- Cierra el contenedor principal -->
-
-      <!-- Sección de copyright -->
       <div class="footer-copy">
         <p>© 2023 Floristería Las Acacias</p>
       </div>
@@ -676,8 +669,6 @@
             actualizarCarrito();
             modal.style.display = "none";
           });
-
-        // Inicializar carrito
         actualizarCarrito();
       });
     </script>

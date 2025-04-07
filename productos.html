@@ -6,6 +6,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <meta charset="UTF-8" />
+    <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta.">
+    <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productos - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css" />
@@ -44,35 +46,27 @@
     <section class="productos-section">
       <h2>Manojos</h2>
       <div class="productos-grid">
-        <!-- Flor 1 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-1.jpeg" alt="Manojo 1" />
         </div>
-        <!-- Flor 2 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-2.jpeg" alt="Manojo 2" />
         </div>
-        <!-- Flor 3 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-3.jpeg" alt="Manojo 3" />
         </div>
-        <!-- Flor 4 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-4.jpeg" alt="Manojo 4" />
         </div>
-        <!-- Flor 5 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-5.jpeg" alt="Manojo 5" />
         </div>
-        <!-- Flor 6 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-6.jpeg" alt="Manojo 6" />
         </div>
-        <!-- Flor 7 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-7.jpg" alt="Manojo 7" />
         </div>
-        <!-- Flor 8 -->
         <div class="flor-clickeable">
           <img src="imagenes/manojo-8.jpg" alt="Manojo 8" />
         </div>
@@ -83,61 +77,49 @@
     <section class="productos-section">
       <h2>Ramos</h2>
       <div class="productos-grid">
-        <!-- Flor 1 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-1.jpeg" alt="Ramo 1" />
         </div>
-        <!-- Flor 2 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-2.png" alt="Ramo 2" />
         </div>
-        <!-- Flor 3 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-3.jpg" alt="Ramo 3" />
         </div>
-        <!-- Flor 4 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-4.jpg" alt="Ramo 4" />
         </div>
-        <!-- Flor 5 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-5.jpg" alt="Ramo 5" />
         </div>
-        <!-- Flor 6 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-6.jpg" alt="Ramo 6" />
         </div>
-        <!-- Flor 7 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-7.jpg" alt="Ramo 7" />
         </div>
-        <!-- Flor 8 -->
         <div class="flor-clickeable">
           <img src="imagenes/ramo-8.jpg" alt="Ramo 8" />
         </div>
       </div>
     </section>
 
-    <!-- Ventana modal -->
+    <!--Modales de flores-->
     <div id="modal" class="modal">
       <div class="modal-contenido">
-        <!-- Botón para cerrar la ventana modal -->
         <span class="cerrar-modal">&times;</span>
 
-        <!-- Contenido de la ventana modal -->
         <h2 id="modal-titulo">Nombre de la Flor</h2>
         <img id="modal-imagen" src="" alt="Flor" class="modal-imagen" />
         <p id="modal-descripcion">Descripción de la flor.</p>
         <p id="modal-precio">Precio: $XX.XXX</p>
 
-        <!-- Cantidad y botón para agregar al carrito -->
         <div class="cantidad-agregar">
           <label for="cantidad">Cantidad:</label>
           <input type="number" id="cantidad" min="1" value="1" />
           <button id="agregar-carrito">Agregar al carrito</button>
         </div>
 
-        <!-- Mensaje personalizado -->
         <div class="mensaje">
           <label for="mensaje-flor">Mensaje para la flor:</label>
           <textarea
@@ -147,7 +129,6 @@
           ></textarea>
         </div>
 
-        <!-- Accesorios -->
         <div class="accesorios">
           <label>Accesorios:</label>
           <select id="accesorios">
@@ -193,13 +174,13 @@
           </p>
         </div>
 
-        <!-- Sección central (Formas de pago) -->
+        <!--Formas de pago-->
         <div class="footer-section">
           <h3>Formas de pago</h3>
           <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
         </div>
 
-        <!-- Sección derecha (Redes) -->
+        <!--Redes-->
         <div class="footer-section">
           <h3>Redes</h3>
           <p>
@@ -228,14 +209,13 @@
           </p>
         </div>
       </div>
-      <!-- Cierra el contenedor principal -->
 
-      <!-- Sección de copyright -->
       <div class="footer-copy">
         <p>© 2023 Floristería Las Acacias</p>
       </div>
     </footer>
 
+    <!--Script interno-->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // -------------------- COOKIES --------------------
@@ -585,8 +565,6 @@
           cartButton.style.backgroundColor =
             carrito.length > 0 ? "#8cbaa3" : "#a8d5ba";
         }
-
-        // Eventos del carrito
         cartButton.addEventListener("click", () => {
           carritoModal.style.display = "block";
           actualizarCarrito();
@@ -629,8 +607,6 @@
             actualizarCarrito();
             modal.style.display = "none";
           });
-
-        // Inicializar carrito
         actualizarCarrito();
       });
     </script>

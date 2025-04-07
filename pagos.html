@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta.">
+  <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagos - Floristería Las Acacias</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Estilos para centrar el botón de pago */
     .botones-pago {
       display: flex;
       justify-content: center;
@@ -17,9 +18,8 @@
       font-size: 1.1em;
       cursor: pointer;
     }
-    /* Estilos para el modal centrado */
     .modal {
-      display: none; /* Oculto por defecto */
+      display: none;
       position: fixed;
       z-index: 9999;
       left: 0;
@@ -52,14 +52,12 @@
       margin: 20px auto;
       display: block;
     }
-    /* Ocultar elementos y ajustar header */
     .cart-button, .search-box {
             display: none !important;
         }
         
-        /* Nuevos estilos para el header */
         .header {
-            min-height: 40px; /* Altura aumentada */
+            min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -67,7 +65,7 @@
         }
         
         .logo img {
-            height: 60px; /* Tamaño aumentado del logo */
+            height: 60px;
             width: auto;
         }
   </style>
@@ -94,6 +92,7 @@
 
   <!-- Contenido principal -->
   <main class="contenedor-pagos">
+
     <!-- Recordatorio -->
     <div class="recordatorio">
       <h2>Recuerda:</h2>
@@ -108,13 +107,13 @@
       <div class="resumen-total">Total: $<span id="resumen-total">0</span></div>
     </div>
 
-    <!-- Botón de Pago con Nequi (centrado) -->
+    <!-- Botón de Pago con Nequi -->
     <div class="botones-pago">
       <button id="pago-nequi" class="pago-nequi">Pago con Nequi</button>
     </div>
   </main>
 
-  <!-- Modal de Nequi (centrado en pantalla) -->
+  <!--Modal de Nequi-->
   <div id="nequiModal" class="modal">
     <div class="modal-contenido-nequi">
       <span class="cerrar-modal">&times;</span>
@@ -135,7 +134,7 @@
   <!-- Footer -->
   <footer>
     <div class="footer-container">
-        <!-- Sección izquierda (Contáctanos) -->
+        <!--Contáctanos)-->
         <div class="footer-section">
             <h3>Contáctanos</h3>
             <p>
@@ -146,13 +145,13 @@
             </p>
         </div>
 
-        <!-- Sección central (Formas de pago) -->
+        <!--Formas de pago-->
         <div class="footer-section">
             <h3>Formas de pago</h3>
             <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
         </div>
 
-        <!-- Sección derecha (Redes) -->
+        <!--Redes-->
         <div class="footer-section">
             <h3>Redes</h3>
             <p>
@@ -164,7 +163,7 @@
             </a>
             </p>
         </div>
-    </div> <!-- Cierra el contenedor principal -->
+    </div>
         
     <!-- Sección de copyright -->
     <div class="footer-copy">
@@ -172,6 +171,7 @@
     </div>
   </footer>
 
+  <!-- Script interno -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -180,7 +180,6 @@
       const modal = document.getElementById("nequiModal");
       const spanCerrar = document.querySelector(".cerrar-modal");
 
-      // Mostrar resumen del carrito
       let total = 0;
       if(carrito.length === 0) {
           resumenItems.innerHTML = "<p>No hay productos en el carrito</p>";
@@ -209,12 +208,10 @@
           document.getElementById("total-pagar").textContent = total.toLocaleString();
       }
 
-      // Mostrar modal al hacer clic en el botón de pago
       document.getElementById("pago-nequi").addEventListener("click", () => {
         modal.style.display = "flex";
       });
 
-      // Cerrar modal
       spanCerrar.addEventListener("click", () => {
           modal.style.display = "none";
       });
@@ -225,14 +222,13 @@
           }
       });
 
-      // Manejar verificación de pago
       document.getElementById("verificar-pago").addEventListener("click", () => {
           document.getElementById("paymentStatus").innerHTML = `
               <p class="success">✔️ Pago realizado con éxito! Recibirás un correo con detalles de tu pedido.</p>
               <p class="success">Serás redirigido a la pagina principal...</p>
           `;
           
-          // Vaciar carrito y redirigir después de 20 segundos
+          // Vaciar carrito y redirigir después de 20 segundos.
           setTimeout(() => {
               localStorage.removeItem('carrito');
               window.location.href = "index.html";

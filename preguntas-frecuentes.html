@@ -3,18 +3,18 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
+    <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta.">
+    <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Ocultar elementos y ajustar header */
         .cart-button, .search-box {
             display: none !important;
         }
         
-        /* Nuevos estilos para el header */
         .header {
-            min-height: 40px; /* Altura aumentada */
+            min-height: 40px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -22,13 +22,13 @@
         }
         
         .logo img {
-            height: 60px; /* Tamaño aumentado del logo */
+            height: 60px;
             width: auto;
         }
     </style>
 </head>
 <body>
-    <!-- Header modificado -->
+    <!-- Header -->
     <header class="header">
         <div class="logo">
             <a href="index.html">
@@ -46,15 +46,14 @@
         </ul>
     </nav>
 
-    <!-- Sección Preguntas Frecuentes -->
+    <!-- Preguntas Frecuentes -->
     <section class="preguntas-frecuentes">
         <h1>Preguntas Frecuentes</h1>
 
-        <!-- Pregunta 1 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Cómo puedo hacer un pedido de flores?
-                <span class="icono">▼</span> <!-- Icono de flecha -->
+                <span class="icono">▼</span> 
             </button>
             <div class="respuesta">
                 <p>
@@ -65,7 +64,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 2 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Cuánto tiempo antes debo hacer mi pedido?
@@ -79,7 +77,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 3 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Cómo debo cuidar mis flores?
@@ -94,7 +91,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 4 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Qué hago si mis flores se marchitan rápidamente?
@@ -109,7 +105,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 5 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Puedo programar un pedido para una fecha específica?
@@ -126,7 +121,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 6 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Puedo agregar un detalle o un mensaje adicional al ramo/manojo?
@@ -142,7 +136,6 @@
             </div>
         </div>
 
-        <!-- Pregunta 7 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Qué hago si mi pedido llega en mal estado o con errores?
@@ -158,7 +151,6 @@
         </div>
 
 
-        <!-- Pregunta 8 -->
         <div class="pregunta">
             <button class="pregunta-titulo">
                 ¿Cuáles son los métodos de pago disponibles?
@@ -174,7 +166,6 @@
     </section>
 
     <script>
-        // Funcionalidad del acordeón (única necesaria)
         document.addEventListener("DOMContentLoaded", function () {
             const preguntas = document.querySelectorAll('.pregunta-titulo');
             
@@ -182,11 +173,9 @@
                 pregunta.addEventListener('click', () => {
                     const respuesta = pregunta.nextElementSibling;
                     const icono = pregunta.querySelector('.icono');
-                    
-                    // Alternar visibilidad de la respuesta
+
                     respuesta.classList.toggle('activa');
-                    
-                    // Cambiar icono
+
                     icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼';
                 });
             });
@@ -197,7 +186,7 @@
 <!-- Footer -->
 <footer>
     <div class="footer-container">
-        <!-- Sección izquierda (Contáctanos) -->
+        <!--Contáctanos-->
         <div class="footer-section">
             <h3>Contáctanos</h3>
             <p>
@@ -208,13 +197,13 @@
             </p>
         </div>
 
-        <!-- Sección central (Formas de pago) -->
+        <!--Formas de pago-->
         <div class="footer-section">
             <h3>Formas de pago</h3>
             <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
         </div>
 
-        <!-- Sección derecha (Redes) -->
+        <!--Redes-->
         <div class="footer-section">
             <h3>Redes</h3>
             <p>
@@ -226,13 +215,12 @@
                 </a>
             </p>
         </div>
-    </div> <!-- Cierra el contenedor principal -->
+    </div>
 
     <!-- Sección de copyright -->
     <div class="footer-copy">
         <p>© 2023 Floristería Las Acacias</p>
     </div>
 </footer>
-
 </body>
 </html>
