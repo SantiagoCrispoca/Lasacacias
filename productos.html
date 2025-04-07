@@ -209,10 +209,7 @@
         </div>
     </footer>
 
-    <!-- Script para la ventana modal -->
-    <script>
-        // Seleccionar todas las flores clickeables
-        const flores = document.querySelectorAll('.flor-clickeable');
+        <script>
 
         // Seleccionar elementos de la ventana modal
         const modal = document.getElementById('modal');
@@ -335,22 +332,218 @@
                 modalPrecio.textContent = `Precio: ${florData.precio}`;
                 modal.style.display = 'flex'; // Mostrar la ventana modal
             });
+            // -------------------- COOKIES --------------------
+    const cookieNotice = document.getElementById('cookie-notice');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    if (acceptCookiesButton) {
+        acceptCookiesButton.addEventListener('click', () => {
+            cookieNotice.style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
         });
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            cookieNotice.style.display = 'none';
+        }
+    }
 
-        // Cerrar la ventana modal
-        cerrarModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+    // -------------------- DATOS Y MODAL --------------------
+    const datosFlores = [
+    // MANOJOS (8)
+    {
+        nombre: "Manojo de Lavanda",
+        imagen: "imagenes/manojo-1.jpeg",
+        descripcion: "Aroma relajante para espacios interiores.",
+        precio: "$15.000"
+    },
+    {
+        nombre: "Manojo de Romero",
+        imagen: "imagenes/manojo-2.jpeg",
+        descripcion: "Hierba aromática para cocina y decoración.",
+        precio: "$12.000"
+    },
+    {
+        nombre: "Manojo de Eucalipto",
+        imagen: "imagenes/manojo-3.jpeg",
+        descripcion: "Perfecto para ambientes naturales.",
+        precio: "$14.000"
+    },
+    {
+        nombre: "Manojo de Hierbabuena",
+        imagen: "imagenes/manojo-4.jpeg",
+        descripcion: "Frescura intensa para cócteles e infusiones.",
+        precio: "$13.000"
+    },
+    {
+        nombre: "Manojo de Albahaca",
+        imagen: "imagenes/manojo-5.jpeg",
+        descripcion: "Hierba fresca para tus recetas italianas.",
+        precio: "$11.000"
+    },
+    {
+        nombre: "Manojo de Cilantro",
+        imagen: "imagenes/manojo-6.jpeg",
+        descripcion: "Aroma esencial para cocina asiática.",
+        precio: "$10.000"
+    },
+    {
+        nombre: "Manojo de Tomillo",
+        imagen: "imagenes/manojo-7.jpg",
+        descripcion: "Aroma terroso para guisos y carnes.",
+        precio: "$16.000"
+    },
+    {
+        nombre: "Manojo de Menta",
+        imagen: "imagenes/manojo-8.jpg",
+        descripcion: "Versátil para bebidas y postres.",
+        precio: "$12.000"
+    },
 
-        // Cerrar la ventana modal si se hace clic fuera de ella
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
+    // RAMOS (8)
+    {
+        nombre: "Ramo de Rosas Clásicas",
+        imagen: "imagenes/ramo-1.jpeg",
+        descripcion: "Elegancia en tonos rojos y blancos.",
+        precio: "$35.000"
+    },
+    {
+        nombre: "Ramo de Tulipanes",
+        imagen: "imagenes/ramo-2.png",
+        descripcion: "Colorido y alegre para primavera.",
+        precio: "$28.000"
+    },
+    {
+        nombre: "Ramo de Lirios",
+        imagen: "imagenes/ramo-3.jpg",
+        descripcion: "Sofisticación en tonos pastel.",
+        precio: "$40.000"
+    },
+    {
+        nombre: "Ramo de Girasoles",
+        imagen: "imagenes/ramo-4.jpg",
+        descripcion: "Energía y calidez veraniega.",
+        precio: "$32.000"
+    },
+    {
+        nombre: "Ramo de Margaritas",
+        imagen: "imagenes/ramo-5.jpg",
+        descripcion: "Simplicidad campestre.",
+        precio: "$25.000"
+    },
+    {
+        nombre: "Ramo de Claveles",
+        imagen: "imagenes/ramo-6.jpg",
+        descripcion: "Duradero y lleno de textura.",
+        precio: "$27.000"
+    },
+    {
+        nombre: "Ramo de Peonias",
+        imagen: "imagenes/ramo-7.jpg",
+        descripcion: "Romanticismo en tonos rosados.",
+        precio: "$45.000"
+    },
+    {
+        nombre: "Ramo de Orquídeas",
+        imagen: "imagenes/ramo-8.jpg",
+        descripcion: "Exclusividad tropical.",
+        precio: "$50.000"
+    }
+    ];
+
+    const productos = [
+        // Manojos
+        { id: "manojo-1", nombre: "Manojo de Lavanda", imagen: "imagenes/manojo-1.jpeg" },
+        { id: "manojo-2", nombre: "Manojo de Romero", imagen: "imagenes/manojo-2.jpeg" },
+        { id: "manojo-3", nombre: "Manojo de Eucalipto", imagen: "imagenes/manojo-3.jpeg" },
+        { id: "manojo-4", nombre: "Manojo de Hierbabuena", imagen: "imagenes/manojo-4.jpeg" },
+        { id: "manojo-5", nombre: "Manojo de Albahaca", imagen: "imagenes/manojo-5.jpeg" },
+        { id: "manojo-6", nombre: "Manojo de Cilantro", imagen: "imagenes/manojo-6.jpeg" },
+        { id: "manojo-7", nombre: "Manojo de Tomillo", imagen: "imagenes/manojo-7.jpg" },
+        { id: "manojo-8", nombre: "Manojo de Menta", imagen: "imagenes/manojo-8.jpg" },
+        
+        // Ramos
+        { id: "ramo-1", nombre: "Ramo de Rosas Clásicas", imagen: "imagenes/ramo-1.jpeg" },
+        { id: "ramo-2", nombre: "Ramo de Tulipanes", imagen: "imagenes/ramo-2.png" },
+        { id: "ramo-3", nombre: "Ramo de Lirios", imagen: "imagenes/ramo-3.jpg" },
+        { id: "ramo-4", nombre: "Ramo de Girasoles", imagen: "imagenes/ramo-4.jpg" },
+        { id: "ramo-5", nombre: "Ramo de Margaritas", imagen: "imagenes/ramo-5.jpg" },
+        { id: "ramo-6", nombre: "Ramo de Claveles", imagen: "imagenes/ramo-6.jpg" },
+        { id: "ramo-7", nombre: "Ramo de Peonias", imagen: "imagenes/ramo-7.jpg" },
+        { id: "ramo-8", nombre: "Ramo de Orquídeas", imagen: "imagenes/ramo-8.jpg" }
+    ];
+
+      // -------------------- MODAL --------------------
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalImagen = document.getElementById('modal-imagen');
+    const modalDescripcion = document.getElementById('modal-descripcion');
+    const modalPrecio = document.getElementById('modal-precio');
+    const cerrarModal = document.querySelector('.cerrar-modal');
+    let currentFlowerIndex = 0;
+
+    // Manejo de clics en flores
+    document.querySelectorAll('.flor-clickeable').forEach((flor) => {
+        flor.addEventListener('click', () => {
+            const imgSrc = flor.querySelector('img').getAttribute('src');
+            const producto = datosFlores.find(item => item.imagen === imgSrc);
+            
+            if (producto) {
+                currentFlowerIndex = datosFlores.indexOf(producto);
+                abrirModal(producto);
             }
         });
+    });
 
-        // Al inicio del script, después de definir los elementos del DOM
-        let currentFlowerIndex = 0; // 🔑 Variable clave que faltaba
+    function abrirModal(producto) {
+        modalTitulo.textContent = producto.nombre;
+        modalImagen.src = producto.imagen;
+        modalDescripcion.textContent = producto.descripcion;
+        modalPrecio.textContent = `Precio: ${producto.precio}`;
+        modal.style.display = 'flex';
+    }
+
+    // Cerrar modal
+    cerrarModal.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => e.target === modal && (modal.style.display = 'none'));
+
+     // -------------------- BÚSQUEDA --------------------
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim().toLowerCase();
+        searchResults.innerHTML = '';
+        
+        if (query) {
+            const filtrados = productos
+                .filter(p => 
+                    p.nombre.toLowerCase().includes(query) || 
+                    p.id.toLowerCase().includes(query)
+                )
+                .map(p => ({
+                    ...p,
+                    data: datosFlores.find(f => f.imagen === p.imagen)
+                }));
+
+            mostrarResultados(filtrados);
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    function mostrarResultados(resultados) {
+        searchResults.innerHTML = resultados.map(p => `
+            <div class="resultado-busqueda">
+                <img src="${p.imagen}" alt="${p.nombre}" width="40">
+                <span>${p.nombre}</span>
+            </div>
+        `).join('');
+        
+        searchResults.style.display = resultados.length ? 'block' : 'none';
+        searchResults.querySelectorAll('.resultado-busqueda').forEach((item, i) => {
+            item.addEventListener('click', () => abrirModal(resultados[i].data));
+        });
+    }
+
+    // -------------------- CARRITO --------------------
         const agregarCarritoBtn = document.getElementById('agregar-carrito'); // 🛒 Botón de agregar
         const cartButton = document.querySelector('.cart-button');
         const carritoModal = document.getElementById('carrito-modal');
@@ -450,6 +643,7 @@
         vaciarCarritoBtn.addEventListener('click', () => {
             carrito = [];
             actualizarCarrito();
+        });
         });
     </script>
     <script>

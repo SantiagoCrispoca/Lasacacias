@@ -208,52 +208,47 @@
 
   <!-- Script Interno -->
   <script>
-    document.addEventListener('DOMContentLoaded'), () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const carouselInner = document.querySelector('.carousel-inner');
       let items = document.querySelectorAll('.carousel-item');
       const visibleCount = 5; // Número de imágenes que se muestran en el carrusel normalmente
       let itemWidth;
 
-      if (items.length < visibleCount) {
-        itemWidth = 100 / items.length; // Cada imagen ocupará el 100% dividido por la cantidad de imágenes
-        items.forEach(item => {
-          item.style.flex = `0 0 ${itemWidth}%`;
-        });
-      } else {
-        itemWidth = 100 / visibleCount;
-      }
+    items.forEach(item => item.style.flex = `0 0 ${itemWidth}%`);
 
-      let currentIndex = 0;
-
-      function moveCarousel(direction) {
-        if (direction === 'next') {
-          // Si llegamos al final, volvemos al inicio
-          currentIndex = (currentIndex + 1) % items.length;
-        } else {
-          // Si retrocedemos, se usa el módulo para evitar índices negativos
-          currentIndex = (currentIndex - 1 + items.length) % items.length;
-        }
-        const offset = -currentIndex * itemWidth;
-        carouselInner.style.transform = `translateX(${offset}%)`;
-      }
-
-      const prevButton = document.querySelector('.carousel-control.prev');
-      const nextButton = document.querySelector('.carousel-control.next');
-      prevButton.addEventListener('click', () => moveCarousel('prev'));
-      nextButton.addEventListener('click', () => moveCarousel('next'));
-
-    // Aviso de Cookies
-    const cookieNotice = document.getElementById('cookie-notice');
-    const acceptCookiesButton = document.getElementById('accept-cookies');
-    acceptCookiesButton.addEventListener('click', () => {
-      cookieNotice.style.display = 'none';
-      localStorage.setItem('cookiesAccepted', 'true');
-    });
-    if (localStorage.getItem('cookiesAccepted') === 'true') {
-      cookieNotice.style.display = 'none';
+    function updateControls() {
+        const prevButton = document.querySelector('.carousel-control.prev');
+        const nextButton = document.querySelector('.carousel-control.next');
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex >= totalItems - visibleCount;
     }
 
-    // Datos de las flores
+    function moveCarousel(direction) {
+        if (direction === 'next' && currentIndex < totalItems - visibleCount) currentIndex++;
+        if (direction === 'prev' && currentIndex > 0) currentIndex--;
+        
+        carouselInner.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+        updateControls();
+    }
+
+    document.querySelector('.carousel-control.prev').addEventListener('click', () => moveCarousel('prev'));
+    document.querySelector('.carousel-control.next').addEventListener('click', () => moveCarousel('next'));
+    updateControls();
+
+    // -------------------- COOKIES --------------------
+    const cookieNotice = document.getElementById('cookie-notice');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    if (acceptCookiesButton) {
+        acceptCookiesButton.addEventListener('click', () => {
+            cookieNotice.style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        });
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            cookieNotice.style.display = 'none';
+        }
+    }
+
+    // -------------------- DATOS Y MODAL --------------------
     const datosFlores = [
       {
         nombre: "Ramo Rosas Rojas",
@@ -596,6 +591,7 @@
         modal.style.display = 'none';
       });
     });
+  });
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -654,77 +650,154 @@
         { nombre: "Manojo variado clásico", imagen: "imagenes/Manojo11.jpeg", descripcion: "Manojo de flores variadas, clásico y duradero.", precio: "$25.000" }
       ];
 
-      // 4. Configuración de la búsqueda
-      const searchInput = document.getElementById("search-input");
-      const searchResults = document.getElementById("search-results");
+    // Manejo de clics en flores
+    document.querySelectorAll('.flor-clickeable').forEach((flor) => {
+        flor.addEventListener('click', () => {
+            // Obtener la ruta de la imagen desde el HTML
+            const imgSrc = flor.querySelector('img').getAttribute('src');
+            
+            // Buscar en datosFlores por coincidencia de ruta de imagen
+            const producto = datosFlores.find(item => item.imagen === imgSrc);
+            
+            if (producto) {
+                currentFlowerIndex = datosFlores.indexOf(producto);
+                abrirModal(producto);
+            }
+        });
+    });
 
-      searchInput.addEventListener("input", function () {
+    // Función unificada para abrir modal
+    function abrirModal(producto) {
+        modalTitulo.textContent = producto.nombre;
+        modalImagen.src = producto.imagen;
+        modalDescripcion.textContent = producto.descripcion;
+        modalPrecio.textContent = `Precio: ${producto.precio}`;
+        currentFlowerIndex = datosFlores.findIndex(item => item.imagen === producto.imagen);
+        modal.style.display = 'flex';
+    }
+
+    // Cerrar modal
+    cerrarModal.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => e.target === modal && (modal.style.display = 'none'));
+
+     // -------------------- BÚSQUEDA --------------------
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function() {
         const query = this.value.trim().toLowerCase();
-        searchResults.innerHTML = "";
+        searchResults.innerHTML = '';
+        
+        if (query) {
+          const filtrados = productos
+              .filter(p => 
+                  p.nombre.toLowerCase().includes(query) || 
+                  p.id.toLowerCase().includes(query)
+              )
+              .map(p => ({
+                  ...p,
+                  data: datosFlores.find(f => f.imagen === p.imagen)
+              }));
 
-        if (query.length > 0) {
-          const filtrados = productos.filter(producto =>
-            producto.nombre.toLowerCase().includes(query) ||
-            producto.id.toLowerCase().includes(query)
-          );
           mostrarResultados(filtrados);
         } else {
-          searchResults.style.display = "none";
+            searchResults.style.display = 'none';
         }
-      });
-
-      function mostrarResultados(filtrados) {
-        if (filtrados.length === 0) {
-          searchResults.style.display = "none";
-          return;
-        }
-
-        searchResults.style.display = "block";
-        searchResults.innerHTML = ""; // Limpiar resultados anteriores
-
-        filtrados.forEach(producto => {
-          const div = document.createElement("div");
-          div.className = "resultado-busqueda";
-          div.innerHTML = `
-                      <img src="${producto.imagen}" alt="${producto.nombre}" width="40">
-                      <span>${producto.nombre}</span>
-                  `;
-          div.addEventListener("click", () => abrirModalProducto(producto));
-          searchResults.appendChild(div);
-        });
-      }
-
-      // 5. Función para abrir el modal
-      function abrirModalProducto(producto) {
-        console.log("Abriendo modal para:", producto);
-
-        // Buscar el producto en datosFlores por la imagen
-        const productoCompleto = datosFlores.find(item => item.imagen === producto.imagen);
-
-        if (productoCompleto) {
-          modalTitulo.textContent = productoCompleto.nombre;
-          modalImagen.src = productoCompleto.imagen;
-          modalDescripcion.textContent = productoCompleto.descripcion;
-          modalPrecio.textContent = `Precio: ${productoCompleto.precio}`;
-          modal.style.display = "flex";
-
-          // Actualizar el índice para el carrito
-          currentFlowerIndex = datosFlores.indexOf(productoCompleto);
-        } else {
-          console.error("Producto no encontrado en datosFlores:", producto);
-          alert("Producto no disponible temporalmente");
-        }
-
-        searchResults.style.display = "none";
-      }
-
-      // 6. Cerrar resultados al hacer clic fuera
-      document.addEventListener("click", function (event) {
-        if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
-          searchResults.style.display = "none";
-        }
-      });
     });
+
+    function mostrarResultados(resultados) {
+        searchResults.innerHTML = resultados.map(p => `
+            <div class="resultado-busqueda">
+                <img src="${p.imagen}" alt="${p.nombre}" width="40">
+                <span>${p.nombre}</span>
+            </div>
+        `).join('');
+        
+        searchResults.style.display = resultados.length ? 'block' : 'none';
+        searchResults.querySelectorAll('.resultado-busqueda').forEach((item, i) => {
+            item.addEventListener('click', () => abrirModal(resultados[i].data));
+        });
+    }
+
+    // -------------------- CARRITO --------------------
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const cartButton = document.querySelector('.cart-button');
+    const carritoModal = document.getElementById('carrito-modal');
+    const cerrarCarrito = document.querySelector('.cerrar-carrito');
+    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+
+    function actualizarCarrito() {
+        const carritoItems = document.getElementById('carrito-items');
+        const carritoTotal = document.getElementById('carrito-total');
+        let total = 0;
+
+        carritoItems.innerHTML = carrito.map((item, index) => {
+            const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+            const accesorioPrecio = {
+                ninguno: 0,
+                oso: 10000,
+                globo: 5000,
+                chocolate: 7000,
+                corona: 8000
+            }[item.accesorio] || 0;
+
+            const subtotal = (precio + accesorioPrecio) * item.cantidad;
+            total += subtotal;
+
+            return `
+                <div class="carrito-item">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div>
+                        <h3>${item.nombre}</h3>
+                        <p>Cantidad: ${item.cantidad}</p>
+                        ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
+                        ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
+                        <p>Subtotal: $${subtotal.toLocaleString()}</p>
+                        <button class="eliminar-item" data-index="${index}">Eliminar</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        carritoTotal.textContent = total.toLocaleString();
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        cartButton.setAttribute('data-count', carrito.length);
+        cartButton.style.backgroundColor = carrito.length > 0 ? '#8cbaa3' : '#a8d5ba';
+    }
+
+    // Eventos del carrito
+    cartButton.addEventListener('click', () => {
+        carritoModal.style.display = 'block';
+        actualizarCarrito();
+    });
+
+    cerrarCarrito.addEventListener('click', () => carritoModal.style.display = 'none');
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('eliminar-item')) {
+            carrito.splice(e.target.dataset.index, 1);
+            actualizarCarrito();
+        }
+    });
+    vaciarCarritoBtn.addEventListener('click', () => {
+        carrito = [];
+        actualizarCarrito();
+    });
+
+    document.getElementById('agregar-carrito').addEventListener('click', () => {
+        const nuevoItem = {
+            ...datosFlores[currentFlowerIndex],
+            cantidad: parseInt(document.getElementById('cantidad').value),
+            mensaje: document.getElementById('mensaje-flor').value,
+            accesorio: document.getElementById('accesorios').value
+        };
+
+        carrito.push(nuevoItem);
+        document.getElementById('confirmacion-agregado').style.display = 'block';
+        setTimeout(() => document.getElementById('confirmacion-agregado').style.display = 'none', 2000);
+        actualizarCarrito();
+        modal.style.display = 'none';
+    });
+});
   </script>
 </body>
 
