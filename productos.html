@@ -427,6 +427,31 @@
             imagen: "imagenes/ramo-8.jpg",
           },
         ];
+
+        //Nombre en blur
+        document.querySelectorAll(".flor-clickeable").forEach((flor) => {
+    const img = flor.querySelector("img");
+    const imgSrc = img.getAttribute("src");
+    const florData = datosFlores.find(item => item.imagen === imgSrc);
+
+    if (florData) {
+        const contenedorInfo = document.createElement("div");
+        contenedorInfo.className = "nombre-flor";
+
+        const nombreElement = document.createElement("div");
+        nombreElement.className = "nombre-flor-texto";
+        nombreElement.textContent = florData.nombre;
+
+        const precioElement = document.createElement("div");
+        precioElement.className = "precio-flor-texto";
+        precioElement.textContent = florData.precio;
+
+        contenedorInfo.appendChild(nombreElement);
+        contenedorInfo.appendChild(precioElement);
+        flor.appendChild(contenedorInfo);
+    }
+});
+
         // -------------------- MODAL --------------------
         const modal = document.getElementById("modal");
         const modalTitulo = document.getElementById("modal-titulo");

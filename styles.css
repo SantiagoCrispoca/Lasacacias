@@ -43,7 +43,7 @@ body {
 
 /* Verde pastel más oscuro al pasar el mouse */
 .cart-button:hover {
-    background-color: #8cbaa3;
+    background-color: #68b991;
 }
 
 /* Estilos para la barra de búsqueda */
@@ -510,6 +510,7 @@ footer {
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .modal-contenido {
@@ -524,6 +525,7 @@ footer {
     margin: 20px;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .cerrar-modal {
@@ -591,6 +593,31 @@ footer {
 
 
 /* Animación al pasar el cursor sobre las flores */
+.flor-clickeable {
+    position: relative;
+    overflow: hidden;
+}
+
+.nombre-flor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(108, 121, 113, 0.6);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateY(100%);
+    font-weight: bold;
+}
+
+.flor-clickeable:hover .nombre-flor {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .flor-clickeable img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 10%;
@@ -603,6 +630,7 @@ footer {
 .flor-clickeable img:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    filter: blur(2px);
 }
 
 

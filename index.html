@@ -218,7 +218,7 @@
         </div>
       </div>
       <div class="footer-copy">
-        <p>© 2023 Floristería Las Acacias</p>
+        <p>© 2025 Floristería Las Acacias</p>
       </div>
     </footer>
 
@@ -345,20 +345,20 @@
             precio: "$80.000",
           },
           {
-            nombre: "Flor de temporada 2",
+            nombre: "Jarron de rosas rojas",
             imagen: "imagenes/ramo-2.png",
             descripcion:
               "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
             precio: "$22.000",
           },
           {
-            nombre: "Flor de temporada 3",
+            nombre: "Ramo variado",
             imagen: "imagenes/ramo-3.jpg",
             descripcion: "Ramo de liliums, elegante y sofisticado.",
             precio: "$24.000",
           },
           {
-            nombre: "Flor de temporada 4",
+            nombre: "Ramo de girasoles y rosas",
             imagen: "imagenes/ramo-4.jpg",
             descripcion:
               "Ramo de girasoles y margaritas, lleno de energía y frescura.",
@@ -489,6 +489,31 @@
             imagen: "imagenes/Manojo11.jpeg",
           },
         ];
+
+        //Nombre en blur
+document.querySelectorAll(".flor-clickeable").forEach((flor) => {
+    const img = flor.querySelector("img");
+    const imgSrc = img.getAttribute("src");
+    const florData = datosFlores.find(item => item.imagen === imgSrc);
+
+    if (florData) {
+        const contenedorInfo = document.createElement("div");
+        contenedorInfo.className = "nombre-flor";
+
+        const nombreElement = document.createElement("div");
+        nombreElement.className = "nombre-flor-texto";
+        nombreElement.textContent = florData.nombre;
+
+        const precioElement = document.createElement("div");
+        precioElement.className = "precio-flor-texto";
+        precioElement.textContent = florData.precio;
+
+        contenedorInfo.appendChild(nombreElement);
+        contenedorInfo.appendChild(precioElement);
+        flor.appendChild(contenedorInfo);
+    }
+});
+
     // -------------------- MODAL --------------------
     const modal = document.getElementById("modal");
     const modalTitulo = document.getElementById("modal-titulo");
