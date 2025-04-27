@@ -1139,3 +1139,51 @@ footer {
         width: 100%;
     }
 }
+
+/* Estilos para el modo vendedor */
+.boton-vendedor {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.pedido {
+    background: #f8f8f8;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.producto {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.total-pedido {
+    font-weight: bold;
+    margin-top: 15px;
+    color: #2c3e50;
+}
+
+.pedido {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.accesorio-pedido {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.drag-drop-area:hover {
+    background-color: #f8f9fa;
+}

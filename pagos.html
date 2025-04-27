@@ -280,6 +280,15 @@
               localStorage.removeItem('carrito');
               window.location.href = "index.html";
           }, 20000);
+
+          // En el evento click de "verificar-pago", agregar:
+        const pedidos = JSON.parse(localStorage.getItem('pedidosPendientes')) || [];
+        pedidos.push({
+            items: carrito,
+            total: total,
+            fecha: new Date().toISOString()
+        });
+        localStorage.setItem('pedidosPendientes', JSON.stringify(pedidos));
       });
           // -------------------- DATOS FLORES --------------------
           const datosFlores = [
@@ -558,7 +567,7 @@
             searchResults.style.display = "none";
           }
         });
-
+        
         function mostrarResultados(resultados) {
           searchResults.innerHTML = resultados
             .map(
@@ -580,6 +589,8 @@
               );
             });
         }
+
+        
     });
     
   </script>
