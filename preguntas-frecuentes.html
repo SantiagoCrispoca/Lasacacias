@@ -8,34 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - Floristería Las Acacias</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .cart-button, .search-box {
-            display: none !important;
-        }
-        
-        .header {
-            min-height: 40px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 0;
-        }
-        
-        .logo img {
-            height: 60px;
-            width: auto;
-        }
-    </style>
+   
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias">
-            </a>
-        </div>
-    </header>
+   <!-- Header -->
+   <header class="header">
+    <button class="cart-button">🛒</button>
+    <div class="logo">
+      <a href="index.html">
+        <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
+      </a>
+    </div>
+    <div class="search-box">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Buscar productos..."
+      />
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </header>
     <!-- Navegación -->
     <nav class="navbar">
         <ul>
