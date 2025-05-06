@@ -167,26 +167,54 @@
     Producto añadido al carrito!
   </div>
 
-  <!-- Boton de login-->
-  <div id="login-modal" class="modal">
-    <div class="modal-contenido">
-        <span class="cerrar-login">&times;</span>
-        <h2>Iniciar Sesión</h2>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" required>
-            </div>
-            
-            <button type="submit" class="login-submit">Ingresar</button>
-        </form>
-    </div>
+<!-- Modal de Login -->
+<div id="login-modal" class="modal">
+  <div class="modal-contenido">
+      <span class="cerrar-login">&times;</span>
+      <div class="login-tabs">
+          <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
+          <button class="tab-link" data-tab="registro">Registrarse</button>
+      </div>
+
+      <!-- Formulario de Login -->
+      <div id="login" class="tab-content active">
+          <form id="login-form">
+              <div class="form-group">
+                  <label for="username">Usuario:</label>
+                  <input type="text" id="username" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="password">Contraseña:</label>
+                  <input type="password" id="password" required>
+              </div>
+              
+              <button type="submit" class="login-submit">Ingresar</button>
+          </form>
+      </div>
+
+      <!-- Formulario de Registro Vendedor -->
+      <div id="registro" class="tab-content">
+          <form id="registro-form">
+              <div class="form-group">
+                  <label for="reg-username">Usuario:</label>
+                  <input type="text" id="reg-username" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="reg-password">Contraseña:</label>
+                  <input type="password" id="reg-password" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="reg-email">Correo electrónico:</label>
+                  <input type="email" id="reg-email" required>
+              </div>
+              <button type="submit" class="login-submit">Registrarse como Vendedor</button>
+          </form>
+      </div>
   </div>
+</div>
 
   <!-- Footer -->
   <footer>
@@ -722,7 +750,7 @@
         });
       actualizarCarrito();
 
-      //LOGIN
+      //-----------------LOGIN-----------------------
       const loginButton = document.querySelector(".login-button");
       const loginModal = document.getElementById("login-modal");
       const cerrarLogin = document.querySelector(".cerrar-login");
@@ -752,6 +780,41 @@
           loginModal.style.display = "none";
       });
 
+    // Manejo de pestañas
+document.querySelectorAll('.tab-link').forEach(button => {
+    button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        
+        // Remover clases activas
+        document.querySelectorAll('.tab-link, .tab-content').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        // Activar elementos correspondientes
+        button.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+    });
+});
+
+// Manejar envío de formulario de registro
+document.getElementById("registro-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const datosRegistro = {
+        usuario: document.getElementById('reg-username').value,
+        password: document.getElementById('reg-password').value,
+        email: document.getElementById('reg-email').value,
+        tienda: document.getElementById('reg-tienda').value
+    };
+    
+    // Simular envío a BD
+    console.log('Datos de registro:', datosRegistro);
+    alert('Registro exitoso (simulación)');
+    loginModal.style.display = "none";
+    
+    // Limpiar formulario
+    document.getElementById("registro-form").reset();
+  }); 
     });
   </script>
 </body>
