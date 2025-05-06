@@ -1187,3 +1187,54 @@ footer {
 .drag-drop-area:hover {
     background-color: #f8f9fa;
 }
+
+/*Login*/
+.login-button {
+    background-color: #a8d5ba;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.login-button:hover {
+    background-color: #8cbaa3;
+}
+
+#login-modal .modal-contenido {
+    max-width: 350px;
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #517b67;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-submit:hover {
+    background-color: #406553;
+}
