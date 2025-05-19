@@ -180,13 +180,13 @@
       <div id="login" class="tab-content active">
         <form id="login-form">
           <div class="form-group">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" required>
+              <label for="username">Usuario:</label>
+              <input type="text" id="username" name="correo" required> 
           </div>
 
           <div class="form-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" required>
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" required> 
           </div>
 
           <button type="submit" class="login-submit">Ingresar</button>
@@ -768,12 +768,36 @@
       });
 
       // Manejar envío de formulario (simulado)
-      document.getElementById("login-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        // Aquí iría la lógica de autenticación
-        alert("Login simulado - Conexión a BD pendiente");
-        loginModal.style.display = "none";
-      });
+// Manejar envío de formulario de login
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const datosLogin = {
+        correo: formData.get('correo'),
+        password: formData.get('password')
+    };
+
+    try {
+        const resp = await fetch('php/login.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(datosLogin)
+        });
+
+        if (resp.redirected) {
+            window.location.href = resp.url;
+        } else {
+            const error = await resp.text();
+            alert(error || 'Credenciales incorrectas');
+        }
+    } catch (err) {
+        console.error('Error de red:', err);
+        alert('No se pudo conectar con el servidor.');
+    }
+});
 
       // Manejo de pestañas
       document.querySelectorAll('.tab-link').forEach(button => {

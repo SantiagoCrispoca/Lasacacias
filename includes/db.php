@@ -1,14 +1,13 @@
 <?php
-$host = "sql113.infinityfree.com"; // Reemplaza por tu host real
-$dbname = "if0_38911703_XXX";
-$username = "if0_38911703_XXX";
+$host = "sql113.infinityfree.com";
+$dbname = "if0_38911703_usuarios"; // Nombre correcto de la BD
+$username = "if0_38911703";        // Usuario correcto
 $password = "2NSoDpGB1PNq4q";
 
 try {
-    $conexion = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "¡Conexión exitosa!";
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo "Error de conexión a la base de datos: " . $e->getMessage();
+    die("Error de conexión: " . $e->getMessage());
 }
 ?>
