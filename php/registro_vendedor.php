@@ -1,50 +1,41 @@
 <?php
-// php/registro_vendedor.php
-session_start();
-require __DIR__ . '/../includes/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location:index.html');
-    exit;
-}
+$getJSON = file_get_contents('php://input');
 
-$nombre   = trim($_POST['nombre'] ?? '');
-$correo   = trim($_POST['correo'] ?? '');
-$password = $_POST['password'] ?? '';
-$rol      = 'vendedor';
+$dataJson = json_decode($getJSON);
 
-// Validaciones simples
-$errors = [];
-if (strlen($nombre) < 3) {
-    $errors[] = 'El nombre debe tener al menos 3 caracteres.';
+$usuario = $_POST['nombre'];
+$email = $_POST['correo'];
+$password = $_POST['password'];
+
+
+
+echo $email;
+
+$mysqli = new mysqli("localhost", "root", "", "lasacacias");//
+//$mysqli = new mysqli("sql113.infinityfree.com", "if0_38911703", "2NSoDpGB1PNq4q", "if0_38911703");
+
+
+/* if ($mysqli->connect_errno) {
+    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = 'El correo no es válido.';
-}
-if (strlen($password) < 6) {
-    $errors[] = 'La contraseña debe tener al menos 6 caracteres.';
+else{
+    echo "Conectado";
 }
 
-if (!empty($errors)) {
-    // Pasar errores por querystring (o guarda en sesión)
-    $qs = 'error=reg&msg=' . urlencode( implode(' | ', $errors) );
-    header("Location:index.html?$qs");
-    exit;
+*/
+
+
+$sql = "INSERT INTO `usuarios` (`ID`, `Nombre`, `Correo`, `Contraseña`, `Rol`) VALUES (NULL, '".$usuario."', '".$email."', '".$password."', 'user');";
+
+if ($mysqli->query($sql) === TRUE ){
+
+     echo "New record...";
+}
+else{
+     echo "Error: " . $sql . "<br>" . $mysqli->error;
 }
 
-// Insertar usuario
-$hash = password_hash($password, PASSWORD_DEFAULT);
-$stmt = $pdo->prepare("
-    INSERT INTO usuario (nombre, contraseña, correo, rol)
-    VALUES (?, ?, ?, ?)
-");
-try {
-    $stmt->execute([$nombre, $hash, $correo, $rol]);
-    // Éxito
-    header('Location: ../index.html?registro=ok');
-    exit;
-} catch (PDOException $e) {
-    // Por ejemplo, correo duplicado
-    header('Location: ../index.html?error=regdup');
-    exit;
-}
+
+
+?>

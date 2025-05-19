@@ -167,54 +167,54 @@
     Producto añadido al carrito!
   </div>
 
-<!-- Modal de Login -->
-<div id="login-modal" class="modal">
-  <div class="modal-contenido">
+  <!-- Modal de Login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-contenido">
       <span class="cerrar-login">&times;</span>
       <div class="login-tabs">
-          <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
-          <button class="tab-link" data-tab="registro">Registrarse</button>
+        <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
+        <button class="tab-link" data-tab="registro">Registrarse</button>
       </div>
 
       <!-- Formulario de Login -->
       <div id="login" class="tab-content active">
-          <form id="login-form">
-              <div class="form-group">
-                  <label for="username">Usuario:</label>
-                  <input type="text" id="username" required>
-              </div>
-              
-              <div class="form-group">
-                  <label for="password">Contraseña:</label>
-                  <input type="password" id="password" required>
-              </div>
-              
-              <button type="submit" class="login-submit">Ingresar</button>
-          </form>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+          </div>
+
+          <button type="submit" class="login-submit">Ingresar</button>
+        </form>
       </div>
 
       <!-- Formulario de Registro Vendedor -->
       <div id="registro" class="tab-content">
-          <form id="registro-form">
-              <div class="form-group">
-                  <label for="reg-username">Usuario:</label>
-                  <input type="text" id="reg-username" required>
-              </div>
-              
-              <div class="form-group">
-                  <label for="reg-password">Contraseña:</label>
-                  <input type="password" id="reg-password" required>
-              </div>
-              
-              <div class="form-group">
-                  <label for="reg-email">Correo electrónico:</label>
-                  <input type="email" id="reg-email" required>
-              </div>
-              <button type="submit" class="login-submit">Registrarse como Vendedor</button>
-          </form>
+        <form id="registro-form">
+          <div class="form-group">
+            <label for="reg-username">nombre:</label>
+            <input type="text" id="reg-username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password">contraseña:</label>
+            <input type="password" id="reg-password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">correo:</label>
+            <input type="email" id="reg-email" required>
+          </div>
+          <button type="submit" class="login-submit">Registrarse como Vendedor</button>
+        </form>
       </div>
+    </div>
   </div>
-</div>
 
   <!-- Footer -->
   <footer>
@@ -290,39 +290,39 @@
       updateControls();
 
       // -------------------- COOKIES --------------------
- // ---- Funciones para crear y leer cookies ----
- function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-  }
+      // ---- Funciones para crear y leer cookies ----
+      function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+      }
 
-  function getCookie(name) {
-    const nameEQ = name + "=";
-    return document.cookie
-      .split(';')
-      .map(c => c.trim())
-      .find(c => c.startsWith(nameEQ))
-      ?.substring(nameEQ.length) || null;
-  }
+      function getCookie(name) {
+        const nameEQ = name + "=";
+        return document.cookie
+          .split(';')
+          .map(c => c.trim())
+          .find(c => c.startsWith(nameEQ))
+          ?.substring(nameEQ.length) || null;
+      }
 
-  // ---- Lógica del banner ----
-  const cookieNotice = document.getElementById("cookie-notice");
-  const acceptBtn = document.getElementById("accept-cookies");
+      // ---- Lógica del banner ----
+      const cookieNotice = document.getElementById("cookie-notice");
+      const acceptBtn = document.getElementById("accept-cookies");
 
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", () => {
-      setCookie("cookiesAceptada", "true", 7);    // caduca en 7 días
-      cookieNotice.style.display = "none";
-      console.log("Cookies aceptadas (guardado en cookie)");
-    });
+      if (acceptBtn) {
+        acceptBtn.addEventListener("click", () => {
+          setCookie("cookiesAceptada", "true", 7);    // caduca en 7 días
+          cookieNotice.style.display = "none";
+          console.log("Cookies aceptadas (guardado en cookie)");
+        });
 
-    // Al cargar la página, ocultar si ya está aceptado
-    if (getCookie("cookiesAceptada") === "true") {
-      cookieNotice.style.display = "none";
-      console.log("Cookies ya aceptadas");
-    }
-  }
+        // Al cargar la página, ocultar si ya está aceptado
+        if (getCookie("cookiesAceptada") === "true") {
+          cookieNotice.style.display = "none";
+          console.log("Cookies ya aceptadas");
+        }
+      }
 
       // -------------------- DATOS FLORES --------------------
       const datosFlores = [
@@ -752,64 +752,78 @@
 
       // Abrir modal
       loginButton.addEventListener("click", () => {
-          loginModal.style.display = "flex";
+        loginModal.style.display = "flex";
       });
 
       // Cerrar modal
       cerrarLogin.addEventListener("click", () => {
-          loginModal.style.display = "none";
+        loginModal.style.display = "none";
       });
 
       // Cerrar al hacer clic fuera
       window.addEventListener("click", (e) => {
-          if (e.target === loginModal) {
-              loginModal.style.display = "none";
-          }
+        if (e.target === loginModal) {
+          loginModal.style.display = "none";
+        }
       });
 
       // Manejar envío de formulario (simulado)
       document.getElementById("login-form").addEventListener("submit", (e) => {
-          e.preventDefault();
-          // Aquí iría la lógica de autenticación
-          alert("Login simulado - Conexión a BD pendiente");
-          loginModal.style.display = "none";
+        e.preventDefault();
+        // Aquí iría la lógica de autenticación
+        alert("Login simulado - Conexión a BD pendiente");
+        loginModal.style.display = "none";
       });
 
-    // Manejo de pestañas
-document.querySelectorAll('.tab-link').forEach(button => {
-    button.addEventListener('click', () => {
-        const tab = button.dataset.tab;
-        
-        // Remover clases activas
-        document.querySelectorAll('.tab-link, .tab-content').forEach(el => {
-            el.classList.remove('active');
-        });
-        
-        // Activar elementos correspondientes
-        button.classList.add('active');
-        document.getElementById(tab).classList.add('active');
-    });
-});
+      // Manejo de pestañas
+      document.querySelectorAll('.tab-link').forEach(button => {
+        button.addEventListener('click', () => {
+          const tab = button.dataset.tab;
 
-// Manejar envío de formulario de registro
-document.getElementById("registro-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    const datosRegistro = {
-        usuario: document.getElementById('reg-username').value,
-        password: document.getElementById('reg-password').value,
-        email: document.getElementById('reg-email').value
-       
-    };
-    
-    // Simular envío a BD
-    console.log('Datos de registro:', datosRegistro);
-    alert('Registro exitoso (simulación)');
-    loginModal.style.display = "none";
-    
-    // Limpiar formulario
-    document.getElementById("registro-form").reset();
-  }); 
+          // Remover clases activas
+          document.querySelectorAll('.tab-link, .tab-content').forEach(el => {
+            el.classList.remove('active');
+          });
+
+          // Activar elementos correspondientes
+          button.classList.add('active');
+          document.getElementById(tab).classList.add('active');
+        });
+      });
+
+      // Manejar envío de formulario de registro
+      document.getElementById("registro-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Construimos los datos con los 'name' que espera el PHP
+        const datosRegistro = new URLSearchParams({
+          nombre: document.getElementById('reg-username').value,
+          password: document.getElementById('reg-password').value,
+          correo: document.getElementById('reg-email').value
+        });
+
+        try {
+          const resp = await fetch('php/registro_vendedor.php', {
+            method: 'POST',
+            body: datosRegistro
+          });
+
+          if (resp.ok) {
+            const texto = await resp.text();
+            console.log('Respuesta del servidor:', texto);
+            alert('Registro exitoso');
+            document.getElementById("registro-form").reset();
+            loginModal.style.display = "none";
+          } else {
+            console.error('Error en respuesta:', resp.status, resp.statusText);
+            alert('Hubo un problema al registrar. Intenta de nuevo.');
+          }
+
+        } catch (err) {
+          console.error('Error de red:', err);
+          alert('No se pudo conectar con el servidor.');
+        }
+      });
     });
   </script>
 </body>
