@@ -12,8 +12,8 @@ $password = $_POST['password'];
 
 echo $email;
 
-$mysqli = new mysqli("localhost", "root", "", "lasacacias");//
-//$mysqli = new mysqli("sql113.infinityfree.com", "if0_38911703", "2NSoDpGB1PNq4q", "if0_38911703");
+//$mysqli = new mysqli("localhost", "root", "", "lasacacias");
+$mysqli = new mysqli("sql113.infinityfree.com", "if0_38911703", "2NSoDpGB1PNq4q", "if0_38911703_usuarios");
 
 
 /* if ($mysqli->connect_errno) {
@@ -26,7 +26,7 @@ else{
 */
 
 
-$sql = "INSERT INTO `usuarios` (`ID`, `Nombre`, `Correo`, `Contraseña`, `Rol`) VALUES (NULL, '".$usuario."', '".$email."', '".$password."', 'user');";
+$sql = "INSERT INTO `usuarios` (`ID`, `Nombre`, `Correo`, `Contrasena`, `Rol`) VALUES (NULL, '".$usuario."', '".$email."', '".$password."', 'user');";
 
 if ($mysqli->query($sql) === TRUE ){
 
