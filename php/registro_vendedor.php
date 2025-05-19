@@ -41,10 +41,10 @@ $stmt = $pdo->prepare("
 try {
     $stmt->execute([$nombre, $hash, $correo, $rol]);
     // Éxito
-    header('Location: ../html/index.html?registro=ok');
+    header('Location: ../index.html?registro=ok');
     exit;
 } catch (PDOException $e) {
     // Por ejemplo, correo duplicado
-    header('Location: ../html/index.html?error=regdup');
+    header('Location: ../index.html?error=regdup');
     exit;
 }
