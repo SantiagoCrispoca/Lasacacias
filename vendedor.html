@@ -203,7 +203,10 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (sessionStorage.getItem('user_role') !== 'seller') {
+                    window.location.href = 'index.html';
+                }
             const modal = document.getElementById('modalVendedor');
             const abrirModalBtn = document.getElementById('abrir-modal');
             const cerrarModal = document.querySelector('.cerrar-modal');
@@ -313,9 +316,15 @@
                 document.querySelectorAll('.btn-entregado').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const index = e.target.dataset.index;
-                        const pedidos = JSON.parse(localStorage.getItem('pedidosPendientes')) || [];
-                        pedidos.splice(index, 1);
-                        localStorage.setItem('pedidosPendientes', JSON.stringify(pedidos));
+                        const pedidosPendientes = JSON.parse(localStorage.getItem('pedidosPendientes')) || [];
+                        const pedidoEntregado = pedidosPendientes.splice(index, 1)[0];
+                        
+                        // Guardar en pedidos entregados
+                        const pedidosEntregados = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
+                        pedidosEntregados.push(pedidoEntregado);
+                        localStorage.setItem('pedidosEntregados', JSON.stringify(pedidosEntregados));
+                        
+                        localStorage.setItem('pedidosPendientes', JSON.stringify(pedidosPendientes));
                         cargarPedidos();
                     });
                 });
