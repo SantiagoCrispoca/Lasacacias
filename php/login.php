@@ -11,6 +11,10 @@ require __DIR__ . '/db.php';
 $response = ["success" => false, "redirect" => "index.html", "error" => "", "role" => ""];
 
 try {
+
+    session_regenerate_id(true); // 👈 Previene sesiones estáticas
+    $_SESSION = array(); // 👈 Limpia datos antiguos
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception("Método no permitido");
     }
@@ -39,7 +43,8 @@ try {
     $_SESSION['user_role'] = $usuario['Rol'];
 
     $response["success"] = true;
-    $response["role"] = $usuario['Rol']; // Enviar rol al front
+    $response["role"] = $usuario['Rol'];
+    $response["correo"] = $correo;
 
 } catch (Exception $e) {
     http_response_code(500);

@@ -779,6 +779,7 @@
     });
 
     try {
+
         const resp = await fetch('php/login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -792,6 +793,7 @@
         }
 
         sessionStorage.setItem('user_role', data.role);
+        sessionStorage.setItem('user_email', data.correo);
         actualizarNav();
         window.location.href = data.redirect;
 
