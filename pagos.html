@@ -265,27 +265,36 @@
         }
       });
 
-      document.getElementById("verificar-pago").addEventListener("click", () => {
+    document.getElementById("verificar-pago").addEventListener("click", () => {
         document.getElementById("paymentStatus").innerHTML = `
-              <p class="success">✔️ Pago realizado con éxito! Recibirás un correo con detalles de tu pedido.</p>
-              <p class="success">Serás redirigido a la pagina principal...</p>
-          `;
+            <p class="success">✔️ Pago realizado con éxito! Recibirás un correo con detalles de tu pedido.</p>
+            <p class="success">Serás redirigido a la pagina principal...</p>
+        `;
 
-        // Vaciar carrito y redirigir después de 20 segundos.
-        setTimeout(() => {
+        // Guardar directamente en pedidosEntregados
+        const correoUsuario = sessionStorage.getItem('user_email');
+        const nuevoPedido = {
+            correo: correoUsuario,
+            items: carrito,
+            total: total,
+            fecha: new Date().toISOString()
+        };
+
+        const entregados = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
+          entregados.push(nuevoPedido);
+          localStorage.setItem('pedidosEntregados', JSON.stringify(entregados));
+
+          // Vaciar carrito y redirigir
           localStorage.removeItem('carrito');
           window.location.href = "index.html";
-        }, 20000);
+    });
 
         // En el evento click de "verificar-pago", agregar:
-        const pedidos = JSON.parse(localStorage.getItem('pedidosPendientes')) || [];
-        pedidos.push({
+        const nuevoPedido = {
           items: carrito,
           total: total,
           fecha: new Date().toISOString()
-        });
-        localStorage.setItem('pedidosPendientes', JSON.stringify(pedidos));
-      });
+        };
       // -------------------- DATOS FLORES --------------------
       const datosFlores = [
         {

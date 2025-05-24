@@ -861,22 +861,22 @@
     const dynamicNavItem = document.getElementById('dynamic-nav-item');
     const navLink = document.getElementById('nav-link');
 
-    function actualizarNav() {
-        const userRole = sessionStorage.getItem('user_role');
-        const dynamicNavItem = document.getElementById('dynamic-nav-item');
-        const navLink = document.getElementById('nav-link');
+function actualizarNav() {
+    const userRole = sessionStorage.getItem('user_role');
+    const dynamicNavItem = document.getElementById('dynamic-nav-item');
+    const navLink = document.getElementById('nav-link');
 
-        if (userRole) {
-            dynamicNavItem.style.display = 'block';
-            navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
-            navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
-        } else {
-            dynamicNavItem.style.display = 'none';
-        }
+    if (userRole) {
+        dynamicNavItem.style.display = 'block';
+        navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
+        navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
+    } else {
+        dynamicNavItem.style.display = 'none';
     }
+}
 
-    // Llamar al cargar y después de login
-    document.addEventListener("DOMContentLoaded", actualizarNav);
+// Ejecutar al cargar
+document.addEventListener("DOMContentLoaded", actualizarNav);
 
   </script>
 </body>

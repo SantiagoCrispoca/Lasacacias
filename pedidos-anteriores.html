@@ -26,10 +26,20 @@
     </style>
 </head>
 <body>
-    <!-- Header igual al index.html -->
-    <header class="header">
-        <!-- ... mismo header que index.html ... -->
-    </header>
+     <!-- Header -->
+  <header class="header">
+    <button class="cart-button">🛒</button>
+    <button class="login-button">👤</button>
+    <div class="logo">
+      <a href="index.html">
+        <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
+      </a>
+    </div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Buscar productos..." />
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </header>
 
     <div class="container">
         <h1>Tus Pedidos Anteriores</h1>
@@ -37,38 +47,90 @@
     </div>
 
     <!-- Footer igual al index.html -->
-    <footer>
-        <!-- ... mismo footer que index.html ... -->
-    </footer>
+    <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Contáctanos</h3>
+        <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
+        <p>
+          <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
+        </p>
+      </div>
+
+      <!--Formas de pago-->
+      <div class="footer-section">
+        <h3>Formas de pago</h3>
+        <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
+      </div>
+
+      <!--Redes-->
+      <div class="footer-section">
+        <h3>Redes</h3>
+        <p>
+          <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
+          </a>
+          <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>© 2025 Floristería Las Acacias</p>
+    </div>
+  </footer>
 
     <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                if (sessionStorage.getItem('user_role') !== 'user') {
-                    window.location.href = 'index.html';
-                }
-            const pedidos = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
-            const container = document.getElementById('pedidos-container');
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('user_role') !== 'user') {
+        window.location.href = 'index.html';
+    }
 
-            pedidos.forEach(pedido => {
-                const pedidoHTML = `
-                    <div class="pedido">
-                        <h3>Pedido del ${new Date(pedido.fecha).toLocaleDateString()}</h3>
-                        ${pedido.items.map(item => `
-                            <div style="display: flex; align-items: center; margin: 10px 0;">
-                                <img src="${item.imagen}" alt="${item.nombre}">
-                                <div>
-                                    <p>${item.nombre} x${item.cantidad}</p>
-                                    ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
-                                    ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
-                        <p><strong>Total: $${pedido.total.toLocaleString()}</strong></p>
+    const correoUsuario = sessionStorage.getItem('user_email');
+    let pedidos = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
+    const container = document.getElementById('pedidos-container');
+
+    // Filtrar por usuario
+    pedidos = pedidos.filter(p => p.correo === correoUsuario);
+
+    container.innerHTML = pedidos.map((pedido, index) => `
+        <div class="pedido" data-index="${index}">
+            <h3>Pedido del ${new Date(pedido.fecha).toLocaleDateString()}</h3>
+            ${pedido.items.map(item => `
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div>
+                        <p>${item.nombre} x${item.cantidad}</p>
+                        ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
+                        ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
                     </div>
-                `;
-                container.innerHTML += pedidoHTML;
-            });
+                </div>
+            `).join('')}
+            <p><strong>Total: $${pedido.total.toLocaleString()}</strong></p>
+            <button class="eliminar-pedido">🗑 Eliminar</button>
+        </div>
+    `).join('');
+
+    // Lógica de eliminación
+    document.querySelectorAll('.eliminar-pedido').forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+            let allPedidos = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
+            const correo = sessionStorage.getItem('user_email');
+            const pedidosFiltrados = allPedidos.filter(p => p.correo === correo);
+
+            // Eliminar de pedidos filtrados
+            pedidosFiltrados.splice(i, 1);
+
+            // Reconstruir la lista original excluyendo los eliminados
+            const nuevosPedidos = allPedidos.filter(p => p.correo !== correo).concat(pedidosFiltrados);
+            localStorage.setItem('pedidosEntregados', JSON.stringify(nuevosPedidos));
+
+            location.reload();
         });
-    </script>
+    });
+});
+</script>
 </body>
 </html>
