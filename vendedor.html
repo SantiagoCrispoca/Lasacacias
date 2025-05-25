@@ -134,7 +134,7 @@
 
         <!-- Sección Productos -->
         <div class="seccion-productos">
-            <button id="abrir-modal">➕ Añadir Producto</button>
+            <button id="abrir-modal"> Añadir Producto</button>
             <div class="productos-agregados" id="productos-agregados"></div>
         </div>
     </div>
@@ -204,38 +204,49 @@
         </div>
     </footer>
 
-   <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  const usuarioRol = sessionStorage.getItem("user_role");
-  if (usuarioRol !== 'seller') {
-    alert("Acceso restringido al modo vendedor.");
-    window.location.href = "index.html";
-    return;
-  }
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const usuarioRol = sessionStorage.getItem("user_role");
+            if (usuarioRol !== 'seller') {
+                alert("Acceso restringido al modo vendedor.");
+                window.location.href = "index.html";
+                return;
+            }
 
-  try {
-    const resp = await fetch("php/obtener_pedidos_pendientes.php");
-    const data = await resp.json();
+            try {
+                const resp = await fetch("php/obtener_pedidos_pendientes.php");
+                const data = await resp.json();
 
-    if (!data.success) throw new Error(data.error);
+                if (!data.success) throw new Error(data.error);
 
-    const contenedor = document.getElementById("pedidos-pendientes");
-    contenedor.innerHTML = data.pedidos.map(p => `
-      <div class="pedido">
-        <p><strong>Cliente:</strong> ${p.correo}</p>
-        <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
-        <p><strong>Fecha:</strong> ${p.fecha}</p>
-        <p><strong>Items:</strong> ${p.items}</p>
-        <hr>
-      </div>
-    `).join("");
+                const contenedor = document.getElementById("lista-pedidos");
+                contenedor.innerHTML = data.pedidos.map(p => {
+                    const items = JSON.parse(p.items);
+                    const itemsHtml = items.map(item => `
+    <li>
+      ${item.nombre} x${item.cantidad}
+      ${item.accesorio !== 'ninguno' ? `+ ${item.accesorio}` : ''}
+    </li>
+  `).join('');
 
-  } catch (err) {
-    alert("Error al cargar pedidos pendientes: " + err.message);
-  }
-});
+                    return `
+    <div class="pedido">
+      <p><strong>Cliente:</strong> ${p.correo}</p>
+      <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
+      <p><strong>Fecha:</strong> ${new Date(p.fecha).toLocaleString()}</p>
+      <p><strong>Items:</strong></p>
+      <ul>${itemsHtml}</ul>
+      <hr>
+    </div>
+  `;
+                }).join("");
 
-</script>
+            } catch (err) {
+                alert("Error al cargar pedidos pendientes: " + err.message);
+            }
+        });
+
+    </script>
 
 </body>
 

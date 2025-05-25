@@ -1,7 +1,9 @@
 <?php
 require 'db.php';
 
-$correo = $_POST['correo'] ?? null;
+$correo = $_POST['correo'];
+$sql = "SELECT * FROM pedidos WHERE correo = ? ORDER BY fecha DESC";
+
 
 if (!$correo) {
     echo json_encode(['success' => false, 'error' => 'Correo no recibido']);
