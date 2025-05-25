@@ -33,7 +33,7 @@
     <ul>
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="productos.html">Productos</a></li>
-      <li><a href="quienes-somos.html">Quienes Somos</a></li>
+      <li><a href="quienes-somos.html">¿Quienes Somos?</a></li>
       <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
       <li id="dynamic-nav-item" style="display: none;"> <!-- Enlace dinamico depende del rol -->
         <a id="nav-link" href="#"></a>
@@ -162,7 +162,7 @@
       <button class="vaciar-carrito" id="vaciar-carrito">
         Vaciar Carrito
       </button>
-      <a href="pagos.html" class="pagar-carrito">Ir a pagar</a>
+      <button id="btn-pagar" class="pagar-carrito">Ir a pagar</button>
     </div>
   </div>
 
@@ -874,6 +874,24 @@ function actualizarNav() {
         dynamicNavItem.style.display = 'none';
     }
 }
+
+document.getElementById("btn-pagar").addEventListener("click", () => {
+  const correo = sessionStorage.getItem("user_email");
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (!correo) {
+    alert("Debes iniciar sesión para pagar.");
+    return;
+  }
+
+  if (carrito.length === 0) {
+    alert("El carrito está vacío.");
+    return;
+  }
+
+  window.location.href = "pagos.html";
+});
+
 
 // Ejecutar al cargar
 document.addEventListener("DOMContentLoaded", actualizarNav);

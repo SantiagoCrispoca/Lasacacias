@@ -28,8 +28,8 @@
 <body>
      <!-- Header -->
   <header class="header">
-    <button class="cart-button">🛒</button>
-    <button class="login-button">👤</button>
+    <button class="cart-button"></button>
+    <button class="login-button"></button>
     <div class="logo">
       <a href="index.html">
         <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
@@ -82,55 +82,59 @@
     </div>
   </footer>
 
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
     if (sessionStorage.getItem('user_role') !== 'user') {
-        window.location.href = 'index.html';
+        return window.location.href = 'index.html';
     }
 
     const correoUsuario = sessionStorage.getItem('user_email');
-    let pedidos = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
     const container = document.getElementById('pedidos-container');
 
-    // Filtrar por usuario
-    pedidos = pedidos.filter(p => p.correo === correoUsuario);
+    const params = new URLSearchParams();
+    params.append('correo', correoUsuario);
 
-    container.innerHTML = pedidos.map((pedido, index) => `
-        <div class="pedido" data-index="${index}">
-            <h3>Pedido del ${new Date(pedido.fecha).toLocaleDateString()}</h3>
-            ${pedido.items.map(item => `
-                <div style="display: flex; align-items: center; margin: 10px 0;">
-                    <img src="${item.imagen}" alt="${item.nombre}">
-                    <div>
-                        <p>${item.nombre} x${item.cantidad}</p>
-                        ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
-                        ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
-                    </div>
-                </div>
-            `).join('')}
-            <p><strong>Total: $${pedido.total.toLocaleString()}</strong></p>
-            <button class="eliminar-pedido">🗑 Eliminar</button>
-        </div>
-    `).join('');
-
-    // Lógica de eliminación
-    document.querySelectorAll('.eliminar-pedido').forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-            let allPedidos = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
-            const correo = sessionStorage.getItem('user_email');
-            const pedidosFiltrados = allPedidos.filter(p => p.correo === correo);
-
-            // Eliminar de pedidos filtrados
-            pedidosFiltrados.splice(i, 1);
-
-            // Reconstruir la lista original excluyendo los eliminados
-            const nuevosPedidos = allPedidos.filter(p => p.correo !== correo).concat(pedidosFiltrados);
-            localStorage.setItem('pedidosEntregados', JSON.stringify(nuevosPedidos));
-
-            location.reload();
+    try {
+        const response = await fetch('php/obtener_pedidos_usuario.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
         });
-    });
+
+        const data = await response.json();
+
+        if (!data.success) throw new Error(data.error);
+
+        if (data.pedidos.length === 0) {
+            container.innerHTML = '<p>No tienes pedidos anteriores aún.</p>';
+            return;
+        }
+
+        container.innerHTML = data.pedidos.map((pedido, index) => {
+            const items = JSON.parse(pedido.items);
+            return `
+                <div class="pedido" data-index="${index}">
+                    <h3>Pedido del ${new Date(pedido.fecha).toLocaleDateString()}</h3>
+                    ${items.map(item => `
+                        <div style="display: flex; align-items: center; margin: 10px 0;">
+                            <img src="${item.imagen}" alt="${item.nombre}">
+                            <div>
+                                <p>${item.nombre} x${item.cantidad}</p>
+                                ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ''}
+                                ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                    <p><strong>Total: $${parseInt(pedido.total).toLocaleString()}</strong></p>
+                </div>
+            `;
+        }).join('');
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p>Error al cargar tus pedidos: ${err.message}</p>`;
+    }
 });
 </script>
+
 </body>
 </html>

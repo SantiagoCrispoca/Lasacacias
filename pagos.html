@@ -206,88 +206,105 @@
 
   <!-- Script interno -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // Verifica que el usuario esté logueado
 
-      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-      const resumenItems = document.getElementById('resumen-items');
-      const resumenTotal = document.getElementById('resumen-total');
-      const modal = document.getElementById("nequiModal");
-      const spanCerrar = document.querySelector(".cerrar-modal");
+   document.addEventListener('DOMContentLoaded', () => {
+  console.log("pagos.html cargado");
 
-      let total = 0;
-      if (carrito.length === 0) {
-        resumenItems.innerHTML = "<p>No hay productos en el carrito</p>";
-      } else {
-        resumenItems.innerHTML = carrito.map((item, index) => {
-          const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
-          const accesorioPrecio = item.accesorio === 'ninguno' ? 0 :
-            item.accesorio === 'oso' ? 10000 :
-              item.accesorio === 'globo' ? 5000 :
-                item.accesorio === 'chocolate' ? 7000 : 8000;
-          const subtotal = (precio + accesorioPrecio) * item.cantidad;
-          total += subtotal;
-          return `
-        <div class="item-resumen" data-index="${index}" style="position: relative; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
-            <button class="eliminar-item" data-index="${index}" style="position: absolute; top: 5px; right: 10px; background: none; border: none; color: red; font-size: 18px; cursor: pointer;">✖</button>
-            <img src="${item.imagen}" alt="${item.nombre}" style="width: 80px;">
-            <h3>${item.nombre}</h3>
-            <p>Cantidad: ${item.cantidad}</p>
-            ${item.mensaje ? `<p>Comentario: ${item.mensaje}</p>` : ''}
-            ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
-            <p>Subtotal: $${subtotal.toLocaleString()}</p>
-        </div>
+  const correo = sessionStorage.getItem("user_email");
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (!correo) {
+    alert("Debes iniciar sesión para pagar.");
+    return window.location.href = "index.html";
+  }
+
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío.");
+    return window.location.href = "index.html";
+  }
+
+  // Mostrar resumen del carrito inmediatamente
+  const resumenItems = document.getElementById('resumen-items');
+  const resumenTotal = document.getElementById('resumen-total');
+  const totalPagar = document.getElementById('total-pagar');
+  let total = 0;
+
+  resumenItems.innerHTML = carrito.map((item, index) => {
+    const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+    const accesorioPrecio = {
+      ninguno: 0,
+      oso: 10000,
+      globo: 5000,
+      chocolate: 7000,
+      corona: 8000
+    }[item.accesorio] || 0;
+    const subtotal = (precio + accesorioPrecio) * item.cantidad;
+    total += subtotal;
+    return `
+      <div class="item-resumen">
+        <img src="${item.imagen}" style="width: 80px;">
+        <h3>${item.nombre}</h3>
+        <p>Cantidad: ${item.cantidad}</p>
+        ${item.mensaje ? `<p>Comentario: ${item.mensaje}</p>` : ''}
+        ${item.accesorio !== 'ninguno' ? `<p>Accesorio: ${item.accesorio}</p>` : ''}
+        <p>Subtotal: $${subtotal.toLocaleString()}</p>
+      </div>
     `;
-        }).join('');
-        resumenTotal.textContent = total.toLocaleString();
-        document.getElementById("total-pagar").textContent = total.toLocaleString();
-      }
+  }).join('');
 
-      document.querySelectorAll('.eliminar-item').forEach(button => {
-        button.addEventListener('click', (e) => {
-          const index = e.target.dataset.index;
-          carrito.splice(index, 1);
-          localStorage.setItem('carrito', JSON.stringify(carrito));
-          location.reload();
-        });
+  resumenTotal.textContent = total.toLocaleString();
+  totalPagar.textContent = total.toLocaleString();
+
+  // Lógica para mostrar modal y registrar pedido
+  const modal = document.getElementById("nequiModal");
+  const btnPago = document.getElementById("pago-nequi");
+  const btnVerificar = document.getElementById("verificar-pago");
+  const estadoPago = document.getElementById("paymentStatus");
+
+  btnPago.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  document.querySelector(".cerrar-modal").addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+
+  btnVerificar.addEventListener("click", async () => {
+    btnVerificar.disabled = true;
+    estadoPago.innerHTML = `<p class="success"> Registrando pedido...</p>`;
+
+    const params = new URLSearchParams();
+    params.append('correo', correo);
+    params.append('items', JSON.stringify(carrito));
+    params.append('total', total);
+
+    try {
+      const resp = await fetch('https://lasacacias.infinityfreeapp.com/php/registro_pedido.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
       });
 
-      document.getElementById("pago-nequi").addEventListener("click", () => {
-        modal.style.display = "flex";
-      });
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.error);
 
-      spanCerrar.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
+      estadoPago.innerHTML = `
+        <p class="success">Pedido registrado con éxito (ID: ${data.id})</p>
+        <p>Redirigiendo al inicio...</p>
+      `;
+      localStorage.removeItem("carrito");
+      setTimeout(() => window.location.href = "index.html", 1500);
 
-      window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
+    } catch (err) {
+      estadoPago.innerHTML = `<p class="error">Error al registrar pedido: ${err.message}</p>`;
+      btnVerificar.disabled = false;
+    }
 
-    document.getElementById("verificar-pago").addEventListener("click", () => {
-        document.getElementById("paymentStatus").innerHTML = `
-            <p class="success">✔️ Pago realizado con éxito! Recibirás un correo con detalles de tu pedido.</p>
-            <p class="success">Serás redirigido a la pagina principal...</p>
-        `;
-
-        // Guardar directamente en pedidosEntregados
-        const correoUsuario = sessionStorage.getItem('user_email');
-        const nuevoPedido = {
-            correo: correoUsuario,
-            items: carrito,
-            total: total,
-            fecha: new Date().toISOString()
-        };
-
-        const entregados = JSON.parse(localStorage.getItem('pedidosEntregados')) || [];
-          entregados.push(nuevoPedido);
-          localStorage.setItem('pedidosEntregados', JSON.stringify(entregados));
-
-          // Vaciar carrito y redirigir
-          localStorage.removeItem('carrito');
-          window.location.href = "index.html";
-    });
 
         // En el evento click de "verificar-pago", agregar:
         const nuevoPedido = {
@@ -295,305 +312,306 @@
           total: total,
           fecha: new Date().toISOString()
         };
-      // -------------------- DATOS FLORES --------------------
-      const datosFlores = [
-        {
-          nombre: "Ramo Rosas Rojas",
-          imagen: "imagenes/ramo-1.jpeg",
-          descripcion:
-            "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
-          precio: "$80.000",
-        },
-        {
-          nombre: "Manojo Variado",
-          imagen: "imagenes/manojo-2.jpeg",
-          descripcion:
-            "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
-          precio: "$30.000",
-        },
-        {
-          nombre: "Ramo Girasoles y Rosas",
-          imagen: "imagenes/ramo-4.jpg",
-          descripcion:
-            "Ramo de girasoles y rosas rojas, lleno de energía y frescura.",
-          precio: "$70.000",
-        },
-        {
-          nombre: "Manojo Variado rosado",
-          imagen: "imagenes/manojo-5.jpeg",
-          descripcion: "Manojo de margaritas, fresco y juvenil.",
-          precio: "$25.000",
-        },
-        {
-          nombre: "Ramo Variado",
-          imagen: "imagenes/ramo-6.jpg",
-          descripcion:
-            "Ramo de girasoles y flores silvestres, natural y encantador.",
-          precio: "$80.000",
-        },
-        {
-          nombre: "Manojo De Girasoles",
-          imagen: "imagenes/manojo-3.jpeg",
-          descripcion: "Manojo de girasoles, lleno de energía y alegría.",
-          precio: "$40.000",
-        },
-        {
-          nombre: "Ramo Variado",
-          imagen: "imagenes/ramo-6.jpg",
-          descripcion:
-            "Ramo de girasoles y flores silvestres, natural y encantador.",
-          precio: "$80.000",
-        },
-        {
-          nombre: "Manojo Variado rosado",
-          imagen: "imagenes/manojo-5.jpeg",
-          descripcion: "Manojo de margaritas, fresco y juvenil.",
-          precio: "$25.000",
-        },
-        {
-          nombre: "Manojo Variado",
-          imagen: "imagenes/manojo-2.jpeg",
-          descripcion:
-            "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
-          precio: "$30.000",
-        },
-        // Productos de temporada
-        {
-          nombre: "Ramo Rosas Rojas",
-          imagen: "imagenes/ramo-1.jpeg",
-          descripcion:
-            "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
-          precio: "$80.000",
-        },
-        {
-          nombre: "Jarron de rosas rojas",
-          imagen: "imagenes/ramo-2.png",
-          descripcion:
-            "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
-          precio: "$22.000",
-        },
-        {
-          nombre: "Ramo variado",
-          imagen: "imagenes/ramo-3.jpg",
-          descripcion: "Ramo de liliums, elegante y sofisticado.",
-          precio: "$24.000",
-        },
-        {
-          nombre: "Ramo de girasoles y rosas",
-          imagen: "imagenes/ramo-4.jpg",
-          descripcion:
-            "Ramo de girasoles y margaritas, lleno de energía y frescura.",
-          precio: "$21.000",
-        },
-        //Productos Reciente
-        {
-          nombre: "Ramo de rosas variadas",
-          imagen: "imagenes/Ramo9.jpeg",
-          descripcion: "Un ramo con una mezcla de rosas para ocasiones especiales.",
-          precio: "$75.000",
-        },
-        {
-          nombre: "Ramo de girasoles",
-          imagen: "imagenes/Ramo10.jpeg",
-          descripcion: "Ramo vibrante con girasoles frescos.",
-          precio: "$65.000",
-        },
-        {
-          nombre: "Manojo variado",
-          imagen: "imagenes/Manojo10.jpeg",
-          descripcion: "Manojo de flores variadas, ideal para decoración.",
-          precio: "$55.000",
-        },
-        {
-          nombre: "Manojo variado clásico",
-          imagen: "imagenes/Manojo11.jpeg",
-          descripcion: "Manojo de flores clásicas para un toque elegante.",
-          precio: "$60.000",
-        },
-      ];
+        // -------------------- DATOS FLORES --------------------
+        const datosFlores = [
+          {
+            nombre: "Ramo Rosas Rojas",
+            imagen: "imagenes/ramo-1.jpeg",
+            descripcion:
+              "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
+            precio: "$80.000",
+          },
+          {
+            nombre: "Manojo Variado",
+            imagen: "imagenes/manojo-2.jpeg",
+            descripcion:
+              "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
+            precio: "$30.000",
+          },
+          {
+            nombre: "Ramo Girasoles y Rosas",
+            imagen: "imagenes/ramo-4.jpg",
+            descripcion:
+              "Ramo de girasoles y rosas rojas, lleno de energía y frescura.",
+            precio: "$70.000",
+          },
+          {
+            nombre: "Manojo Variado rosado",
+            imagen: "imagenes/manojo-5.jpeg",
+            descripcion: "Manojo de margaritas, fresco y juvenil.",
+            precio: "$25.000",
+          },
+          {
+            nombre: "Ramo Variado",
+            imagen: "imagenes/ramo-6.jpg",
+            descripcion:
+              "Ramo de girasoles y flores silvestres, natural y encantador.",
+            precio: "$80.000",
+          },
+          {
+            nombre: "Manojo De Girasoles",
+            imagen: "imagenes/manojo-3.jpeg",
+            descripcion: "Manojo de girasoles, lleno de energía y alegría.",
+            precio: "$40.000",
+          },
+          {
+            nombre: "Ramo Variado",
+            imagen: "imagenes/ramo-6.jpg",
+            descripcion:
+              "Ramo de girasoles y flores silvestres, natural y encantador.",
+            precio: "$80.000",
+          },
+          {
+            nombre: "Manojo Variado rosado",
+            imagen: "imagenes/manojo-5.jpeg",
+            descripcion: "Manojo de margaritas, fresco y juvenil.",
+            precio: "$25.000",
+          },
+          {
+            nombre: "Manojo Variado",
+            imagen: "imagenes/manojo-2.jpeg",
+            descripcion:
+              "Manojo de Rosas variadas, ideal para expresar amor y pureza.",
+            precio: "$30.000",
+          },
+          // Productos de temporada
+          {
+            nombre: "Ramo Rosas Rojas",
+            imagen: "imagenes/ramo-1.jpeg",
+            descripcion:
+              "Un hermoso ramo de rosas rojas, perfecto para cualquier ocasión.",
+            precio: "$80.000",
+          },
+          {
+            nombre: "Jarron de rosas rojas",
+            imagen: "imagenes/ramo-2.png",
+            descripcion:
+              "Ramo de tulipanes, perfecto para alegrar cualquier espacio.",
+            precio: "$22.000",
+          },
+          {
+            nombre: "Ramo variado",
+            imagen: "imagenes/ramo-3.jpg",
+            descripcion: "Ramo de liliums, elegante y sofisticado.",
+            precio: "$24.000",
+          },
+          {
+            nombre: "Ramo de girasoles y rosas",
+            imagen: "imagenes/ramo-4.jpg",
+            descripcion:
+              "Ramo de girasoles y margaritas, lleno de energía y frescura.",
+            precio: "$21.000",
+          },
+          //Productos Reciente
+          {
+            nombre: "Ramo de rosas variadas",
+            imagen: "imagenes/Ramo9.jpeg",
+            descripcion: "Un ramo con una mezcla de rosas para ocasiones especiales.",
+            precio: "$75.000",
+          },
+          {
+            nombre: "Ramo de girasoles",
+            imagen: "imagenes/Ramo10.jpeg",
+            descripcion: "Ramo vibrante con girasoles frescos.",
+            precio: "$65.000",
+          },
+          {
+            nombre: "Manojo variado",
+            imagen: "imagenes/Manojo10.jpeg",
+            descripcion: "Manojo de flores variadas, ideal para decoración.",
+            precio: "$55.000",
+          },
+          {
+            nombre: "Manojo variado clásico",
+            imagen: "imagenes/Manojo11.jpeg",
+            descripcion: "Manojo de flores clásicas para un toque elegante.",
+            precio: "$60.000",
+          },
+        ];
 
-      const productos = [
-        {
-          id: "ramo-1",
-          nombre: "Ramo de Rosas",
-          imagen: "imagenes/ramo-1.jpeg",
-        },
-        {
-          id: "ramo-2",
-          nombre: "Ramo de Tulipanes",
-          imagen: "imagenes/ramo-2.png",
-        },
-        {
-          id: "ramo-3",
-          nombre: "Ramo de Lirios",
-          imagen: "imagenes/ramo-3.jpg",
-        },
-        { id: "ramo-4", nombre: "Ramo Mixto", imagen: "imagenes/ramo-4.jpg" },
-        {
-          id: "ramo-5",
-          nombre: "Ramo de Margaritas",
-          imagen: "imagenes/ramo-5.jpg",
-        },
-        {
-          id: "ramo-6",
-          nombre: "Ramo de Girasoles",
-          imagen: "imagenes/ramo-6.jpg",
-        },
-        {
-          id: "ramo-7",
-          nombre: "Ramo de Claveles",
-          imagen: "imagenes/ramo-7.jpg",
-        },
-        {
-          id: "ramo-8",
-          nombre: "Ramo de Peonias",
-          imagen: "imagenes/ramo-8.jpg",
-        },
-        {
-          id: "Ramo9",
-          nombre: "Ramo de rosas variadas",
-          imagen: "imagenes/ramo9.jpeg",
-        },
-        {
-          id: "Ramo10",
-          nombre: "Ramo de girasoles",
-          imagen: "imagenes/ramo10.jpeg",
-        },
-        {
-          id: "manojo-1",
-          nombre: "Manojo de Lavanda",
-          imagen: "imagenes/manojo-1.jpeg",
-        },
-        {
-          id: "manojo-2",
-          nombre: "Manojo de Romero",
-          imagen: "imagenes/manojo-2.jpeg",
-        },
-        {
-          id: "manojo-3",
-          nombre: "Manojo de Eucalipto",
-          imagen: "imagenes/manojo-3.jpeg",
-        },
-        {
-          id: "manojo-4",
-          nombre: "Manojo de Hierbabuena",
-          imagen: "imagenes/manojo-4.jpeg",
-        },
-        {
-          id: "manojo-5",
-          nombre: "Manojo de Albahaca",
-          imagen: "imagenes/manojo-5.jpeg",
-        },
-        {
-          id: "manojo-6",
-          nombre: "Manojo de Cilantro",
-          imagen: "imagenes/manojo-6.jpeg",
-        },
-        {
-          id: "manojo-7",
-          nombre: "Manojo de Tomillo",
-          imagen: "imagenes/manojo-7.jpg",
-        },
-        {
-          id: "manojo-8",
-          nombre: "Manojo de Menta",
-          imagen: "imagenes/manojo-8.jpg",
-        },
-        {
-          id: "Manojo10",
-          nombre: "Manojo variado",
-          imagen: "imagenes/Manojo10.jpeg",
-        },
-        {
-          id: "Manojo11",
-          nombre: "Manojo variado clásico",
-          imagen: "imagenes/Manojo11.jpeg",
-        },
-      ];
+        const productos = [
+          {
+            id: "ramo-1",
+            nombre: "Ramo de Rosas",
+            imagen: "imagenes/ramo-1.jpeg",
+          },
+          {
+            id: "ramo-2",
+            nombre: "Ramo de Tulipanes",
+            imagen: "imagenes/ramo-2.png",
+          },
+          {
+            id: "ramo-3",
+            nombre: "Ramo de Lirios",
+            imagen: "imagenes/ramo-3.jpg",
+          },
+          { id: "ramo-4", nombre: "Ramo Mixto", imagen: "imagenes/ramo-4.jpg" },
+          {
+            id: "ramo-5",
+            nombre: "Ramo de Margaritas",
+            imagen: "imagenes/ramo-5.jpg",
+          },
+          {
+            id: "ramo-6",
+            nombre: "Ramo de Girasoles",
+            imagen: "imagenes/ramo-6.jpg",
+          },
+          {
+            id: "ramo-7",
+            nombre: "Ramo de Claveles",
+            imagen: "imagenes/ramo-7.jpg",
+          },
+          {
+            id: "ramo-8",
+            nombre: "Ramo de Peonias",
+            imagen: "imagenes/ramo-8.jpg",
+          },
+          {
+            id: "Ramo9",
+            nombre: "Ramo de rosas variadas",
+            imagen: "imagenes/ramo9.jpeg",
+          },
+          {
+            id: "Ramo10",
+            nombre: "Ramo de girasoles",
+            imagen: "imagenes/ramo10.jpeg",
+          },
+          {
+            id: "manojo-1",
+            nombre: "Manojo de Lavanda",
+            imagen: "imagenes/manojo-1.jpeg",
+          },
+          {
+            id: "manojo-2",
+            nombre: "Manojo de Romero",
+            imagen: "imagenes/manojo-2.jpeg",
+          },
+          {
+            id: "manojo-3",
+            nombre: "Manojo de Eucalipto",
+            imagen: "imagenes/manojo-3.jpeg",
+          },
+          {
+            id: "manojo-4",
+            nombre: "Manojo de Hierbabuena",
+            imagen: "imagenes/manojo-4.jpeg",
+          },
+          {
+            id: "manojo-5",
+            nombre: "Manojo de Albahaca",
+            imagen: "imagenes/manojo-5.jpeg",
+          },
+          {
+            id: "manojo-6",
+            nombre: "Manojo de Cilantro",
+            imagen: "imagenes/manojo-6.jpeg",
+          },
+          {
+            id: "manojo-7",
+            nombre: "Manojo de Tomillo",
+            imagen: "imagenes/manojo-7.jpg",
+          },
+          {
+            id: "manojo-8",
+            nombre: "Manojo de Menta",
+            imagen: "imagenes/manojo-8.jpg",
+          },
+          {
+            id: "Manojo10",
+            nombre: "Manojo variado",
+            imagen: "imagenes/Manojo10.jpeg",
+          },
+          {
+            id: "Manojo11",
+            nombre: "Manojo variado clásico",
+            imagen: "imagenes/Manojo11.jpeg",
+          },
+        ];
 
 
-      // -------------------- MODAL --------------------
-      const modal2 = document.getElementById("modalbusqueda");
-      const modalTitulo = document.getElementById("modal-titulo");
-      const modalImagen = document.getElementById("modal-imagen");
-      const modalDescripcion = document.getElementById("modal-descripcion");
-      const modalPrecio = document.getElementById("modal-precio");
-      const cerrarModal = document.querySelector(".cerrar-modal2");
-      let currentFlowerIndex = 0;
+        // -------------------- MODAL --------------------
+        const modal2 = document.getElementById("modalbusqueda");
+        const modalTitulo = document.getElementById("modal-titulo");
+        const modalImagen = document.getElementById("modal-imagen");
+        const modalDescripcion = document.getElementById("modal-descripcion");
+        const modalPrecio = document.getElementById("modal-precio");
+        const cerrarModal = document.querySelector(".cerrar-modal2");
+        let currentFlowerIndex = 0;
 
-      document.querySelectorAll(".flor-clickeable").forEach((flor, index) => {
-        flor.addEventListener("click", () => {
-          const imgSrc = flor.querySelector("img").getAttribute("src");
-          const producto = datosFlores.find((item) => item.imagen === imgSrc);
+        document.querySelectorAll(".flor-clickeable").forEach((flor, index) => {
+          flor.addEventListener("click", () => {
+            const imgSrc = flor.querySelector("img").getAttribute("src");
+            const producto = datosFlores.find((item) => item.imagen === imgSrc);
 
-          if (producto) {
-            currentFlowerIndex = datosFlores.indexOf(producto);
-            abrirModal(producto);
+            if (producto) {
+              currentFlowerIndex = datosFlores.indexOf(producto);
+              abrirModal(producto);
+            }
+          });
+        });
+
+        function abrirModal(producto) {
+          const productoExacto = datosFlores.find(f => f.imagen === producto.imagen);
+          if (productoExacto) {
+            modalTitulo.textContent = productoExacto.nombre;
+            modalImagen.src = productoExacto.imagen;
+            modalDescripcion.textContent = productoExacto.descripcion;
+            modalPrecio.textContent = `Precio: ${productoExacto.precio}`;
+            modal2.style.display = 'flex';
+          }
+        }
+
+        cerrarModal.addEventListener("click", () => modal2.style.display = "none");
+        window.addEventListener("click", (e) => e.target === modal2 && (modal2.style.display = "none"));
+
+        // -------------------- BÚSQUEDA --------------------
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
+
+        searchInput.addEventListener("input", function () {
+          const query = this.value.trim().toLowerCase();
+          searchResults.innerHTML = "";
+
+          if (query) {
+            const filtrados = productos
+              .filter(
+                (p) =>
+                  p.nombre.toLowerCase().includes(query) ||
+                  p.id.toLowerCase().includes(query)
+              )
+              .map((p) => ({
+                ...p,
+                data: datosFlores.find((f) => f.imagen === p.imagen),
+              }));
+
+            mostrarResultados(filtrados);
+          } else {
+            searchResults.style.display = "none";
           }
         });
-      });
 
-      function abrirModal(producto) {
-        const productoExacto = datosFlores.find(f => f.imagen === producto.imagen);
-        if (productoExacto) {
-          modalTitulo.textContent = productoExacto.nombre;
-          modalImagen.src = productoExacto.imagen;
-          modalDescripcion.textContent = productoExacto.descripcion;
-          modalPrecio.textContent = `Precio: ${productoExacto.precio}`;
-          modal2.style.display = 'flex';
-        }
-      }
-
-      cerrarModal.addEventListener("click", () => modal2.style.display = "none");
-      window.addEventListener("click", (e) => e.target === modal2 && (modal2.style.display = "none"));
-
-      // -------------------- BÚSQUEDA --------------------
-      const searchInput = document.getElementById("search-input");
-      const searchResults = document.getElementById("search-results");
-
-      searchInput.addEventListener("input", function () {
-        const query = this.value.trim().toLowerCase();
-        searchResults.innerHTML = "";
-
-        if (query) {
-          const filtrados = productos
-            .filter(
-              (p) =>
-                p.nombre.toLowerCase().includes(query) ||
-                p.id.toLowerCase().includes(query)
-            )
-            .map((p) => ({
-              ...p,
-              data: datosFlores.find((f) => f.imagen === p.imagen),
-            }));
-
-          mostrarResultados(filtrados);
-        } else {
-          searchResults.style.display = "none";
-        }
-      });
-
-      function mostrarResultados(resultados) {
-        searchResults.innerHTML = resultados
-          .map(
-            (p) => `
+        function mostrarResultados(resultados) {
+          searchResults.innerHTML = resultados
+            .map(
+              (p) => `
             <div class="resultado-busqueda">
                 <img src="${p.imagen}" alt="${p.nombre}" width="40">
                 <span>${p.nombre}</span>
             </div>
         `
-          )
-          .join("");
+            )
+            .join("");
 
-        searchResults.style.display = resultados.length ? "block" : "none";
-        searchResults
-          .querySelectorAll(".resultado-busqueda")
-          .forEach((item, i) => {
-            item.addEventListener("click", () =>
-              abrirModal(resultados[i].data)
-            );
-          });
-      }
+          searchResults.style.display = resultados.length ? "block" : "none";
+          searchResults
+            .querySelectorAll(".resultado-busqueda")
+            .forEach((item, i) => {
+              item.addEventListener("click", () =>
+                abrirModal(resultados[i].data)
+              );
+            });
+        }
+      });
 
 
     });
