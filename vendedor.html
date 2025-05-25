@@ -231,30 +231,97 @@
                 if (!data.success) throw new Error(data.error);
 
                 const contenedor = document.getElementById("lista-pedidos");
-                contenedor.innerHTML = data.pedidos.map(p => {
-                    const items = JSON.parse(p.items);
-                    const itemsHtml = items.map(item => `
-    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-      <img src="${item.imagen}" alt="${item.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
-      <div>
-        <p><strong>${item.nombre}</strong> x${item.cantidad}</p>
-        ${item.mensaje ? `<p> Mensaje: ${item.mensaje}</p>` : ''}
-        ${item.accesorio !== 'ninguno' ? `<p> Accesorio: ${item.accesorio}</p>` : ''}
-      </div>
-    </div>
-  `).join('');
+                contenedor.innerHTML = ''; // Limpiar
 
-                    return `
-    <div class="pedido" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
-      <p><strong>ID Pedido:</strong> ${p.id}</p>
-      <p><strong>Cliente:</strong> ${p.correo}</p>
-      <p><strong>Fecha:</strong> ${new Date(p.fecha).toLocaleString()}</p>
-      <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
-      <div><strong>Productos:</strong>${itemsHtml}</div>
-      <button class="btn-entregado" data-id="${p.id}">Marcar como entregado</button>
-    </div>
-  `;
-                }).join('');
+                let pedidosMostrados = 0;
+                const lote = 3;
+
+                const contenedorPedidos = document.createElement("div");
+                const botonMas = document.createElement("button");
+
+                botonMas.textContent = "Mostrar más pedidos";
+                botonMas.style.cssText = `
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #8cbaa3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+`;
+
+                const mostrarPedidos = () => {
+                    const fragment = document.createDocumentFragment();
+
+                    for (let i = pedidosMostrados; i < pedidosMostrados + lote && i < data.pedidos.length; i++) {
+                        const p = data.pedidos[i];
+                        const items = JSON.parse(p.items);
+                        const itemsHtml = items.map(item => `
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="${item.imagen}" alt="${item.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+                <div>
+                    <p><strong>${item.nombre}</strong> x${item.cantidad}</p>
+                    ${item.mensaje ? `<p> Mensaje: ${item.mensaje}</p>` : ''}
+                    ${item.accesorio !== 'ninguno' ? `<p> Accesorio: ${item.accesorio}</p>` : ''}
+                </div>
+            </div>
+        `).join('');
+
+                        const pedidoDiv = document.createElement("div");
+                        pedidoDiv.className = "pedido";
+                        pedidoDiv.style = "border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;";
+                        pedidoDiv.innerHTML = `
+            <p><strong>ID Pedido:</strong> ${p.id}</p>
+            <p><strong>Cliente:</strong> ${p.correo}</p>
+            <p><strong>Fecha:</strong> ${new Date(p.fecha).toLocaleString()}</p>
+            <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
+            <div><strong>Productos:</strong>${itemsHtml}</div>
+            <button class="btn-entregado" data-id="${p.id}">Marcar como entregado</button>
+        `;
+
+                        fragment.appendChild(pedidoDiv);
+                    }
+
+                    contenedorPedidos.appendChild(fragment);
+                    pedidosMostrados += lote;
+
+                    if (pedidosMostrados >= data.pedidos.length) {
+                        botonMas.remove();
+                    }
+
+                    // Vuelve a activar los botones "entregado"
+                    document.querySelectorAll(".btn-entregado").forEach(btn => {
+                        btn.addEventListener("click", async () => {
+                            const idPedido = btn.dataset.id;
+                            try {
+                                const params = new URLSearchParams();
+                                params.append("id", idPedido);
+                                params.append("estado", "entregado");
+
+                                const resp = await fetch("php/actualizar_estado_pedido.php", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                                    body: params.toString()
+                                });
+
+                                const data = await resp.json();
+                                if (!data.success) throw new Error(data.error);
+
+                                alert("Pedido actualizado como entregado.");
+                                btn.disabled = true;
+                                btn.textContent = "Entregado";
+                            } catch (err) {
+                                alert("Error al actualizar pedido: " + err.message);
+                            }
+                        });
+                    });
+                };
+
+                mostrarPedidos();
+                botonMas.addEventListener("click", mostrarPedidos);
+                contenedor.appendChild(contenedorPedidos);
+                contenedor.appendChild(botonMas);
 
                 document.querySelectorAll(".btn-entregado").forEach(btn => {
                     btn.addEventListener("click", async () => {
