@@ -1,66 +1,42 @@
 <?php
-// php/agregar_producto.php
-session_start();
-require __DIR__ . '/../includes/db.php';
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
-// Solo vendedores pueden agregar
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'vendedor') {
-    header('Location:index.html?error=auth');
-    exit;
-}
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location:vendedor.html');
+    echo json_encode(["success" => false, "error" => "Método no permitido"]);
     exit;
 }
 
-// Campos del formulario
-$titulo      = trim($_POST['titulo'] ?? '');
-$descripcion = trim($_POST['descripcion'] ?? '');
-$precio      = floatval($_POST['precio']  ?? 0);
-$stock       = intval($_POST['stock']      ?? 0);
+// Validación de campos
+$nombre = $_POST['nombre'] ?? '';
+$descripcion = $_POST['descripcion'] ?? '';
+$precio = isset($_POST['precio']) ? floatval($_POST['precio']) : 0;
+$stock = isset($_POST['stock']) ? intval($_POST['stock']) : 0;
 
-// Validaciones básicas
-$errors = [];
-if ($titulo === '') {
-    $errors[] = 'El título es obligatorio.';
-}
-if ($descripcion === '') {
-    $errors[] = 'La descripción es obligatoria.';
-}
-if ($precio <= 0) {
-    $errors[] = 'El precio debe ser mayor a 0.';
-}
-if ($stock < 0) {
-    $errors[] = 'El stock no puede ser negativo.';
+if (!$nombre || !$descripcion || $precio <= 0 || $stock < 0 || !isset($_FILES['imagen'])) {
+    echo json_encode(["success" => false, "error" => "Campos inválidos o incompletos"]);
+    exit;
 }
 
 // Procesar imagen
-$imagenNombre = null;
-if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-    $tmp  = $_FILES['imagen']['tmp_name'];
-    $ext  = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-    $imagenNombre = uniqid('prod_') . '.' . $ext;
-    $dest = __DIR__ . '/../uploads/' . $imagenNombre;
-    if (!move_uploaded_file($tmp, $dest)) {
-        $errors[] = 'Error al guardar la imagen.';
-    }
-} else {
-    $errors[] = 'La imagen es obligatoria.';
-}
+$imagenTmp = $_FILES['imagen']['tmp_name'];
+$imagenNombre = uniqid('img_') . '.' . pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+$rutaFinal = 'imagenes/' . $imagenNombre;
+$destino = __DIR__ . '/../imagenes/' . $imagenNombre;
 
-if (!empty($errors)) {
-    $_SESSION['prod_errors'] = $errors;
-    header('Location:vendedor.html');
+if (!move_uploaded_file($imagenTmp, $destino)) {
+    echo json_encode(["success" => false, "error" => "No se pudo guardar la imagen"]);
     exit;
 }
 
-// Insertar en BD
-$stmt = $pdo->prepare("
-    INSERT INTO producto (titulo, descripcion, precio, stock, imagen)
-    VALUES (?, ?, ?, ?, ?)
-");
-$stmt->execute([$titulo, $descripcion, $precio, $stock, $imagenNombre]);
-
-header('Location:vendedor.html?producto=ok');
-exit;
+// Insertar en la tabla inventario
+try {
+    $stmt = $pdo->prepare("INSERT INTO inventario (nombre, descripcion, imagen, precio, stock) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$nombre, $descripcion, $rutaFinal, $precio, $stock]);
+    echo json_encode(["success" => true]);
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "error" => $e->getMessage()]);
+}
+?>
