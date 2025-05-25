@@ -32,61 +32,230 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <button class="cart-button">🛒</button>
-    <button class="login-button">👤</button>
-    <div class="logo">
-      <a href="index.html">
-        <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
-      </a>
-    </div>
-    <div class="search-box">
-      <input type="text" id="search-input" placeholder="Buscar productos..." />
-      <div id="search-results" class="search-results"></div>
-    </div>
-  </header>
+  <button class="cart-button">🛒</button>
+  <button class="login-button">👤</button>
+  <div class="logo">
+    <a href="index.html">
+      <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
+    </a>
+  </div>
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Buscar productos..." />
+    <div id="search-results" class="search-results"></div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="productos.html">Productos</a></li>
+    <li><a href="quienes-somos.html">¿Quienes Somos?</a></li>
+    <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+    <li id="dynamic-nav-item" style="display: none;">
+      <a id="nav-link" href="#"></a>
+    </li>
+  </ul>
+</nav>
+
 
   <div class="container">
     <h1>Tus Pedidos Anteriores</h1>
     <div id="pedidos-container"></div>
   </div>
 
-  <!-- Footer igual al index.html -->
+  <!-- En productos.html, dentro del body, añade el modal de login: -->
+<!-- Modal de Login -->
+<div id="login-modal" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar-login">&times;</span>
+    <div class="login-tabs">
+      <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
+      <button class="tab-link" data-tab="registro">Registrarse</button>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div id="login" class="tab-content active">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Correo:</label>
+          <input type="text" id="correo" name="correo" required> 
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required> 
+        </div>
+
+        <button type="submit" class="login-submit">Ingresar</button>
+      </form>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div id="registro" class="tab-content">
+      <form id="registro-form">
+        <div class="form-group">
+          <label for="reg-username">Nombre:</label>
+          <input type="text" id="reg-username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Contraseña:</label>
+          <input type="password" id="reg-password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">Correo:</label>
+          <input type="email" id="reg-email" required>
+        </div>
+        <button type="submit" class="login-submit">Registrarse como Vendedor</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
   <!-- Footer -->
   <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>Contáctanos</h3>
-        <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
-        <p>
-          <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
-        </p>
-      </div>
-
-      <!--Formas de pago-->
-      <div class="footer-section">
-        <h3>Formas de pago</h3>
-        <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
-      </div>
-
-      <!--Redes-->
-      <div class="footer-section">
-        <h3>Redes</h3>
-        <p>
-          <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
-            <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
-          </a>
-          <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
-            <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
-          </a>
-        </p>
-      </div>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Contáctanos</h3>
+      <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
+      <p><i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com</p>
     </div>
-    <div class="footer-copy">
-      <p>© 2025 Floristería Las Acacias</p>
+    <div class="footer-section">
+      <h3>Formas de pago</h3>
+      <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
     </div>
-  </footer>
+    <div class="footer-section">
+      <h3>Redes</h3>
+      <p>
+        <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+          <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
+        </a>
+        <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+          <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <p>© 2025 Floristería Las Acacias</p>
+  </div>
+</footer>
+
 
   <script>
+
+    document.getElementById("btn-pagar")?.addEventListener("click", () => {
+  const correo = sessionStorage.getItem("user_email");
+  if (!correo) {
+    alert("Debes iniciar sesión para pagar.");
+    return;
+  }
+  window.location.href = "pagos.html";
+});
+
+    // -------------------- LOGIN --------------------
+const loginButton = document.querySelector(".login-button");
+const loginModal = document.getElementById("login-modal");
+const cerrarLogin = document.querySelector(".cerrar-login");
+
+// Abrir modal
+loginButton.addEventListener("click", () => {
+  loginModal.style.display = "flex";
+});
+
+// Cerrar modal
+cerrarLogin.addEventListener("click", () => {
+  loginModal.style.display = "none";
+});
+
+// Cerrar al hacer clic fuera
+window.addEventListener("click", (e) => {
+  if (e.target === loginModal) {
+    loginModal.style.display = "none";
+  }
+});
+
+// Manejo de login
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const datosLogin = new URLSearchParams({
+    correo: document.getElementById('correo').value,
+    password: document.getElementById('password').value
+  });
+
+  try {
+    const resp = await fetch('php/login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: datosLogin
+    });
+    
+    const data = await resp.json();
+    
+    if (!data.success) {
+      throw new Error(data.error || "Error en la autenticación");
+    }
+
+    sessionStorage.setItem('user_role', data.role);
+    sessionStorage.setItem('user_email', data.correo);
+    actualizarNav();
+    window.location.href = data.redirect;
+
+  } catch (err) {
+    console.error('Error:', err);
+    alert(err.message || "Error de conexión");
+  }
+});
+
+// Manejo de registro
+document.getElementById("registro-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const datosRegistro = new URLSearchParams({
+    nombre: document.getElementById('reg-username').value,
+    correo: document.getElementById('reg-email').value,
+    password: document.getElementById('reg-password').value
+  });
+
+  try {
+    const resp = await fetch('php/registro_vendedor.php', {
+      method: 'POST',
+      body: datosRegistro
+    });
+
+    if (resp.ok) {
+      alert('Registro exitoso');
+      loginModal.style.display = "none";
+    } else {
+      alert('Error en el registro');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error de conexión');
+  }
+});
+
+// -------------------- NAVEGACIÓN DINÁMICA --------------------
+function actualizarNav() {
+  const userRole = sessionStorage.getItem('user_role');
+  const dynamicNavItem = document.getElementById('dynamic-nav-item');
+  const navLink = document.getElementById('nav-link');
+
+  if (userRole) {
+    dynamicNavItem.style.display = 'block';
+    navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
+    navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
+  } else {
+    dynamicNavItem.style.display = 'none';
+  }
+}
+
+// Inicializar al cargar
+document.addEventListener("DOMContentLoaded", actualizarNav);
+
     document.addEventListener('DOMContentLoaded', async () => {
     if (sessionStorage.getItem('user_role') !== 'user') {
         return window.location.href = 'index.html';
