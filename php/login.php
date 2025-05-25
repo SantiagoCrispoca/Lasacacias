@@ -12,8 +12,8 @@ $response = ["success" => false, "redirect" => "index.html", "error" => "", "rol
 
 try {
 
-    session_regenerate_id(true); // 👈 Previene sesiones estáticas
-    $_SESSION = array(); // 👈 Limpia datos antiguos
+    session_regenerate_id(true); //  Previene sesiones estáticas
+    $_SESSION = array(); //  Limpia datos antiguos
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception("Método no permitido");
