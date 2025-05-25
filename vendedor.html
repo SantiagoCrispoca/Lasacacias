@@ -214,7 +214,7 @@
             }
 
             try {
-                const resp = await fetch("php/obtener_pedidos_pendientes.php");
+                const resp = await fetch("https://lasacacias.infinityfreeapp.com/php/actualizar_estado_pedido.php");
                 const data = await resp.json();
 
                 if (!data.success) throw new Error(data.error);
@@ -223,23 +223,54 @@
                 contenedor.innerHTML = data.pedidos.map(p => {
                     const items = JSON.parse(p.items);
                     const itemsHtml = items.map(item => `
-    <li>
-      ${item.nombre} x${item.cantidad}
-      ${item.accesorio !== 'ninguno' ? `+ ${item.accesorio}` : ''}
-    </li>
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <img src="${item.imagen}" alt="${item.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
+      <div>
+        <p><strong>${item.nombre}</strong> x${item.cantidad}</p>
+        ${item.mensaje ? `<p>💬 Mensaje: ${item.mensaje}</p>` : ''}
+        ${item.accesorio !== 'ninguno' ? `<p> Accesorio: ${item.accesorio}</p>` : ''}
+      </div>
+    </div>
   `).join('');
 
                     return `
-    <div class="pedido">
+    <div class="pedido" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
+      <p><strong>ID Pedido:</strong> ${p.id}</p>
       <p><strong>Cliente:</strong> ${p.correo}</p>
-      <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
       <p><strong>Fecha:</strong> ${new Date(p.fecha).toLocaleString()}</p>
-      <p><strong>Items:</strong></p>
-      <ul>${itemsHtml}</ul>
-      <hr>
+      <p><strong>Total:</strong> $${parseInt(p.total).toLocaleString()}</p>
+      <div><strong>Productos:</strong>${itemsHtml}</div>
+      <button class="btn-entregado" data-id="${p.id}">Marcar como entregado</button>
     </div>
   `;
-                }).join("");
+                }).join('');
+
+    document.querySelectorAll(".btn-entregado").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const idPedido = btn.dataset.id;
+
+    try {
+      const params = new URLSearchParams();
+      params.append("id", idPedido);
+      params.append("estado", "entregado");
+
+      const resp = await fetch("php/actualizar_estado_pedido.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
+      });
+
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.error);
+
+      alert("Pedido actualizado como entregado.");
+      btn.disabled = true;
+      btn.textContent = "Entregado";
+    } catch (err) {
+      alert("Error al actualizar pedido: " + err.message);
+    }
+  });
+});
 
             } catch (err) {
                 alert("Error al cargar pedidos pendientes: " + err.message);
