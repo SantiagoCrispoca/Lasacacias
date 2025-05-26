@@ -547,6 +547,7 @@
       });
 
       function abrirModal(producto) {
+        productoActual = producto;
         modalTitulo.textContent = producto.nombre;
         modalImagen.src = producto.imagen;
         modalDescripcion.textContent = producto.descripcion;
@@ -819,27 +820,29 @@
         actualizarCarrito();
       });
 
-      document.getElementById("agregar-carrito").addEventListener("click", () => {
-        const nuevoItem = {
-          ...datosFlores[currentFlowerIndex],
-          cantidad: parseInt(document.getElementById("cantidad").value),
-          mensaje: document.getElementById("mensaje-flor").value,
-          accesorio: document.getElementById("accesorios").value,
-        };
+document.getElementById("agregar-carrito").addEventListener("click", () => {
+  if (!productoActual) return; // seguridad
 
-        carrito.push(nuevoItem);
-        document.getElementById("confirmacion-agregado").style.display =
-          "block";
-        setTimeout(
-          () =>
-          (document.getElementById(
-            "confirmacion-agregado"
-          ).style.display = "none"),
-          2000
-        );
-        actualizarCarrito();
-        modal.style.display = "none";
-      });
+  const nuevoItem = {
+    nombre: productoActual.nombre,
+    imagen: productoActual.imagen,
+    descripcion: productoActual.descripcion || "",
+    precio: productoActual.precio || productoActual.precio_formateado || "$0",
+    cantidad: parseInt(document.getElementById("cantidad").value) || 1,
+    mensaje: document.getElementById("mensaje-flor").value || "",
+    accesorio: document.getElementById("accesorios").value || "ninguno",
+  };
+
+  carrito.push(nuevoItem);
+
+  document.getElementById("confirmacion-agregado").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("confirmacion-agregado").style.display = "none";
+  }, 2000);
+
+  actualizarCarrito();
+  modal.style.display = "none";
+});
 
       async function cargarProductosDesdeBD() {
         try {
