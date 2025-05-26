@@ -17,6 +17,7 @@
   <header class="header">
     <button class="cart-button">🛒</button>
     <button class="login-button">👤</button>
+    <button class="logout-button" style="display:none;">Cerrar Sesión</button>
     <div class="logo">
       <a href="index.html">
         <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
@@ -230,6 +231,52 @@
 
   <!-- Script -->
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loginBtn = document.querySelector(".login-button");
+        const logoutBtn = document.querySelector(".logout-button");
+        const loginModal = document.getElementById("login-modal");
+
+        // Detectar estado de sesión
+        const userEmail = sessionStorage.getItem("user_email");
+
+        if (userEmail) {
+          // Usuario logueado
+          loginBtn.style.display = "none";
+          logoutBtn.style.display = "inline-block";
+        } else {
+          // Usuario no logueado
+          loginBtn.style.display = "inline-block";
+          logoutBtn.style.display = "none";
+        }
+
+        // Abrir modal login
+        loginBtn.addEventListener("click", () => {
+          if (loginModal) {
+            loginModal.style.display = "flex";
+          }
+        });
+
+        // Cerrar sesión
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("user_email");
+          sessionStorage.removeItem("user_role"); // si usas rol
+          // Limpiar otras variables si hay
+          window.location.reload();
+        });
+
+        // Cerrar modal login al clicar en "x"
+        const cerrarLogin = document.querySelector(".cerrar-login");
+        cerrarLogin.addEventListener("click", () => {
+          loginModal.style.display = "none";
+        });
+
+        // Cerrar modal login al clicar fuera del contenido
+        window.addEventListener("click", (e) => {
+          if (e.target === loginModal) {
+            loginModal.style.display = "none";
+          }
+        });
+      });
     document.addEventListener("DOMContentLoaded", () => {
       // Toggle preguntas
       const preguntas = document.querySelectorAll('.pregunta-titulo');

@@ -1313,3 +1313,35 @@ footer {
     color: #444;
     font-size: 14px;
 }
+
+.logout-button {
+  background-color: #d9534f; /* Rojo suave */
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(217, 83, 79, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+  user-select: none;
+  margin-right: 80px;
+}
+
+/* Hover: cambio de color y sombra */
+.logout-button:hover {
+  background-color: #c9302c;
+  box-shadow: 0 6px 10px rgba(201, 48, 44, 0.6);
+}
+
+/* Animación al hacer click (presionar) */
+.logout-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 5px rgba(201, 48, 44, 0.8);
+}
+
+/* Para dispositivos táctiles: eliminar efecto selección */
+.logout-button:focus {
+  outline: none;
+}
