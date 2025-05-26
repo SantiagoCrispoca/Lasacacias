@@ -556,23 +556,17 @@
 
 
       // -------------------- LOGIN --------------------
-      const loginBtn = document.querySelector(".login-button");
+      const loginButton = document.querySelector(".login-button");
       const loginModal = document.getElementById("login-modal");
       const cerrarLogin = document.querySelector(".cerrar-login");
 
-      // Abrir modal
-      if (loginBtn) {
-        loginBtn.addEventListener("click", () => {
-          loginModal.style.display = "flex";
-        });
-      }
+      loginButton.addEventListener("click", () => {
+        loginModal.style.display = "flex";
+      });
 
-      // Cerrar modal
-      if (cerrarLogin) {
-        cerrarLogin.addEventListener("click", () => {
-          loginModal.style.display = "none";
-        });
-      }
+      cerrarLogin.addEventListener("click", () => {
+        loginModal.style.display = "none";
+      });
 
       window.addEventListener("click", (e) => {
         if (e.target === loginModal) {
@@ -580,46 +574,73 @@
         }
       });
 
-      // Tabs login/registro
-      const tabs = document.querySelectorAll(".tab-link");
-      const contents = document.querySelectorAll(".tab-content");
+      document.getElementById("login-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-          tabs.forEach(t => t.classList.remove("active"));
-          contents.forEach(c => c.classList.remove("active"));
+        const datosLogin = new URLSearchParams({
+          correo: document.getElementById("correo").value,
+          password: document.getElementById("password").value,
+        });
 
-          tab.classList.add("active");
-          const target = tab.getAttribute("data-tab");
-          document.getElementById(target).classList.add("active");
+        try {
+          const resp = await fetch("php/login.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: datosLogin,
+          });
+
+          const data = await resp.json();
+
+          if (!data.success) {
+            throw new Error(data.error || "Error en la autenticación");
+          }
+
+          sessionStorage.setItem("user_role", data.role);
+          sessionStorage.setItem("user_email", data.correo);
+          window.location.href = data.redirect;
+        } catch (err) {
+          console.error("Error:", err);
+          alert(err.message || "Error de conexión");
+          window.location.reload();
+        }
+      });
+
+      document.querySelectorAll(".tab-link").forEach((button) => {
+        button.addEventListener("click", () => {
+          const tab = button.dataset.tab;
+          document.querySelectorAll(".tab-link, .tab-content").forEach((el) => {
+            el.classList.remove("active");
+          });
+          button.classList.add("active");
+          document.getElementById(tab).classList.add("active");
         });
       });
 
-      // Manejo de registro
       document.getElementById("registro-form").addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const datosRegistro = new URLSearchParams({
-          nombre: document.getElementById('reg-username').value,
-          correo: document.getElementById('reg-email').value,
-          password: document.getElementById('reg-password').value
+          nombre: document.getElementById("reg-username").value,
+          correo: document.getElementById("reg-email").value,
+          password: document.getElementById("reg-password").value,
         });
 
         try {
-          const resp = await fetch('php/registro_vendedor.php', {
-            method: 'POST',
-            body: datosRegistro
+          const resp = await fetch("php/registro_vendedor.php", {
+            method: "POST",
+            body: datosRegistro,
           });
 
           if (resp.ok) {
-            alert('Registro exitoso');
+            alert("Registro exitoso");
+            document.getElementById("registro-form").reset();
             loginModal.style.display = "none";
           } else {
-            alert('Error en el registro');
+            alert("Hubo un problema al registrar. Intenta de nuevo.");
           }
         } catch (err) {
-          console.error('Error:', err);
-          alert('Error de conexión');
+          console.error("Error de red:", err);
+          alert("No se pudo conectar con el servidor.");
         }
       });
 
@@ -644,7 +665,7 @@
 
       // Inicializar al cargar
       document.addEventListener("DOMContentLoaded", actualizarNavegacionDinamica);
-       actualizarNavegacionDinamica();
+      actualizarNavegacionDinamica();
 
       // --------------- Carrito -----------------
       let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
