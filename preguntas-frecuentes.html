@@ -1,231 +1,425 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta.">
-    <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas Frecuentes - Floristería Las Acacias</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta." />
+  <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript." />
+  <title>Preguntas Frecuentes - Floristería Las Acacias</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
- <!-- Header -->
-   <header class="header">
+  <!-- Header -->
+  <header class="header">
     <button class="cart-button">🛒</button>
+    <button class="login-button">👤</button>
     <div class="logo">
       <a href="index.html">
         <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
       </a>
     </div>
     <div class="search-box">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Buscar productos..."
-      />
+      <input type="text" id="search-input" placeholder="Buscar productos..." />
       <div id="search-results" class="search-results"></div>
     </div>
   </header>
-    <!-- Navegación -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="quienes-somos.html">Quienes Somos</a></li>
-            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
-        </ul>
-    </nav>
 
-    <!-- Preguntas Frecuentes -->
-    <section class="preguntas-frecuentes">
-        <h1>Preguntas Frecuentes</h1>
+  <!-- Navegación -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="quienes-somos.html">¿Quiénes Somos?</a></li>
+      <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+      <li id="dynamic-nav-item" style="display: none;">
+        <a id="nav-link" href="#"></a>
+      </li>
+    </ul>
+  </nav>
 
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Cómo puedo hacer un pedido de flores?
-                <span class="icono">▼</span> 
-            </button>
-            <div class="respuesta">
-                <p>
-                    Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y
-                    completando la información de entrega. También puedes llamarnos directamente para realizar tu
-                    pedido.
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Cuánto tiempo antes debo hacer mi pedido?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar
-                    la disponibilidad y frescura de las flores.
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Cómo debo cuidar mis flores?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua.
-                    Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del
-                    sol.
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Qué hago si mis flores se marchitan rápidamente?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados
-                    adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el
-                    crecimiento de bacterias.
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Puedo programar un pedido para una fecha específica?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Sí, ofrecemos la posibilidad de programar tu pedido para una fecha específica.
-                    Para coordinarlo, por favor envíanos un correo a lasacaciasfloristeria@gmail.com indicándonos la
-                    fecha en la
-                    que deseas que llegue tu pedido. Nuestro equipo te confirmará los detalles y disponibilidad a la
-                    brevedad
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Puedo agregar un detalle o un mensaje adicional al ramo/manojo?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Sí, al realizar tu pedido puedes agregar un mensaje personalizado sin costo adicional. Además,
-                    tienes la opción de incluir accesorios como osos de peluche, globos temáticos, chocolates o coronas.
-                    Cada accesorio tiene un costo adicional que se muestra junto al producto correspondiente, pero el
-                    mensaje personalizado no genera ningún recargo.
-                </p>
-            </div>
-        </div>
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Qué hago si mi pedido llega en mal estado o con errores?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                    Si tu pedido llega en mal estado o con errores, por favor contáctanos enviando un correo a
-                    lasacaciasfloristeria@gmail.com. Es importante que adjuntes evidencias, ya sea en fotos o video,
-                    que muestren el estado del producto para poder ayudarte de manera efectiva.
-                </p>
-            </div>
-        </div>
-
-
-        <div class="pregunta">
-            <button class="pregunta-titulo">
-                ¿Cuáles son los métodos de pago disponibles?
-                <span class="icono">▼</span>
-            </button>
-            <div class="respuesta">
-                <p>
-                El metodo de pago utilizado es mediante nequi
-                </p>
-            </div>
-        </div>
-
-    </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const preguntas = document.querySelectorAll('.pregunta-titulo');
-            
-            preguntas.forEach(pregunta => {
-                pregunta.addEventListener('click', () => {
-                    const respuesta = pregunta.nextElementSibling;
-                    const icono = pregunta.querySelector('.icono');
-
-                    respuesta.classList.toggle('activa');
-
-                    icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼';
-                });
-            });
-        });
-    </script>
-</body>-
-
-<!-- Footer -->
-<footer>
-    <div class="footer-container">
-        <!--Contáctanos-->
-        <div class="footer-section">
-            <h3>Contáctanos</h3>
-            <p>
-                <i class="fab fa-whatsapp"></i> +57 321 9694834
-            </p>
-            <p>
-                <i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com
-            </p>
-        </div>
-
-        <!--Formas de pago-->
-        <div class="footer-section">
-            <h3>Formas de pago</h3>
-            <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px;">
-        </div>
-
-        <div class="footer-section">
-            <h3>Redes</h3>
-            <p>
-              <a
-                href="https://www.facebook.com/share/1Ahi9w2jai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="imagenes/Facebook.png"
-                  alt="Facebook"
-                  class="social-btn"
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/lasacaciasflores/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="imagenes/instagram.png"
-                  alt="Instagram"
-                  class="social-btn"
-                />
-              </a>
-            </p>
+  <!-- Modal de Login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar-login">&times;</span>
+      <div class="login-tabs">
+        <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
+        <button class="tab-link" data-tab="registro">Registrarse</button>
+      </div>
+      <!-- Formulario de Login -->
+      <div id="login" class="tab-content active">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Correo:</label>
+            <input type="text" id="correo" name="correo" required />
           </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit" class="login-submit">Ingresar</button>
+        </form>
+      </div>
+      <!-- Formulario de Registro -->
+      <div id="registro" class="tab-content">
+        <form id="registro-form">
+          <div class="form-group">
+            <label for="reg-username">Nombre:</label>
+            <input type="text" id="reg-username" required />
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Contraseña:</label>
+            <input type="password" id="reg-password" required />
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Correo:</label>
+            <input type="email" id="reg-email" required />
+          </div>
+          <button type="submit" class="login-submit">Registrarse como Vendedor</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div id="carrito-modal" class="carrito-modal">
+    <div class="carrito-header">
+      <h2>Tu Carrito</h2>
+      <span class="cerrar-carrito">&times;</span>
+    </div>
+    <div id="carrito-items"></div>
+    <div class="carrito-total">Total: $<span id="carrito-total">0</span></div>
+    <div class="carrito-botones">
+      <button class="vaciar-carrito" id="vaciar-carrito">Vaciar Carrito</button>
+      <button id="btn-pagar" class="pagar-carrito">Ir a pagar</button>
+    </div>
+  </div>
+
+  <div class="confirmacion-agregado" id="confirmacion-agregado">
+    Producto añadido al carrito!
+  </div>
+
+  <!-- Preguntas Frecuentes -->
+  <section class="preguntas-frecuentes">
+    <h1>Preguntas Frecuentes</h1>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Cómo puedo hacer un pedido de flores?
+        <span class="icono">▼</span> 
+      </button>
+      <div class="respuesta">
+        <p>Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y completando la información de entrega. También puedes llamarnos directamente para realizar tu pedido.</p>
+      </div>
     </div>
 
-    <!-- Sección de copyright -->
-    <div class="footer-copy">
-        <p>© 2023 Floristería Las Acacias</p>
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Cuánto tiempo antes debo hacer mi pedido?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar la disponibilidad y frescura de las flores.</p>
+      </div>
     </div>
-</footer>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Cómo debo cuidar mis flores?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua. Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del sol.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Qué hago si mis flores se marchitan rápidamente?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el crecimiento de bacterias.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Puedo programar un pedido para una fecha específica?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Sí, ofrecemos la posibilidad de programar tu pedido para una fecha específica. Para coordinarlo, por favor envíanos un correo a lasacaciasfloristeria@gmail.com indicándonos la fecha en la que deseas que llegue tu pedido. Nuestro equipo te confirmará los detalles y disponibilidad a la brevedad.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Puedo agregar un detalle o un mensaje adicional al ramo/manojo?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Sí, al realizar tu pedido puedes agregar un mensaje personalizado sin costo adicional. Además, tienes la opción de incluir accesorios como osos de peluche, globos temáticos, chocolates o coronas. Cada accesorio tiene un costo adicional que se muestra junto al producto correspondiente, pero el mensaje personalizado no genera ningún recargo.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Qué hago si mi pedido llega en mal estado o con errores?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>Si tu pedido llega en mal estado o con errores, por favor contáctanos enviando un correo a lasacaciasfloristeria@gmail.com. Es importante que adjuntes evidencias, ya sea en fotos o video, que muestren el estado del producto para poder ayudarte de manera efectiva.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <button class="pregunta-titulo">
+        ¿Cuáles son los métodos de pago disponibles?
+        <span class="icono">▼</span>
+      </button>
+      <div class="respuesta">
+        <p>El método de pago utilizado es mediante Nequi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Contáctanos</h3>
+        <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
+        <p><i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com</p>
+      </div>
+      <div class="footer-section">
+        <h3>Formas de pago</h3>
+        <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
+      </div>
+      <div class="footer-section">
+        <h3>Redes</h3>
+        <p>
+          <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
+          </a>
+          <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>© 2025 Floristería Las Acacias</p>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Toggle preguntas
+      const preguntas = document.querySelectorAll('.pregunta-titulo');
+      preguntas.forEach(pregunta => {
+        pregunta.addEventListener('click', () => {
+          const respuesta = pregunta.nextElementSibling;
+          const icono = pregunta.querySelector('.icono');
+          respuesta.classList.toggle('activa');
+          icono.textContent = respuesta.classList.contains('activa') ? '▲' : '▼';
+        });
+      });
+
+      // -------------------- CARRITO --------------------
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const cartButton = document.querySelector(".cart-button");
+      const carritoModal = document.getElementById("carrito-modal");
+      const cerrarCarrito = document.querySelector(".cerrar-carrito");
+      const vaciarCarritoBtn = document.getElementById("vaciar-carrito");
+
+      function actualizarCarrito() {
+        const carritoItems = document.getElementById("carrito-items");
+        const carritoTotal = document.getElementById("carrito-total");
+        let total = 0;
+
+        carritoItems.innerHTML = carrito
+          .map((item, index) => {
+            const precio = parseInt(item.precio.replace(/\D/g, "")) || 0;
+            const accesorioPrecio = {
+              ninguno: 0,
+              oso: 10000,
+              globo: 5000,
+              chocolate: 7000,
+              corona: 8000,
+            }[item.accesorio] || 0;
+
+            const subtotal = (precio + accesorioPrecio) * item.cantidad;
+            total += subtotal;
+
+            return `
+              <div class="carrito-item">
+                <img src="${item.imagen}" alt="${item.nombre}">
+                <div>
+                  <h3>${item.nombre}</h3>
+                  <p>Cantidad: ${item.cantidad}</p>
+                  ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ""}
+                  ${
+                    item.accesorio !== "ninguno"
+                      ? `<p>Accesorio: ${item.accesorio}</p>`
+                      : ""
+                  }
+                  <p>Subtotal: $${subtotal.toLocaleString()}</p>
+                  <button class="eliminar-item" data-index="${index}">Eliminar</button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+        carritoTotal.textContent = total.toLocaleString();
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        cartButton.setAttribute("data-count", carrito.length);
+        cartButton.style.backgroundColor = carrito.length > 0 ? "#8cbaa3" : "#a8d5ba";
+      }
+
+      cartButton.addEventListener("click", () => {
+        carritoModal.style.display = "block";
+        actualizarCarrito();
+      });
+
+      cerrarCarrito.addEventListener("click", () => {
+        carritoModal.style.display = "none";
+      });
+
+      vaciarCarritoBtn.addEventListener("click", () => {
+        carrito = [];
+        actualizarCarrito();
+      });
+
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("eliminar-item")) {
+          carrito.splice(e.target.dataset.index, 1);
+          actualizarCarrito();
+        }
+      });
+
+      document.getElementById("btn-pagar").addEventListener("click", () => {
+        const correo = sessionStorage.getItem("user_email");
+        if (!correo) {
+          alert("Debes iniciar sesión para pagar.");
+          return;
+        }
+        if (carrito.length === 0) {
+          alert("El carrito está vacío.");
+          return;
+        }
+        window.location.href = "pagos.html";
+      });
+
+      actualizarCarrito();
+
+      // -------------------- LOGIN --------------------
+      const loginButton = document.querySelector(".login-button");
+      const loginModal = document.getElementById("login-modal");
+      const cerrarLogin = document.querySelector(".cerrar-login");
+
+      loginButton.addEventListener("click", () => {
+        loginModal.style.display = "flex";
+      });
+
+      cerrarLogin.addEventListener("click", () => {
+        loginModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === loginModal) {
+          loginModal.style.display = "none";
+        }
+      });
+
+      document.getElementById("login-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const datosLogin = new URLSearchParams({
+          correo: document.getElementById("correo").value,
+          password: document.getElementById("password").value,
+        });
+
+        try {
+          const resp = await fetch("php/login.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: datosLogin,
+          });
+
+          const data = await resp.json();
+
+          if (!data.success) {
+            throw new Error(data.error || "Error en la autenticación");
+          }
+
+          sessionStorage.setItem("user_role", data.role);
+          sessionStorage.setItem("user_email", data.correo);
+          actualizarNav();
+          window.location.href = data.redirect;
+        } catch (err) {
+          console.error("Error:", err);
+          alert(err.message || "Error de conexión");
+          window.location.reload();
+        }
+      });
+
+      document.querySelectorAll(".tab-link").forEach((button) => {
+        button.addEventListener("click", () => {
+          const tab = button.dataset.tab;
+          document.querySelectorAll(".tab-link, .tab-content").forEach((el) => {
+            el.classList.remove("active");
+          });
+          button.classList.add("active");
+          document.getElementById(tab).classList.add("active");
+        });
+      });
+
+      document.getElementById("registro-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const datosRegistro = new URLSearchParams({
+          nombre: document.getElementById("reg-username").value,
+          correo: document.getElementById("reg-email").value,
+          password: document.getElementById("reg-password").value,
+        });
+
+        try {
+          const resp = await fetch("php/registro_vendedor.php", {
+            method: "POST",
+            body: datosRegistro,
+          });
+
+          if (resp.ok) {
+            alert("Registro exitoso");
+            document.getElementById("registro-form").reset();
+            loginModal.style.display = "none";
+          } else {
+            alert("Hubo un problema al registrar. Intenta de nuevo.");
+          }
+        } catch (err) {
+          console.error("Error de red:", err);
+          alert("No se pudo conectar con el servidor.");
+        }
+      });
+
+      const dynamicNavItem = document.getElementById("dynamic-nav-item");
+      const navLink = document.getElementById("nav-link");
+
+      function actualizarNav() {
+        const userRole = sessionStorage.getItem("user_role");
+        if (userRole) {
+          dynamicNavItem.style.display = "block";
+          navLink.textContent = userRole === "seller" ? "Modo Vendedor" : "Pedidos Anteriores";
+          navLink.href = userRole === "seller" ? "vendedor.html" : "pedidos-anteriores.html";
+        } else {
+          dynamicNavItem.style.display = "none";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", actualizarNav);
+    });
+  </script>
 </body>
 </html>

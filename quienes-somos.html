@@ -11,31 +11,79 @@
 </head>
 <body>
      <!-- Header -->
-   <header class="header">
-    <button class="cart-button">🛒</button>
-    <div class="logo">
-      <a href="index.html">
-        <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
-      </a>
-    </div>
-    <div class="search-box">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Buscar productos..."
-      />
-      <div id="search-results" class="search-results"></div>
-    </div>
-  </header>
+<header class="header">
+  <button class="cart-button">🛒</button>
+  <button class="login-button">👤</button> <!-- Botón añadido -->
+  <div class="logo">
+    <a href="index.html">
+      <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias"/>
+    </a>
+  </div>
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Buscar productos..."/>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</header>
     <!-- Navegación -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="quienes-somos.html">Quienes Somos</a></li>
-            <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="productos.html">Productos</a></li>
+    <li><a href="quienes-somos.html">¿Quiénes Somos?</a></li>
+    <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+    <li id="dynamic-nav-item" style="display: none;">
+      <a id="nav-link" href="#"></a>
+    </li>
+  </ul>
+</nav>
+
+<div id="login-modal" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar-login">&times;</span>
+    <div class="login-tabs">
+      <button class="tab-link active" data-tab="login">Iniciar Sesión</button>
+      <button class="tab-link" data-tab="registro">Registrarse</button>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div id="login" class="tab-content active">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Correo:</label>
+          <input type="text" id="correo" name="correo" required> 
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required> 
+        </div>
+
+        <button type="submit" class="login-submit">Ingresar</button>
+      </form>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div id="registro" class="tab-content">
+      <form id="registro-form">
+        <div class="form-group">
+          <label for="reg-username">Nombre:</label>
+          <input type="text" id="reg-username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Contraseña:</label>
+          <input type="password" id="reg-password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">Correo:</label>
+          <input type="email" id="reg-email" required>
+        </div>
+        <button type="submit" class="login-submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+</div>
 
     <!--Quiénes Somos -->
     <section class="quienes-somos">
@@ -500,6 +548,107 @@
               );
             });
         }
+
+ // -------------------- LOGIN --------------------
+const loginButton = document.querySelector(".login-button");
+const loginModal = document.getElementById("login-modal");
+const cerrarLogin = document.querySelector(".cerrar-login");
+
+// Abrir modal
+loginButton.addEventListener("click", () => {
+  loginModal.style.display = "flex";
+});
+
+// Cerrar modal
+cerrarLogin.addEventListener("click", () => {
+  loginModal.style.display = "none";
+});
+
+// Cerrar al hacer clic fuera
+window.addEventListener("click", (e) => {
+  if (e.target === loginModal) {
+    loginModal.style.display = "none";
+  }
+});
+
+// Manejo de login
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const datosLogin = new URLSearchParams({
+    correo: document.getElementById('correo').value,
+    password: document.getElementById('password').value
+  });
+
+  try {
+    const resp = await fetch('php/login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: datosLogin
+    });
+    
+    const data = await resp.json();
+    
+    if (!data.success) {
+      throw new Error(data.error || "Error en la autenticación");
+    }
+
+    sessionStorage.setItem('user_role', data.role);
+    sessionStorage.setItem('user_email', data.correo);
+    actualizarNav();
+    window.location.href = data.redirect;
+
+  } catch (err) {
+    console.error('Error:', err);
+    alert(err.message || "Error de conexión");
+  }
+});
+
+// Manejo de registro
+document.getElementById("registro-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const datosRegistro = new URLSearchParams({
+    nombre: document.getElementById('reg-username').value,
+    correo: document.getElementById('reg-email').value,
+    password: document.getElementById('reg-password').value
+  });
+
+  try {
+    const resp = await fetch('php/registro_vendedor.php', {
+      method: 'POST',
+      body: datosRegistro
+    });
+
+    if (resp.ok) {
+      alert('Registro exitoso');
+      loginModal.style.display = "none";
+    } else {
+      alert('Error en el registro');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error de conexión');
+  }
+});
+
+// -------------------- NAVEGACIÓN DINÁMICA --------------------
+function actualizarNav() {
+  const userRole = sessionStorage.getItem('user_role');
+  const dynamicNavItem = document.getElementById('dynamic-nav-item');
+  const navLink = document.getElementById('nav-link');
+
+  if (userRole) {
+    dynamicNavItem.style.display = 'block';
+    navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
+    navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
+  } else {
+    dynamicNavItem.style.display = 'none';
+  }
+}
+
+// Inicializar al cargar
+document.addEventListener("DOMContentLoaded", actualizarNav);
 
   // --------------- Carrito -----------------
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
