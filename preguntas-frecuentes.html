@@ -441,7 +441,6 @@
 
           sessionStorage.setItem("user_role", data.role);
           sessionStorage.setItem("user_email", data.correo);
-          actualizarNav();
           window.location.href = data.redirect;
         } catch (err) {
           console.error("Error:", err);

@@ -815,7 +815,6 @@ function abrirModalBD(producto) {
 
         sessionStorage.setItem('user_role', data.role);
         sessionStorage.setItem('user_email', data.correo);
-        actualizarNav();
         window.location.href = data.redirect;
 
     } catch (err) {
@@ -877,22 +876,28 @@ function abrirModalBD(producto) {
 
  //-----------------CONDICIONAL DE ROL PARA LOGIN-----------------------
 
-    const dynamicNavItem = document.getElementById('dynamic-nav-item');
-    const navLink = document.getElementById('nav-link');
+function actualizarNavegacionDinamica() {
+        const role = sessionStorage.getItem('user_role') || localStorage.getItem('user_role');
+        const navItem = document.getElementById("dynamic-nav-item");
+        const navLink = document.getElementById("nav-link");
 
-function actualizarNav() {
-    const userRole = sessionStorage.getItem('user_role');
-    const dynamicNavItem = document.getElementById('dynamic-nav-item');
-    const navLink = document.getElementById('nav-link');
+        if (role === "seller") {
+          navItem.style.display = "block";
+          navLink.textContent = "Modo Vendedor";
+          navLink.href = "vendedor.html";
+        } else if (role === "user") {
+          navItem.style.display = "block";
+          navLink.textContent = "Pedidos Anteriores";
+          navLink.href = "pedidos-anteriores.html";
+        } else {
+          navItem.style.display = "none";
+        }
+      }
 
-    if (userRole) {
-        dynamicNavItem.style.display = 'block';
-        navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
-        navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
-    } else {
-        dynamicNavItem.style.display = 'none';
-    }
-}
+      // Inicializar al cargar
+      document.addEventListener("DOMContentLoaded", actualizarNavegacionDinamica);
+       actualizarNavegacionDinamica();
+
 
 document.getElementById("btn-pagar").addEventListener("click", () => {
   const correo = sessionStorage.getItem("user_email");
@@ -910,10 +915,6 @@ document.getElementById("btn-pagar").addEventListener("click", () => {
 
   window.location.href = "pagos.html";
 });
-
-
-// Ejecutar al cargar
-document.addEventListener("DOMContentLoaded", actualizarNav);
 
   </script>
 </body>

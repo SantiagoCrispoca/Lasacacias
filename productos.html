@@ -103,6 +103,14 @@
     </div>
   </section>
 
+  <!-- Sección de Productos Agregados por Vendedores -->
+  <section class="productos-section">
+    <h2>Productos Nuevos</h2>
+    <div class="productos-grid" id="productos-dinamicos">
+      <!-- Aquí se insertan dinámicamente los productos desde la base de datos -->
+    </div>
+  </section>
+
   <!--Modales de flores-->
   <div id="modal" class="modal">
     <div class="modal-contenido">
@@ -763,7 +771,45 @@
         actualizarCarrito();
         modal.style.display = "none";
       });
+
+      async function cargarProductosDesdeBD() {
+        try {
+          const resp = await fetch('php/obtener_productos.php');
+          const data = await resp.json();
+          const contenedor = document.getElementById('productos-dinamicos');
+
+          if (!data.success) throw new Error(data.error);
+
+          data.productos.forEach(producto => {
+            const div = document.createElement('div');
+            div.className = 'flor-clickeable';
+            div.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
+        <div class="nombre-flor">
+          <div class="nombre-flor-texto">${producto.nombre}</div>
+          <div class="precio-flor-texto">$${parseInt(producto.precio).toLocaleString()}</div>
+        </div>
+      `;
+
+            div.addEventListener('click', () => {
+              abrirModal({
+                nombre: producto.nombre,
+                imagen: producto.imagen,
+                descripcion: producto.descripcion,
+                precio: `$${parseInt(producto.precio).toLocaleString()}`
+              });
+            });
+
+            contenedor.appendChild(div);
+          });
+
+        } catch (err) {
+          console.error('Error cargando productos:', err);
+        }
+      }
+
       actualizarCarrito();
+      cargarProductosDesdeBD();
 
     });
   </script>
