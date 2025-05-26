@@ -1,24 +1,21 @@
 <?php
-require_once 'db.php';
-
-header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
+require __DIR__ . '/db.php';
 
-$q = $_GET['q'] ?? '';
-$q = trim($q);
+$query = $_GET['q'] ?? '';
 
-if (!$q) {
-    echo json_encode(["success" => true, "productos" => []]);
+if (!$query) {
+    echo json_encode(['success' => false, 'error' => 'Falta el parámetro de búsqueda']);
     exit;
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT id, nombre, descripcion, imagen, precio FROM inventario WHERE nombre LIKE ? OR descripcion LIKE ?");
-    $like = '%' . $q . '%';
+    $stmt = $pdo->prepare("SELECT * FROM inventario WHERE nombre LIKE ? OR descripcion LIKE ? LIMIT 10");
+    $like = "%$query%";
     $stmt->execute([$like, $like]);
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(["success" => true, "productos" => $productos]);
+    echo json_encode(['success' => true, 'productos' => $productos]);
 } catch (PDOException $e) {
-    echo json_encode(["success" => false, "error" => $e->getMessage()]);
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta." />
-  <meta name="description" content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript." />
+  <meta name="author"
+    content="David Santiago Crispoca Taborda, Sebastian Guzman Castiblanco, Yoann Esteban Jacome Garcia, Maria Alejandra Suarez Cuesta." />
+  <meta name="description"
+    content="Proyecto Tecnologías del internet MUL B 2025-01, pagina web creada con HTML, CSS Y JavaScript." />
   <title>Preguntas Frecuentes - Floristería Las Acacias</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -74,7 +78,7 @@
             <label for="reg-email">Correo:</label>
             <input type="email" id="reg-email" required />
           </div>
-          <button type="submit" class="login-submit">Registrarse como Vendedor</button>
+          <button type="submit" class="login-submit">Registrarse</button>
         </form>
       </div>
     </div>
@@ -105,10 +109,11 @@
     <div class="pregunta">
       <button class="pregunta-titulo">
         ¿Cómo puedo hacer un pedido de flores?
-        <span class="icono">▼</span> 
+        <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y completando la información de entrega. También puedes llamarnos directamente para realizar tu pedido.</p>
+        <p>Puedes hacer un pedido de flores a través de nuestra página web, seleccionando el ramo que deseas y
+          completando la información de entrega. También puedes llamarnos directamente para realizar tu pedido.</p>
       </div>
     </div>
 
@@ -118,7 +123,8 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar la disponibilidad y frescura de las flores.</p>
+        <p>Recomendamos hacer tu pedido al menos 24 horas antes de la fecha de entrega deseada para garantizar la
+          disponibilidad y frescura de las flores.</p>
       </div>
     </div>
 
@@ -128,7 +134,8 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua. Cambia el agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del sol.</p>
+        <p>Para cuidar tus flores, asegúrate de cortar los tallos en diagonal antes de colocarlas en agua. Cambia el
+          agua cada dos días y mantén las flores en un lugar fresco, lejos de la luz directa del sol.</p>
       </div>
     </div>
 
@@ -138,7 +145,9 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el crecimiento de bacterias.</p>
+        <p>Si tus flores se marchitan, verifica que tengan suficiente agua y que los tallos estén cortados
+          adecuadamente. También, retira cualquier hoja que esté sumergida en el agua para evitar el crecimiento de
+          bacterias.</p>
       </div>
     </div>
 
@@ -148,7 +157,9 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Sí, ofrecemos la posibilidad de programar tu pedido para una fecha específica. Para coordinarlo, por favor envíanos un correo a lasacaciasfloristeria@gmail.com indicándonos la fecha en la que deseas que llegue tu pedido. Nuestro equipo te confirmará los detalles y disponibilidad a la brevedad.</p>
+        <p>Sí, ofrecemos la posibilidad de programar tu pedido para una fecha específica. Para coordinarlo, por favor
+          envíanos un correo a lasacaciasfloristeria@gmail.com indicándonos la fecha en la que deseas que llegue tu
+          pedido. Nuestro equipo te confirmará los detalles y disponibilidad a la brevedad.</p>
       </div>
     </div>
 
@@ -158,7 +169,10 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Sí, al realizar tu pedido puedes agregar un mensaje personalizado sin costo adicional. Además, tienes la opción de incluir accesorios como osos de peluche, globos temáticos, chocolates o coronas. Cada accesorio tiene un costo adicional que se muestra junto al producto correspondiente, pero el mensaje personalizado no genera ningún recargo.</p>
+        <p>Sí, al realizar tu pedido puedes agregar un mensaje personalizado sin costo adicional. Además, tienes la
+          opción de incluir accesorios como osos de peluche, globos temáticos, chocolates o coronas. Cada accesorio
+          tiene un costo adicional que se muestra junto al producto correspondiente, pero el mensaje personalizado no
+          genera ningún recargo.</p>
       </div>
     </div>
 
@@ -168,7 +182,9 @@
         <span class="icono">▼</span>
       </button>
       <div class="respuesta">
-        <p>Si tu pedido llega en mal estado o con errores, por favor contáctanos enviando un correo a lasacaciasfloristeria@gmail.com. Es importante que adjuntes evidencias, ya sea en fotos o video, que muestren el estado del producto para poder ayudarte de manera efectiva.</p>
+        <p>Si tu pedido llega en mal estado o con errores, por favor contáctanos enviando un correo a
+          lasacaciasfloristeria@gmail.com. Es importante que adjuntes evidencias, ya sea en fotos o video, que muestren
+          el estado del producto para poder ayudarte de manera efectiva.</p>
       </div>
     </div>
 
@@ -259,11 +275,10 @@
                   <h3>${item.nombre}</h3>
                   <p>Cantidad: ${item.cantidad}</p>
                   ${item.mensaje ? `<p>Mensaje: ${item.mensaje}</p>` : ""}
-                  ${
-                    item.accesorio !== "ninguno"
-                      ? `<p>Accesorio: ${item.accesorio}</p>`
-                      : ""
-                  }
+                  ${item.accesorio !== "ninguno"
+                ? `<p>Accesorio: ${item.accesorio}</p>`
+                : ""
+              }
                   <p>Subtotal: $${subtotal.toLocaleString()}</p>
                   <button class="eliminar-item" data-index="${index}">Eliminar</button>
                 </div>
@@ -313,6 +328,76 @@
       });
 
       actualizarCarrito();
+
+      // -------------------- BÚSQUEDA ACTUALIZADA CON BASE DE DATOS --------------------
+      const searchInput = document.getElementById("search-input");
+      const searchResults = document.getElementById("search-results");
+
+      searchInput.addEventListener("input", async function () {
+        const query = this.value.trim();
+        searchResults.innerHTML = "";
+
+        if (!query) {
+          searchResults.style.display = "none";
+          return;
+        }
+
+        try {
+          const resp = await fetch(`php/buscar_productos.php?q=${encodeURIComponent(query)}`);
+          const data = await resp.json();
+
+          if (!data.success) throw new Error(data.error);
+
+          const resultados = data.productos;
+
+          if (resultados.length === 0) {
+            searchResults.innerHTML = "<div class='resultado-busqueda'>Sin resultados</div>";
+          } else {
+            searchResults.innerHTML = resultados.map(p => `
+        <div class="resultado-busqueda" data-id="${p.id}">
+          <img src="${p.imagen}" alt="${p.nombre}" width="40">
+          <span>${p.nombre}</span>
+        </div>
+      `).join("");
+          }
+
+          searchResults.style.display = "block";
+
+          // Abrir modal al hacer clic
+          document.querySelectorAll(".resultado-busqueda").forEach(item => {
+            item.addEventListener("click", () => {
+              const id = item.getAttribute("data-id");
+              const producto = resultados.find(p => p.id == id);
+              abrirModalBD(producto);
+            });
+          });
+
+        } catch (err) {
+          searchResults.innerHTML = `<div class='resultado-busqueda'>Error: ${err.message}</div>`;
+          searchResults.style.display = "block";
+        }
+      });
+
+      // Mostrar producto desde base de datos
+      function abrirModalBD(producto) {
+        if (!producto) return;
+
+        document.getElementById("modal-titulo").textContent = producto.nombre;
+        document.getElementById("modal-imagen").src = producto.imagen;
+        document.getElementById("modal-descripcion").textContent = producto.descripcion;
+        document.getElementById("modal-precio").textContent = `Precio: $${parseInt(producto.precio).toLocaleString()}`;
+        modal.style.display = "flex";
+
+        // Actualiza currentFlowerIndex para que el carrito lo reconozca
+        currentFlowerIndex = -1;
+        datosFlores[-1] = {
+          nombre: producto.nombre,
+          imagen: producto.imagen,
+          descripcion: producto.descripcion,
+          precio: `$${parseInt(producto.precio).toLocaleString()}`
+        };
+      }
+
 
       // -------------------- LOGIN --------------------
       const loginButton = document.querySelector(".login-button");
@@ -404,22 +489,31 @@
         }
       });
 
-      const dynamicNavItem = document.getElementById("dynamic-nav-item");
-      const navLink = document.getElementById("nav-link");
+      // -------------------- NAVEGACIÓN DINÁMICA --------------------
+      function actualizarNavegacionDinamica() {
+        const role = sessionStorage.getItem('user_role') || localStorage.getItem('user_role');
+        const navItem = document.getElementById("dynamic-nav-item");
+        const navLink = document.getElementById("nav-link");
 
-      function actualizarNav() {
-        const userRole = sessionStorage.getItem("user_role");
-        if (userRole) {
-          dynamicNavItem.style.display = "block";
-          navLink.textContent = userRole === "seller" ? "Modo Vendedor" : "Pedidos Anteriores";
-          navLink.href = userRole === "seller" ? "vendedor.html" : "pedidos-anteriores.html";
+        if (role === "seller") {
+          navItem.style.display = "block";
+          navLink.textContent = "Modo Vendedor";
+          navLink.href = "vendedor.html";
+        } else if (role === "user") {
+          navItem.style.display = "block";
+          navLink.textContent = "Pedidos Anteriores";
+          navLink.href = "pedidos-anteriores.html";
         } else {
-          dynamicNavItem.style.display = "none";
+          navItem.style.display = "none";
         }
       }
 
-      document.addEventListener("DOMContentLoaded", actualizarNav);
+      document.addEventListener("DOMContentLoaded", actualizarNavegacionDinamica);
+      actualizarNavegacionDinamica();
+
+
     });
   </script>
 </body>
+
 </html>

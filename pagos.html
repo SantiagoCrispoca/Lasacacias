@@ -66,31 +66,31 @@
 <body>
   <!-- Header -->
   <header class="header">
-  <button class="cart-button">🛒</button>
-  <button class="login-button">👤</button>
-  <div class="logo">
-    <a href="index.html">
-      <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
-    </a>
-  </div>
-  <div class="search-box">
-    <input type="text" id="search-input" placeholder="Buscar productos..." />
-    <div id="search-results" class="search-results"></div>
-  </div>
-</header>
+    <button class="cart-button">🛒</button>
+    <button class="login-button">👤</button>
+    <div class="logo">
+      <a href="index.html">
+        <img src="imagenes/logo2.jpg" alt="Logo de Floristería Las Acacias" />
+      </a>
+    </div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Buscar productos..." />
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </header>
 
   <!-- Navegación -->
-<nav class="navbar">
-  <ul>
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="productos.html">Productos</a></li>
-    <li><a href="quienes-somos.html">¿Quiénes Somos?</a></li>
-    <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
-    <li id="dynamic-nav-item" style="display: none;">
-      <a id="nav-link" href="#"></a>
-    </li>
-  </ul>
-</nav>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="quienes-somos.html">¿Quiénes Somos?</a></li>
+      <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+      <li id="dynamic-nav-item" style="display: none;">
+        <a id="nav-link" href="#"></a>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Contenido principal -->
   <main class="contenedor-pagos">
@@ -166,8 +166,8 @@
     </div>
   </div>
 
-<!-- En productos.html, dentro del body, añade el modal de login: -->
-<!-- Modal de Login -->
+  <!-- En productos.html, dentro del body, añade el modal de login: -->
+  <!-- Modal de Login -->
   <div id="login-modal" class="modal">
     <div class="modal-contenido">
       <span class="cerrar-login">&times;</span>
@@ -181,12 +181,12 @@
         <form id="login-form">
           <div class="form-group">
             <label for="username">Correo:</label>
-            <input type="text" id="correo" name="correo" required> 
+            <input type="text" id="correo" name="correo" required>
           </div>
 
           <div class="form-group">
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required> 
+            <input type="password" id="password" name="password" required>
           </div>
 
           <button type="submit" class="login-submit">Ingresar</button>
@@ -218,71 +218,71 @@
 
   <!-- Footer -->
   <footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h3>Contáctanos</h3>
-      <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
-      <p><i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com</p>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Contáctanos</h3>
+        <p><i class="fab fa-whatsapp"></i> +57 321 9694834</p>
+        <p><i class="fa-solid fa-envelope"></i> lasacaciasfloristeria@gmail.com</p>
+      </div>
+      <div class="footer-section">
+        <h3>Formas de pago</h3>
+        <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
+      </div>
+      <div class="footer-section">
+        <h3>Redes</h3>
+        <p>
+          <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
+          </a>
+          <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
+            <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
+          </a>
+        </p>
+      </div>
     </div>
-    <div class="footer-section">
-      <h3>Formas de pago</h3>
-      <img src="imagenes/NequiLogo.png" alt="Nequi" style="width: 60px" />
+    <div class="footer-copy">
+      <p>© 2025 Floristería Las Acacias</p>
     </div>
-    <div class="footer-section">
-      <h3>Redes</h3>
-      <p>
-        <a href="https://www.facebook.com/share/1Ahi9w2jai/" target="_blank" rel="noopener noreferrer">
-          <img src="imagenes/Facebook.png" alt="Facebook" class="social-btn" />
-        </a>
-        <a href="https://www.instagram.com/lasacaciasflores/" target="_blank" rel="noopener noreferrer">
-          <img src="imagenes/instagram.png" alt="Instagram" class="social-btn" />
-        </a>
-      </p>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <p>© 2025 Floristería Las Acacias</p>
-  </div>
-</footer>
+  </footer>
 
   <!-- Script interno -->
   <script>
     // Verifica que el usuario esté logueado
 
-   document.addEventListener('DOMContentLoaded', () => {
-  console.log("pagos.html cargado");
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("pagos.html cargado");
 
-  const correo = sessionStorage.getItem("user_email");
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const correo = sessionStorage.getItem("user_email");
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-  if (!correo) {
-    alert("Debes iniciar sesión para pagar.");
-    return window.location.href = "index.html";
-  }
+      if (!correo) {
+        alert("Debes iniciar sesión para pagar.");
+        return window.location.href = "index.html";
+      }
 
-  if (carrito.length === 0) {
-    alert("Tu carrito está vacío.");
-    return window.location.href = "index.html";
-  }
+      if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return window.location.href = "index.html";
+      }
 
-  // Mostrar resumen del carrito inmediatamente
-  const resumenItems = document.getElementById('resumen-items');
-  const resumenTotal = document.getElementById('resumen-total');
-  const totalPagar = document.getElementById('total-pagar');
-  let total = 0;
+      // Mostrar resumen del carrito inmediatamente
+      const resumenItems = document.getElementById('resumen-items');
+      const resumenTotal = document.getElementById('resumen-total');
+      const totalPagar = document.getElementById('total-pagar');
+      let total = 0;
 
-  resumenItems.innerHTML = carrito.map((item, index) => {
-    const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
-    const accesorioPrecio = {
-      ninguno: 0,
-      oso: 10000,
-      globo: 5000,
-      chocolate: 7000,
-      corona: 8000
-    }[item.accesorio] || 0;
-    const subtotal = (precio + accesorioPrecio) * item.cantidad;
-    total += subtotal;
-    return `
+      resumenItems.innerHTML = carrito.map((item, index) => {
+        const precio = parseInt(item.precio.replace(/\D/g, '')) || 0;
+        const accesorioPrecio = {
+          ninguno: 0,
+          oso: 10000,
+          globo: 5000,
+          chocolate: 7000,
+          corona: 8000
+        }[item.accesorio] || 0;
+        const subtotal = (precio + accesorioPrecio) * item.cantidad;
+        total += subtotal;
+        return `
       <div class="item-resumen">
         <img src="${item.imagen}" style="width: 80px;">
         <h3>${item.nombre}</h3>
@@ -292,59 +292,59 @@
         <p>Subtotal: $${subtotal.toLocaleString()}</p>
       </div>
     `;
-  }).join('');
+      }).join('');
 
-  resumenTotal.textContent = total.toLocaleString();
-  totalPagar.textContent = total.toLocaleString();
+      resumenTotal.textContent = total.toLocaleString();
+      totalPagar.textContent = total.toLocaleString();
 
-  // Lógica para mostrar modal y registrar pedido
-  const modal = document.getElementById("nequiModal");
-  const btnPago = document.getElementById("pago-nequi");
-  const btnVerificar = document.getElementById("verificar-pago");
-  const estadoPago = document.getElementById("paymentStatus");
+      // Lógica para mostrar modal y registrar pedido
+      const modal = document.getElementById("nequiModal");
+      const btnPago = document.getElementById("pago-nequi");
+      const btnVerificar = document.getElementById("verificar-pago");
+      const estadoPago = document.getElementById("paymentStatus");
 
-  btnPago.addEventListener("click", () => {
-    modal.style.display = "flex";
-  });
-
-  document.querySelector(".cerrar-modal").addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
-  });
-
-  btnVerificar.addEventListener("click", async () => {
-    btnVerificar.disabled = true;
-    estadoPago.innerHTML = `<p class="success"> Registrando pedido...</p>`;
-
-    const params = new URLSearchParams();
-    params.append('correo', correo);
-    params.append('items', JSON.stringify(carrito));
-    params.append('total', total);
-
-    try {
-      const resp = await fetch('https://lasacacias.infinityfreeapp.com/php/registro_pedido.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
+      btnPago.addEventListener("click", () => {
+        modal.style.display = "flex";
       });
 
-      const data = await resp.json();
-      if (!data.success) throw new Error(data.error);
+      document.querySelector(".cerrar-modal").addEventListener("click", () => {
+        modal.style.display = "none";
+      });
 
-      estadoPago.innerHTML = `
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+
+      btnVerificar.addEventListener("click", async () => {
+        btnVerificar.disabled = true;
+        estadoPago.innerHTML = `<p class="success"> Registrando pedido...</p>`;
+
+        const params = new URLSearchParams();
+        params.append('correo', correo);
+        params.append('items', JSON.stringify(carrito));
+        params.append('total', total);
+
+        try {
+          const resp = await fetch('https://lasacacias.infinityfreeapp.com/php/registro_pedido.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+          });
+
+          const data = await resp.json();
+          if (!data.success) throw new Error(data.error);
+
+          estadoPago.innerHTML = `
         <p class="success">Pedido registrado con éxito (ID: ${data.id})</p>
         <p>Redirigiendo al inicio...</p>
       `;
-      localStorage.removeItem("carrito");
-      setTimeout(() => window.location.href = "index.html", 1500);
+          localStorage.removeItem("carrito");
+          setTimeout(() => window.location.href = "index.html", 1500);
 
-    } catch (err) {
-      estadoPago.innerHTML = `<p class="error">Error al registrar pedido: ${err.message}</p>`;
-      btnVerificar.disabled = false;
-    }
+        } catch (err) {
+          estadoPago.innerHTML = `<p class="error">Error al registrar pedido: ${err.message}</p>`;
+          btnVerificar.disabled = false;
+        }
 
 
         // En el evento click de "verificar-pago", agregar:
@@ -607,114 +607,121 @@
 
 
         document.getElementById("btn-pagar")?.addEventListener("click", () => {
-        const correo = sessionStorage.getItem("user_email");
-        if (!correo) {
-          alert("Debes iniciar sesión para pagar.");
+          const correo = sessionStorage.getItem("user_email");
+          if (!correo) {
+            alert("Debes iniciar sesión para pagar.");
+            return;
+          }
+          window.location.href = "pagos.html";
+        });
+
+        if (!data.success) {
+          document.getElementById("paymentStatus").innerHTML = `
+    <p class="error">Error: ${data.error}</p>
+  `;
           return;
         }
-        window.location.href = "pagos.html";
-      });
 
         // -------------------- LOGIN --------------------
-      const loginButton = document.querySelector(".login-button");
-      const loginModal = document.getElementById("login-modal");
-      const cerrarLogin = document.querySelector(".cerrar-login");
+        const loginButton = document.querySelector(".login-button");
+        const loginModal = document.getElementById("login-modal");
+        const cerrarLogin = document.querySelector(".cerrar-login");
 
-      // Abrir modal
-      loginButton.addEventListener("click", () => {
-        loginModal.style.display = "flex";
-      });
+        // Abrir modal
+        loginButton.addEventListener("click", () => {
+          loginModal.style.display = "flex";
+        });
 
-      // Cerrar modal
-      cerrarLogin.addEventListener("click", () => {
-        loginModal.style.display = "none";
-      });
-
-      // Cerrar al hacer clic fuera
-      window.addEventListener("click", (e) => {
-        if (e.target === loginModal) {
+        // Cerrar modal
+        cerrarLogin.addEventListener("click", () => {
           loginModal.style.display = "none";
-        }
-      });
-
-      // Manejo de login
-      document.getElementById("login-form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        
-        const datosLogin = new URLSearchParams({
-          correo: document.getElementById('correo').value,
-          password: document.getElementById('password').value
         });
 
-        try {
-          const resp = await fetch('php/login.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: datosLogin
-          });
-          
-          const data = await resp.json();
-          
-          if (!data.success) {
-            throw new Error(data.error || "Error en la autenticación");
-          }
-
-          sessionStorage.setItem('user_role', data.role);
-          sessionStorage.setItem('user_email', data.correo);
-          actualizarNav();
-          window.location.href = data.redirect;
-
-        } catch (err) {
-          console.error('Error:', err);
-          alert(err.message || "Error de conexión");
-        }
-      });
-
-      // Manejo de registro
-      document.getElementById("registro-form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const datosRegistro = new URLSearchParams({
-          nombre: document.getElementById('reg-username').value,
-          correo: document.getElementById('reg-email').value,
-          password: document.getElementById('reg-password').value
-        });
-
-        try {
-          const resp = await fetch('php/registro_vendedor.php', {
-            method: 'POST',
-            body: datosRegistro
-          });
-
-          if (resp.ok) {
-            alert('Registro exitoso');
+        // Cerrar al hacer clic fuera
+        window.addEventListener("click", (e) => {
+          if (e.target === loginModal) {
             loginModal.style.display = "none";
-          } else {
-            alert('Error en el registro');
           }
-        } catch (err) {
-          console.error('Error:', err);
-          alert('Error de conexión');
+        });
+
+        // Manejo de login
+        document.getElementById("login-form").addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const datosLogin = new URLSearchParams({
+            correo: document.getElementById('correo').value,
+            password: document.getElementById('password').value
+          });
+
+          try {
+            const resp = await fetch('php/login.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: datosLogin
+            });
+
+            const data = await resp.json();
+
+            if (!data.success) {
+              throw new Error(data.error || "Error en la autenticación");
+            }
+
+            sessionStorage.setItem('user_role', data.role);
+            sessionStorage.setItem('user_email', data.correo);
+            actualizarNav();
+            window.location.href = data.redirect;
+
+          } catch (err) {
+            console.error('Error:', err);
+            alert(err.message || "Error de conexión");
+          }
+        });
+
+        // Manejo de registro
+        document.getElementById("registro-form").addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const datosRegistro = new URLSearchParams({
+            nombre: document.getElementById('reg-username').value,
+            correo: document.getElementById('reg-email').value,
+            password: document.getElementById('reg-password').value
+          });
+
+          try {
+            const resp = await fetch('php/registro_vendedor.php', {
+              method: 'POST',
+              body: datosRegistro
+            });
+
+            if (resp.ok) {
+              alert('Registro exitoso');
+              loginModal.style.display = "none";
+            } else {
+              alert('Error en el registro');
+            }
+          } catch (err) {
+            console.error('Error:', err);
+            alert('Error de conexión');
+          }
+        });
+
+        // -------------------- NAVEGACIÓN DINÁMICA --------------------
+        function actualizarNav() {
+          const userRole = sessionStorage.getItem('user_role');
+          const dynamicNavItem = document.getElementById('dynamic-nav-item');
+          const navLink = document.getElementById('nav-link');
+
+          if (userRole) {
+            dynamicNavItem.style.display = 'block';
+            navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
+            navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
+          } else {
+            dynamicNavItem.style.display = 'none';
+          }
         }
-      });
 
-      // -------------------- NAVEGACIÓN DINÁMICA --------------------
-      function actualizarNav() {
-        const userRole = sessionStorage.getItem('user_role');
-        const dynamicNavItem = document.getElementById('dynamic-nav-item');
-        const navLink = document.getElementById('nav-link');
-
-        if (userRole) {
-          dynamicNavItem.style.display = 'block';
-          navLink.textContent = userRole === 'seller' ? 'Modo Vendedor' : 'Pedidos Anteriores';
-          navLink.href = userRole === 'seller' ? 'vendedor.html' : 'pedidos-anteriores.html';
-        } else {
-          dynamicNavItem.style.display = 'none';
-        }
-      }
-
-      // Inicializar al cargar
-      document.addEventListener("DOMContentLoaded", actualizarNav);
+        // Inicializar al cargar
+        document.addEventListener("DOMContentLoaded", actualizarNav);
 
         // -------------------- BÚSQUEDA --------------------
         const searchInput = document.getElementById("search-input");
